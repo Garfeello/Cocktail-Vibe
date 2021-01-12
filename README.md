@@ -1,7 +1,7 @@
 ![Project status](https://github.com/Garfeello/Cocktail-Vibe/workflows/Project%20status/badge.svg)
 
-# Koktajl-Vibe
-Koktajl Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
+# Cocktail-Vibe
+Cocktail Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
 
 
 ## Description
