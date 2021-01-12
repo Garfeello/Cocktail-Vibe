@@ -1,4 +1,4 @@
-![Project Status](https://github.com/Garfeello/Koktajl-Vibe/workflows/Project%20Status/badge.svg)
+![Project status](https://github.com/Garfeello/Cocktail-Vibe/workflows/Project%20status/badge.svg)
 
 # Koktajl-Vibe
 Koktajl Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
