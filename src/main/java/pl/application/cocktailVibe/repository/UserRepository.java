@@ -6,11 +6,14 @@ import org.springframework.data.repository.CrudRepository;
 import pl.application.cocktailVibe.model.User;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long>, CrudRepository<User, Long> {
 
 
     @Query("select u from  User u")
     List<User> findAllIngredients();
+
+    Optional<User> findByEmailAndPassword(String email, String password);
 
 }

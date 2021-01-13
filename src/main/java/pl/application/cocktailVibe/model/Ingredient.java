@@ -18,6 +18,4 @@ public class Ingredient {
     @NotEmpty
     private String measurement;
 
-    @OneToOne
-    private Cocktail cocktail;
 }

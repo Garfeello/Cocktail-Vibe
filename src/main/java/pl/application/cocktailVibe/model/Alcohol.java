@@ -30,7 +30,6 @@ public class Alcohol {
     private int age;
 
     @Size(max = 250)
-    @Column(columnDefinition = "String default brak opisu/no description")
     private String description;
 
     @NotNull

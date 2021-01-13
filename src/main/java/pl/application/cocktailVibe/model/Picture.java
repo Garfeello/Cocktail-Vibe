@@ -23,8 +23,6 @@ public class Picture {
     @Column(columnDefinition = "mediumblob")
     private byte[] image;
 
-    @OneToOne
-    private Cocktail cocktail;
 
     public Long getId() {
         return id;
@@ -58,13 +56,6 @@ public class Picture {
         this.image = image;
     }
 
-    public Cocktail getCocktail() {
-        return cocktail;
-    }
-
-    public void setCocktail(Cocktail cocktail) {
-        this.cocktail = cocktail;
-    }
 
     @Override
     public String toString() {
@@ -73,7 +64,6 @@ public class Picture {
                 ", name='" + name + '\'' +
                 ", url='" + url + '\'' +
                 ", image=" + Arrays.toString(image) +
-                ", cocktail=" + cocktail +
                 '}';
     }
 }
