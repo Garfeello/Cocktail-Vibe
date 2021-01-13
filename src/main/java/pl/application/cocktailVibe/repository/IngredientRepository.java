@@ -1,4 +1,15 @@
 package pl.application.cocktailVibe.repository;
 
-public interface IngredientRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import pl.application.cocktailVibe.model.Alcohol;
+import pl.application.cocktailVibe.model.Ingredient;
+
+import java.util.List;
+
+public interface IngredientRepository extends JpaRepository<Ingredient, Long>, CrudRepository<Ingredient, Long> {
+
+    @Query("select i from Ingredient i")
+    List<Ingredient> findAllIngredients();
 }

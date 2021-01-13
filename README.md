@@ -5,7 +5,7 @@ Cocktail Vibe is a small App for graduation project in CodersLab-Warsaw as Java 
 
 
 ## Description
-Main goal of this project was simple. Create funny website with interesting idea that can store ideas of others and share them to wide range of people,
+Main goal of this project was simple. Create a funny website with interesting idea that can store ideas of others and share them to wide range of people,
 especially in times like this.
 
 

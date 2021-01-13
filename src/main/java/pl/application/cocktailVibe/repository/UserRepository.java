@@ -1,4 +1,16 @@
 package pl.application.cocktailVibe.repository;
 
-public interface UserRepository {
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.CrudRepository;
+import pl.application.cocktailVibe.model.User;
+
+import java.util.List;
+
+public interface UserRepository extends JpaRepository<User, Long>, CrudRepository<User, Long> {
+
+
+    @Query("select u from  User u")
+    List<User> findAllIngredients();
+
 }
