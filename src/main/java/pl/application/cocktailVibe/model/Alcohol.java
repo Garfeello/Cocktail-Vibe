@@ -36,6 +36,9 @@ public class Alcohol {
     @Enumerated(STRING)
     private Language language;
 
+    @OneToOne
+    private Picture picture;
+
 
     public Long getId() {
         return id;

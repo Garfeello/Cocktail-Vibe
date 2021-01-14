@@ -17,7 +17,7 @@ public class Cocktail {
     private String name;
 
     @NotEmpty
-    @ManyToMany
+    @OneToMany
     private List<Alcohol> alcoholList;
 
     @OneToMany
