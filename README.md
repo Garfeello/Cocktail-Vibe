@@ -1,5 +1,7 @@
 ![Project status](https://github.com/Garfeello/Cocktail-Vibe/workflows/Project%20status/badge.svg)
 
+I'm currently working on this project.
+
 # Cocktail-Vibe
 Cocktail Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
 
