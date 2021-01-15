@@ -42,7 +42,7 @@ public class AlcoholController {
 
     @PostMapping("/addAlcohol")
     private String addAlcohol(@ModelAttribute @Valid Alcohol alcohol, BindingResult result,
-                              @RequestParam("image") @Nullable MultipartFile file) {
+                              @RequestParam("image") MultipartFile file) {
 
         if (result.hasErrors()) {
             return "alcohol/alcoholForm";

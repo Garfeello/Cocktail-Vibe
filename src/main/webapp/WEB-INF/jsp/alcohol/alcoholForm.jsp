@@ -43,38 +43,19 @@
                 <form:textarea class="form-control" rows="3" placeholder="max 500 characters" path="description"/>
             </div>
             <div class="form-group">
-                <label for="ingredients">Choose language of your cocktail</label>
+                <label for="language">Choose language of your cocktail</label>
                 <form:select class="form-control" path="language">
                     <form:option value="Pl" label="Pl"/>
                     <form:option value="Eng" label="Eng"/>
                 </form:select>
             </div>
             <div class="form-group">
-                <p>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseURL"
-                            aria-expanded="false" aria-controls="collapseURL">
-                        URL
-                    </button>
-                    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#collapseImage"
-                            aria-expanded="false" aria-controls="collapseImage">
-                        Image Upload
-                    </button>
-                </p>
-                <div class="collapse" id="collapseURL">
-                    <div class="card card-body">
-                        <label for="imageURL">Input Picture</label>
-                        <input class="form-control" type="text" name="imageUrl" id="imageURL"/>
-                    </div>
+                <div class="form-group">
+                    <label for="image">Input Picture</label>
+                    <input class="form-control-file" type="file" name="image" id="image"/>
                 </div>
-                <div class="collapse" id="collapseImage">
-                    <div class="card card-body">
-                        <label for="image">Input Picture URL</label>
-                        <input class="form-control-file" placeholder="www.google.com" type="file" name="image" id="image"/>
-                    </div>
-                </div>
-
             </div>
-            <button class="btn btn-primary">Sign in</button>
+            <button class="btn btn-primary">Save</button>
         </form:form>
     </div>
 </div>
