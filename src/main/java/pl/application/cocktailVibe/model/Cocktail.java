@@ -17,20 +17,23 @@ public class Cocktail {
     private String name;
 
     @NotEmpty
-    @OneToMany
+    @ManyToMany
     private List<Alcohol> alcoholList;
 
-    @OneToMany
+    @ManyToMany
     private List<Ingredient> ingredients;
 
     @Size(max = 500)
     private String preparationDescription;
 
-    @Size(max = 500)
+    @Size(max = 200)
     private String userInspiration;
 
     @OneToOne
     private Picture picture;
+
+    @NotEmpty
+    private String language;
 
     @ManyToOne
     private User user;
@@ -67,6 +70,13 @@ public class Cocktail {
         this.ingredients = ingredients;
     }
 
+    public String getPreparationDescription() {
+        return preparationDescription;
+    }
+
+    public void setPreparationDescription(String preparationDescription) {
+        this.preparationDescription = preparationDescription;
+    }
 
     public String getUserInspiration() {
         return userInspiration;
@@ -84,15 +94,34 @@ public class Cocktail {
         this.picture = picture;
     }
 
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Override
     public String toString() {
         return "Cocktail{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", alcoholList=" + alcoholList +
-                ", ingredients=" + ingredients +
+                ", ingredient=" + ingredients +
+                ", preparationDescription='" + preparationDescription + '\'' +
                 ", userInspiration='" + userInspiration + '\'' +
                 ", picture=" + picture +
+                ", language='" + language + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

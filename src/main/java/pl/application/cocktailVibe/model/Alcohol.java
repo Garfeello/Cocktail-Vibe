@@ -1,7 +1,5 @@
 package pl.application.cocktailVibe.model;
 
-import pl.application.cocktailVibe.enums.AlcoholType;
-import pl.application.cocktailVibe.enums.Language;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
@@ -9,7 +7,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import static javax.persistence.EnumType.STRING;
 
 @Entity
 public class Alcohol {
@@ -23,22 +20,19 @@ public class Alcohol {
     private String name;
 
     @NotNull
-    @Enumerated(STRING)
-    private AlcoholType alcoholType;
+    private String alcoholType;
 
     @Max(100)
     private int age;
 
-    @Size(max = 250)
+    @Size(max = 500)
     private String description;
 
     @NotNull
-    @Enumerated(STRING)
-    private Language language;
+    private String language;
 
     @OneToOne
     private Picture picture;
-
 
     public Long getId() {
         return id;
@@ -56,11 +50,11 @@ public class Alcohol {
         this.name = name;
     }
 
-    public AlcoholType getAlcoholType() {
+    public String getAlcoholType() {
         return alcoholType;
     }
 
-    public void setAlcoholType(AlcoholType alcoholType) {
+    public void setAlcoholType(String alcoholType) {
         this.alcoholType = alcoholType;
     }
 
@@ -80,12 +74,20 @@ public class Alcohol {
         this.description = description;
     }
 
-    public Language getLanguage() {
+    public String getLanguage() {
         return language;
     }
 
-    public void setLanguage(Language language) {
+    public void setLanguage(String language) {
         this.language = language;
+    }
+
+    public Picture getPicture() {
+        return picture;
+    }
+
+    public void setPicture(Picture picture) {
+        this.picture = picture;
     }
 
     @Override
@@ -93,10 +95,11 @@ public class Alcohol {
         return "Alcohol{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", alcoholType=" + alcoholType +
+                ", alcoholType='" + alcoholType + '\'' +
                 ", age=" + age +
                 ", description='" + description + '\'' +
-                ", language=" + language +
+                ", language='" + language + '\'' +
+                ", picture=" + picture +
                 '}';
     }
 }

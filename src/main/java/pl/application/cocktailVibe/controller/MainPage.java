@@ -26,8 +26,7 @@ public class MainPage {
 
     @GetMapping("/")
     private String mainPage(){
-        return "mainPage/test";
+        return "mainPage/body";
     }
-
 
 }
