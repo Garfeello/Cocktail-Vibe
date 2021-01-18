@@ -5,7 +5,6 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
-
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -13,9 +12,6 @@ import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.model.Picture;
-import pl.application.cocktailVibe.repository.AlcoholRepository;
-import pl.application.cocktailVibe.repository.CocktailRepository;
-
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -53,7 +49,7 @@ public class TheCocktailDbAPI {
         cocktail.setIngredients(ingredientList);
         cocktail.setPreparationDescription(drinkInstructions);
         cocktail.setPicture(createPicture(drinkImageUrl));
-        cocktail.setLanguage("Pl");
+        cocktail.setLanguage("Eng");
         return cocktail;
     }
 
@@ -74,7 +70,7 @@ public class TheCocktailDbAPI {
         return picture;
     }
 
-    //create connected objects
+    //create objects connected with cocktail class
     private void checkIngredientOrAlcoholAndCreateObject(String ingredient, List<Alcohol> alcoholList, List<Ingredient> ingredientList) {
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredient;
         List<String> stringsFromArrayNode = getListOfStringFromArrayNode(resourceURL);
@@ -90,6 +86,7 @@ public class TheCocktailDbAPI {
     private void createIngredient(String ingredientName, List<String> strings, List<Ingredient> ingredientList) {
         Ingredient ingredient = new Ingredient();
         ingredient.setName(ingredientName);
+        ingredient.setLanguage("Eng");
         for (String string : strings) {
             if (string.matches(".*strDescription\".*")) {
                 String ingredientDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
@@ -118,7 +115,7 @@ public class TheCocktailDbAPI {
        alcoholList.add(alcohol);
     }
 
-    //json body
+    //create and parse resource url to readable format
     private JsonNode getJsonNodeBody(String resourceURL) {
         ResponseEntity<String> response = new RestTemplate().getForEntity(resourceURL, String.class);
         return prepareJsonNodeBody(response);
