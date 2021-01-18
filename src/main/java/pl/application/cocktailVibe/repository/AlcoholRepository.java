@@ -15,4 +15,6 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Long>, CrudRep
 
     Optional<Alcohol> findById(Long longId);
 
+    Optional<Alcohol> findAlcoholByName(String name);
+
 }

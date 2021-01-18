@@ -8,6 +8,4 @@ import java.io.InputStream;
 
 
 public interface PictureRepository extends JpaRepository<Picture, Long>, CrudRepository<Picture, Long> {
-
-
 }

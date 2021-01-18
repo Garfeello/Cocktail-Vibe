@@ -12,11 +12,7 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
     @Query("select c from Cocktail c")
     List<Cocktail> findAllCocktails();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM cocktail ORDER BY id LIMIT 5")
+    @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP order by created_on desc LIMIT 5;")
     List<Cocktail> findFiveNewestCocktails();
-
-
-
-
 
 }

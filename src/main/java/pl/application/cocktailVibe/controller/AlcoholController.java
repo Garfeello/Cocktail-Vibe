@@ -31,7 +31,7 @@ public class AlcoholController {
 
     @ModelAttribute("alcoholTypeList")
     private List<String> alcoholTypeList() {
-        return Arrays.asList("Vodka", "Whiskey", "Brandy", "Vermouth", "Cognac", "Rum", "Gin", "Port Wine", "Cognac");
+        return Arrays.asList("Vodka", "Whiskey", "Brandy", "Vermouth", "Cognac", "Rum", "Gin", "Port Wine", "Cognac", "Spirit");
     }
 
     @GetMapping("/addAlcohol")
@@ -56,7 +56,6 @@ public class AlcoholController {
             e.printStackTrace();
         }
 
-        pictureRepository.save(picture);
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
         return "redirect:/cocktailVibe/";

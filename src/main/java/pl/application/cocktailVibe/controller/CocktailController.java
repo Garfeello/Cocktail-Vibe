@@ -59,7 +59,6 @@ public class CocktailController {
         if (result.hasErrors()) {
             return "drink/cocktailForm";
         }
-
         Picture picture = new Picture();
         picture.setName(cocktail.getName());
         try {
@@ -67,8 +66,6 @@ public class CocktailController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        pictureRepository.save(picture);
         cocktail.setPicture(picture);
         cocktailRepository.save(cocktail);
         return "redirect:/cocktailVibe/";

@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.PictureRepository;
+import pl.application.cocktailVibe.services.CocktailService;
 
 import java.util.List;
 
@@ -15,11 +16,11 @@ import java.util.List;
 public class MainPage {
 
     private final CocktailRepository cocktailRepository;
-    private final PictureRepository pictureRepository;
+    private final CocktailService cocktailService;
 
-    public MainPage(CocktailRepository cocktailRepository, PictureRepository pictureRepository) {
+    public MainPage(CocktailRepository cocktailRepository, CocktailService cocktailService) {
         this.cocktailRepository = cocktailRepository;
-        this.pictureRepository = pictureRepository;
+        this.cocktailService = cocktailService;
     }
 
     @ModelAttribute("fiveNewestCocktails")
@@ -30,6 +31,11 @@ public class MainPage {
     @GetMapping("/")
     private String mainPage(){
         return "mainPage/body";
+    }
+
+    @GetMapping("/test")
+    private Cocktail cocktail(){
+        return cocktailService.searchCocktailByName("margarita");
     }
 
 }

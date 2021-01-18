@@ -4,6 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 
 import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -17,10 +18,10 @@ public class Cocktail {
     private String name;
 
     @NotEmpty
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Alcohol> alcoholList;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 
     @Size(max = 500)
@@ -29,7 +30,7 @@ public class Cocktail {
     @Size(max = 200)
     private String userInspiration;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
 
     @NotEmpty
@@ -37,6 +38,9 @@ public class Cocktail {
 
     @ManyToOne
     private User user;
+
+    @Column(name = "created_on")
+    private LocalDateTime createdOn;
 
     public Long getId() {
         return id;
@@ -102,6 +106,15 @@ public class Cocktail {
         this.language = language;
     }
 
+    public LocalDateTime getCreatedOn() {
+        return createdOn;
+    }
+
+    @PrePersist
+    public void setCreatedOn() {
+        this.createdOn = LocalDateTime.now();
+    }
+
     public User getUser() {
         return user;
     }
@@ -116,11 +129,12 @@ public class Cocktail {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", alcoholList=" + alcoholList +
-                ", ingredient=" + ingredients +
+                ", ingredients=" + ingredients +
                 ", preparationDescription='" + preparationDescription + '\'' +
                 ", userInspiration='" + userInspiration + '\'' +
                 ", picture=" + picture +
                 ", language='" + language + '\'' +
+                ", createdOn=" + createdOn +
                 ", user=" + user +
                 '}';
     }

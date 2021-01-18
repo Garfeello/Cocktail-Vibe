@@ -31,7 +31,7 @@ public class Alcohol {
     @NotNull
     private String language;
 
-    @OneToOne
+    @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
 
     public Long getId() {
