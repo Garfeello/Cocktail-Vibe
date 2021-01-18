@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.PictureRepository;
 
 import java.util.List;
 
@@ -14,13 +15,15 @@ import java.util.List;
 public class MainPage {
 
     private final CocktailRepository cocktailRepository;
+    private final PictureRepository pictureRepository;
 
-    public MainPage(CocktailRepository cocktailRepository) {
+    public MainPage(CocktailRepository cocktailRepository, PictureRepository pictureRepository) {
         this.cocktailRepository = cocktailRepository;
+        this.pictureRepository = pictureRepository;
     }
 
-    @ModelAttribute("fiveNewestDrinks")
-    private List<Cocktail> newestDrinksList() {
+    @ModelAttribute("fiveNewestCocktails")
+    private List<Cocktail> newestCocktailList() {
         return cocktailRepository.findFiveNewestCocktails();
     }
 

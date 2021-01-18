@@ -29,7 +29,7 @@ public class Cocktail {
     @Size(max = 200)
     private String userInspiration;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.EAGER)
     private Picture picture;
 
     @NotEmpty
