@@ -14,7 +14,7 @@ public class Cocktail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 25)
+    @Size(min = 2, max = 35)
     private String name;
 
     @NotEmpty

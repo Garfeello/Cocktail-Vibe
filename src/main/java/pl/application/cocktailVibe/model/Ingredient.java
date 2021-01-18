@@ -16,15 +16,11 @@ public class Ingredient {
     @Size(min = 2, max = 25)
     private String name;
 
+    private String description;
+
+    private String type;
+
     private String language;
-
-    public String getLanguage() {
-        return language;
-    }
-
-    public void setLanguage(String language) {
-        this.language = language;
-    }
 
     public Long getId() {
         return id;
@@ -42,13 +38,38 @@ public class Ingredient {
         this.name = name;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language;
+    }
+
     @Override
     public String toString() {
         return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", type='" + type + '\'' +
                 ", language='" + language + '\'' +
                 '}';
     }
-
 }

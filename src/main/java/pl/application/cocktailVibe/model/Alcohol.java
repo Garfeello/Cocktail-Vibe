@@ -16,7 +16,7 @@ public class Alcohol {
     private Long id;
 
     @NotEmpty
-    @Size(min = 2, max = 25)
+    @Size(min = 2, max = 35)
     private String name;
 
     @NotNull

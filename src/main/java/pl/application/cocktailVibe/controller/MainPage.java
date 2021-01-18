@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.PictureRepository;
@@ -29,13 +30,15 @@ public class MainPage {
     }
 
     @GetMapping("/")
-    private String mainPage(){
+    private String mainPage() {
         return "mainPage/body";
     }
 
+    @ResponseBody
     @GetMapping("/test")
-    private Cocktail cocktail(){
-        return cocktailService.searchCocktailByName("margarita");
+    private Cocktail cocktail() {
+        Cocktail cocktail = cocktailService.searchCocktailByName("Blue Margarita");
+        return cocktail;
     }
 
 }

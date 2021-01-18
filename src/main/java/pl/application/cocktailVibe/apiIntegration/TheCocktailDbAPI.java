@@ -25,14 +25,6 @@ import java.util.*;
 @Component
 public class TheCocktailDbAPI {
 
-    private final AlcoholRepository alcoholRepository;
-    private final CocktailRepository cocktailRepository;
-
-
-    public TheCocktailDbAPI(AlcoholRepository alcoholRepository, CocktailRepository cocktailRepository) {
-        this.alcoholRepository = alcoholRepository;
-        this.cocktailRepository = cocktailRepository;
-    }
 
     public Cocktail createCocktailFromStringUrl(String resourceURL) {
         Cocktail cocktail = new Cocktail();
@@ -44,35 +36,31 @@ public class TheCocktailDbAPI {
 
         List<String> strings = getListOfStringFromArrayNode(resourceURL);
         for (String string : strings) {
+            string = string.replaceAll(",", " ");
             if (string.matches(".*strDrink\".*")) {
                 drinkName = string.replaceAll(".*strDrink\"[:][\"]", "").replace("\"", "");
-
-            } else if (string.matches("^((?!.*null).).*strIngredient1.*")) {
-                String getAlcoholName = string.replaceAll(".*strIngredient1\"[:][\"]", "").replace("\"", "");
-                alcoholList.add(createAlcohol(getAlcoholName));
-
-            } else if (string.matches("^((?!.*null).).*strIngredient[2-9].*")) {
-                String drinkIngredient = string.replaceAll(".*strIngredient[2-9]\"[:][\"]", "").replace("\"", "");
-                ingredientList.add(createIngredient(drinkIngredient));
-
+            } else if (string.matches("^((?!.*null).).*strIngredient[0-9].*")) {
+                String getIngredient = string.replaceAll(".*strIngredient[0-9]\"[:][\"]", "").replace("\"", "");
+                checkIngredientOrAlcoholAndCreateObject(getIngredient, alcoholList, ingredientList);
             } else if (string.matches(".*strInstructions\".*")) {
                 drinkInstructions = string.replaceAll(".*strInstructions\"[:][\"]", "").replace("\"", "");
-
             } else if (string.matches(".*strDrinkThumb\".*")) {
                 drinkImageUrl = string.replaceAll(".*strDrinkThumb\"[:][\"]", "").replace("\"", "");
             }
         }
-
         cocktail.setName(drinkName);
         cocktail.setAlcoholList(alcoholList);
         cocktail.setIngredients(ingredientList);
         cocktail.setPreparationDescription(drinkInstructions);
         cocktail.setPicture(createPicture(drinkImageUrl));
+        cocktail.setLanguage("Pl");
         return cocktail;
     }
 
+    //do dopracowania
     private Picture createPicture(String pictureURL) {
         Picture picture = new Picture();
+        picture.setName("test");
         byte[] image = new byte[0];
         try {
             URL url = new URL(pictureURL);
@@ -86,16 +74,35 @@ public class TheCocktailDbAPI {
         return picture;
     }
 
-    private Ingredient createIngredient(String ingredientName) {
-        Ingredient ingredient = new Ingredient();
-        ingredient.setName(ingredientName);
-        return ingredient;
+    //create connected objects
+    private void checkIngredientOrAlcoholAndCreateObject(String ingredient, List<Alcohol> alcoholList, List<Ingredient> ingredientList) {
+        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredient;
+        List<String> stringsFromArrayNode = getListOfStringFromArrayNode(resourceURL);
+        for (String string : stringsFromArrayNode) {
+            if (string.matches(".*strAlcohol\".*") && string.matches(".*Yes.*")) {
+                createAlcohol(ingredient, stringsFromArrayNode, alcoholList);
+            } else if (string.matches(".*strAlcohol\".*")) {
+                createIngredient(ingredient, stringsFromArrayNode, ingredientList);
+            }
+        }
     }
 
-    private Alcohol createAlcohol(String alcoholName) {
-        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + alcoholName;
-        List<String> strings = getListOfStringFromArrayNode(resourceURL);
+    private void createIngredient(String ingredientName, List<String> strings, List<Ingredient> ingredientList) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setName(ingredientName);
+        for (String string : strings) {
+            if (string.matches(".*strDescription\".*")) {
+                String ingredientDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
+                ingredient.setDescription(ingredientDescription);
+            } else if (string.matches(".*strType.*")) {
+                String ingredientType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
+                ingredient.setType(ingredientType);
+            }
+        }
+        ingredientList.add(ingredient);
+    }
 
+    private void createAlcohol(String alcoholName, List<String> strings,  List<Alcohol> alcoholList) {
         Alcohol alcohol = new Alcohol();
         alcohol.setName(alcoholName);
         alcohol.setLanguage("Eng");
@@ -108,9 +115,10 @@ public class TheCocktailDbAPI {
                 alcohol.setAlcoholType(alcoholType);
             }
         }
-        return alcohol;
+       alcoholList.add(alcohol);
     }
 
+    //json body
     private JsonNode getJsonNodeBody(String resourceURL) {
         ResponseEntity<String> response = new RestTemplate().getForEntity(resourceURL, String.class);
         return prepareJsonNodeBody(response);
@@ -143,7 +151,6 @@ public class TheCocktailDbAPI {
     private List<String> getListOfStringFromArrayNode(String resourceURL) {
         List<String> strings = Collections.emptyList();
         ArrayNode arrayNode = getArrayNodeFromJsonNodeBody(getJsonNodeBody(resourceURL));
-
         for (int i = 0; i < arrayNode.size(); i++) {
             JsonNode arrayElement = arrayNode.get(i);
             strings = Arrays.asList(arrayElement.toString().split(","));
