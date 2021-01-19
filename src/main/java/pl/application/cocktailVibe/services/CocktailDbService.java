@@ -5,23 +5,22 @@ import pl.application.cocktailVibe.apiIntegration.TheCocktailDbAPI;
 import pl.application.cocktailVibe.model.Cocktail;
 
 @Component
-public class CocktailService {
+public class CocktailDbService {
 
     private final TheCocktailDbAPI theCocktailDbAPI;
 
 
-    public CocktailService(TheCocktailDbAPI theCocktailDbAPI) {
+    public CocktailDbService(TheCocktailDbAPI theCocktailDbAPI) {
         this.theCocktailDbAPI = theCocktailDbAPI;
     }
 
-    public Cocktail searchCocktailByName(String cocktailName) {
+    public void searchCocktailByName(String cocktailName) {
        String searchByCocktailNameUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=$";
-       return theCocktailDbAPI.createCocktailFromStringUrl(searchByCocktailNameUrl.replace("$", cocktailName));
+       theCocktailDbAPI.getAndSaveCocktail(searchByCocktailNameUrl.replace("$", cocktailName));
     }
 
     public void searchCocktailByIngredient(String cocktailName) {
         String searchByCocktailIngredientUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
-
 
     }
 
