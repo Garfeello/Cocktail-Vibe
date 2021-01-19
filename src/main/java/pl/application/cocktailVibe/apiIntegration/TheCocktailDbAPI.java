@@ -33,11 +33,11 @@ public class TheCocktailDbAPI {
         this.cocktailRepository = cocktailRepository;
     }
 
-    public void getAndSaveCocktail(String resourceURL){
-        cocktailRepository.save(createCocktailFromStringUrl(resourceURL));
+    public void findAndSaveCocktail(String resourceURL){
+        cocktailRepository.save(getCocktailFromApi(resourceURL));
     }
 
-    private Cocktail createCocktailFromStringUrl(String resourceURL) {
+    private Cocktail getCocktailFromApi(String resourceURL) {
         Cocktail cocktail = new Cocktail();
         String drinkName = "";
         List<Alcohol> alcoholList = new ArrayList<>();
@@ -67,6 +67,7 @@ public class TheCocktailDbAPI {
         cocktail.setPreparationDescription(drinkInstructions);
         cocktail.setPicture(downloadAndCreatePictureFromUrl(drinkPictureUrl, drinkName));
         cocktail.setLanguage("Eng");
+        cocktail.setUserInspiration("downloaded data from theCocktailDB");
         return cocktail;
     }
 
@@ -127,6 +128,7 @@ public class TheCocktailDbAPI {
         Alcohol alcohol = new Alcohol();
         alcohol.setName(alcoholName);
         alcohol.setLanguage("Eng");
+        alcohol.setAge(0);
         for (String string : strings) {
             if (string.matches(".*strDescription\".*")) {
                 String alcoholDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
@@ -145,7 +147,8 @@ public class TheCocktailDbAPI {
         ArrayNode arrayNode = getArrayNodeFromJsonNodeBody(getJsonNodeBody(resourceURL));
         for (int i = 0; i < arrayNode.size(); i++) {
             JsonNode arrayElement = arrayNode.get(i);
-            strings = Arrays.asList(arrayElement.toString().split(","));
+            strings = Arrays.asList(arrayElement.toString().split("\","));
+            break; // to find only first element in case of multiple elements;
         }
         return strings;
     }

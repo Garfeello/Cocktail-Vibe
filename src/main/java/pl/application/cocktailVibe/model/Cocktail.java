@@ -24,7 +24,7 @@ public class Cocktail {
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Ingredient> ingredients;
 
-    @Size(max = 500)
+    @Size(max = 1000)
     private String preparationDescription;
 
     @Size(max = 200)
@@ -122,6 +122,7 @@ public class Cocktail {
     public void setUser(User user) {
         this.user = user;
     }
+
 
     @Override
     public String toString() {

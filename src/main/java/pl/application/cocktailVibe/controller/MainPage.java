@@ -36,8 +36,8 @@ public class MainPage {
     @ResponseBody
     @GetMapping("/test")
     private Cocktail cocktail() {
-        cocktailDbService.searchCocktailByName("margarita");
-        return cocktailRepository.findCocktailByName("margarita").orElse(new Cocktail());
+        cocktailDbService.searchCocktailByName("Bluebird");
+        return cocktailRepository.findFirstByName("Bluebird").orElse(new Cocktail());
     }
 
 }
