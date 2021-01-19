@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.services.CocktailDbService;
+import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import java.util.List;
 
@@ -15,10 +16,12 @@ import java.util.List;
 @RequestMapping("/cocktailVibe")
 public class MainPage {
 
+    private final GoogleTranslateService googleTranslateService;
     private final CocktailRepository cocktailRepository;
     private final CocktailDbService cocktailDbService;
 
-    public MainPage(CocktailRepository cocktailRepository, CocktailDbService cocktailDbService) {
+    public MainPage(GoogleTranslateService googleTranslateService, CocktailRepository cocktailRepository, CocktailDbService cocktailDbService) {
+        this.googleTranslateService = googleTranslateService;
         this.cocktailRepository = cocktailRepository;
         this.cocktailDbService = cocktailDbService;
     }
@@ -35,9 +38,16 @@ public class MainPage {
 
     @ResponseBody
     @GetMapping("/test")
-    private Cocktail cocktail() {
-        cocktailDbService.searchCocktailByName("Bluebird");
-        return cocktailRepository.findFirstByName("Bluebird").orElse(new Cocktail());
+    public Cocktail cocktail() {
+        cocktailDbService.checkIfCocktailExists("Martini");
+        googleTranslateService.translateCocktail("Martini");
+        return cocktailRepository.findFirstByName("Martini").orElse(new Cocktail());
     }
 
+
+    @ResponseBody
+    @GetMapping("/testList")
+    private List<Cocktail> cocktailList() {
+        return cocktailDbService.searchCocktailByIngredient("Lime juice");
+    }
 }

@@ -3,23 +3,27 @@ package pl.application.cocktailVibe.services;
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.apiIntegration.TheCocktailDbAPI;
 import pl.application.cocktailVibe.model.Cocktail;
+import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.IngredientRepository;
+
+import java.util.List;
 
 
 @Component
 public class CocktailDbService {
 
     private final TheCocktailDbAPI theCocktailDbAPI;
-    private final GoogleTranslateService googleTranslateService;
     private final CocktailRepository cocktailRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public CocktailDbService(TheCocktailDbAPI theCocktailDbAPI, GoogleTranslateService googleTranslateService, CocktailRepository cocktailRepository) {
+    public CocktailDbService(TheCocktailDbAPI theCocktailDbAPI, CocktailRepository cocktailRepository, IngredientRepository ingredientRepository) {
         this.theCocktailDbAPI = theCocktailDbAPI;
-        this.googleTranslateService = googleTranslateService;
         this.cocktailRepository = cocktailRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
-    public Cocktail searchCocktailByName(String cocktailName) {
+    public Cocktail checkIfCocktailExists(String cocktailName) {
         if (cocktailRepository.findFirstByName(cocktailName).isPresent()) {
             Cocktail cocktail = cocktailRepository.findFirstByName(cocktailName).get();
             return cocktail;
@@ -30,9 +34,15 @@ public class CocktailDbService {
         }
     }
 
-
-    public void searchCocktailByIngredient(String cocktailName) {
+    public List<Cocktail> searchCocktailByIngredient(String ingredientName) {
         String searchByCocktailIngredientUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
+        if (ingredientRepository.findFirstByName(ingredientName).isPresent()){
+            Ingredient ingredient = ingredientRepository.findFirstByName(ingredientName).get();
+            return cocktailRepository.findCocktailsByIngredients(ingredient);
+        } else {
+
+        }
+        return null;
     }
 
     public void searchCocktailByMultipleIngredients(String... cocktailName) {
@@ -43,7 +53,6 @@ public class CocktailDbService {
     private void queryApi(String cocktailName) {
         String searchByCocktailName = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=$";
         theCocktailDbAPI.findAndSaveCocktail(searchByCocktailName.replace("$", cocktailName));
-        googleTranslateService.translateAndSaveCocktail(cocktailName);
     }
 
 

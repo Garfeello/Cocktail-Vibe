@@ -6,11 +6,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import org.springframework.web.multipart.MultipartFile;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
@@ -33,7 +31,7 @@ public class TheCocktailDbAPI {
         this.cocktailRepository = cocktailRepository;
     }
 
-    public void findAndSaveCocktail(String resourceURL){
+    public void findAndSaveCocktail(String resourceURL) {
         cocktailRepository.save(getCocktailFromApi(resourceURL));
     }
 
@@ -71,10 +69,8 @@ public class TheCocktailDbAPI {
         return cocktail;
     }
 
-    //needs improvement
-    private Picture downloadAndCreatePictureFromUrl(String pictureURL, String pictureName) {
+    private Picture downloadAndCreatePictureFromUrl(String pictureURL, String cocktailName) {
         Picture picture = new Picture();
-        String destinationFile = pictureName + "_" + new Date().getTime() + ".jpg";
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             URL url = new URL(pictureURL);
@@ -84,14 +80,9 @@ public class TheCocktailDbAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        MultipartFile multipartFile = new MockMultipartFile
-                (destinationFile, destinationFile, "image/jpg", byteArrayOutputStream.toByteArray());
-        picture.setName(pictureName);
-        try {
-            picture.setImage(multipartFile.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
+        picture.setImage(byteArrayOutputStream.toByteArray());
+        picture.setName(cocktailName + ".jpg");
         return picture;
     }
 

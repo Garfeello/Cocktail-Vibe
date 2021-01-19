@@ -5,6 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import pl.application.cocktailVibe.model.Cocktail;
+import pl.application.cocktailVibe.model.Ingredient;
 
 import java.util.List;
 import java.util.Optional;
@@ -18,4 +19,7 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
     List<Cocktail> findFiveNewestCocktails();
 
     Optional<Cocktail> findFirstByName(String cocktailName);
+
+    List<Cocktail> findCocktailsByIngredients(Ingredient ingredient);
+
 }
