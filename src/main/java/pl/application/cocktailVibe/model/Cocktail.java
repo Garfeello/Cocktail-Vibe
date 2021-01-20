@@ -17,7 +17,6 @@ public class Cocktail {
     @Size(min = 2, max = 35)
     private String name;
 
-    @NotEmpty
     @ManyToMany(cascade = CascadeType.ALL)
     private List<Alcohol> alcoholList;
 

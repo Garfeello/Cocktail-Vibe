@@ -17,11 +17,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Component
-public class GoogleTranslateAPI_v2 {
+public class GoogleTranslateAPI {
 
     private final CocktailRepository cocktailRepository;
 
-    public GoogleTranslateAPI_v2(CocktailRepository cocktailRepository) {
+    public GoogleTranslateAPI(CocktailRepository cocktailRepository) {
         this.cocktailRepository = cocktailRepository;
     }
 
@@ -42,12 +42,12 @@ public class GoogleTranslateAPI_v2 {
         return translatedCocktail;
     }
 
-    //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
-    //It is only for academical purposes after all :)
     private String translatePreparationDescription(String description) {
         return prepareAndGetTranslation(description);
     }
 
+    //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
+    //It is only for academical purposes after all :)
     private List<Ingredient> translateIngredients(List<Ingredient> ingredientList) {
         List<Ingredient> translatedIngredients = new ArrayList<>();
         for (Ingredient ingredient : ingredientList) {

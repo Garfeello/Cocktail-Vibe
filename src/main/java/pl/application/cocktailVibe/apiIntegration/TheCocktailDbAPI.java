@@ -27,12 +27,24 @@ public class TheCocktailDbAPI {
 
     private final CocktailRepository cocktailRepository;
 
+
     public TheCocktailDbAPI(CocktailRepository cocktailRepository) {
         this.cocktailRepository = cocktailRepository;
     }
 
     public void findAndSaveCocktail(String resourceURL) {
         cocktailRepository.save(getCocktailFromApi(resourceURL));
+    }
+
+    public String getDrinkNameByIngredient(String resourceURL) {
+        List<String> strings = getListOfStringFromArrayNode(resourceURL);
+        List<String> drinkNames = new ArrayList<>();
+        for (String string : strings) {
+            if (string.matches(".*strDrink\".*")) {
+                drinkNames.add(string.replaceAll(".*strDrink\"[:][\"]", "").replace("\"", ""));
+            }
+        }
+        return drinkNames.get(new Random().nextInt(drinkNames.size()));
     }
 
     private Cocktail getCocktailFromApi(String resourceURL) {
@@ -69,6 +81,7 @@ public class TheCocktailDbAPI {
         return cocktail;
     }
 
+    //create objects connected with cocktail class
     private Picture downloadAndCreatePictureFromUrl(String pictureURL, String cocktailName) {
         Picture picture = new Picture();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
@@ -80,13 +93,11 @@ public class TheCocktailDbAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         picture.setImage(byteArrayOutputStream.toByteArray());
         picture.setName(cocktailName + ".jpg");
         return picture;
     }
 
-    //create objects connected with cocktail class
     private void checkIngredientOrAlcoholAndCreateObject(String ingredient, List<Alcohol> alcoholList, List<Ingredient> ingredientList) {
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredient;
         List<String> stringsFromArrayNode = getListOfStringFromArrayNode(resourceURL);
@@ -101,6 +112,9 @@ public class TheCocktailDbAPI {
 
     private void createIngredient(String ingredientName, List<String> strings, List<Ingredient> ingredientList) {
         Ingredient ingredient = new Ingredient();
+
+
+
         ingredient.setName(ingredientName);
         ingredient.setLanguage("Eng");
         for (String string : strings) {
@@ -117,6 +131,7 @@ public class TheCocktailDbAPI {
 
     private void createAlcohol(String alcoholName, List<String> strings, List<Alcohol> alcoholList) {
         Alcohol alcohol = new Alcohol();
+        //if
         alcohol.setName(alcoholName);
         alcohol.setLanguage("Eng");
         alcohol.setAge(0);
@@ -131,6 +146,7 @@ public class TheCocktailDbAPI {
         }
         alcoholList.add(alcohol);
     }
+
 
     //create and parse resource url to readable format
     private List<String> getListOfStringFromArrayNode(String resourceURL) {
@@ -154,7 +170,7 @@ public class TheCocktailDbAPI {
         ObjectMapper mapper = new ObjectMapper();
         try {
             root = mapper.readTree(response.getBody());
-        } catch (JsonProcessingException e) {
+        } catch (JsonProcessingException | IllegalArgumentException e) {
             e.printStackTrace();
         }
         return root;
@@ -162,7 +178,7 @@ public class TheCocktailDbAPI {
 
     private ArrayNode getArrayNodeFromJsonNodeBody(JsonNode root) {
         ArrayNode arrayNode = null;
-        if (root.isObject()) {
+        if (root != null) {
             Iterator<String> fieldNames = root.fieldNames();
             while (fieldNames.hasNext()) {
                 String fieldName = fieldNames.next();

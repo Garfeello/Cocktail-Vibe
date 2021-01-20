@@ -39,7 +39,7 @@ public class MainPage {
     @ResponseBody
     @GetMapping("/test")
     public Cocktail cocktail() {
-        cocktailDbService.checkIfCocktailExists("Martini");
+        cocktailDbService.getCocktail("Martini");
         googleTranslateService.translateCocktail("Martini");
         return cocktailRepository.findFirstByName("Martini").orElse(new Cocktail());
     }
@@ -48,6 +48,6 @@ public class MainPage {
     @ResponseBody
     @GetMapping("/testList")
     private List<Cocktail> cocktailList() {
-        return cocktailDbService.searchCocktailByIngredient("Lime juice");
+        return cocktailDbService.getCocktailsByIngredient("mint");
     }
 }

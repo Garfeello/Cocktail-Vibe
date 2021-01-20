@@ -1,26 +1,32 @@
 package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
-import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI_v2;
+import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
+
+import java.util.NoSuchElementException;
 
 @Component
 public class GoogleTranslateService {
 
-    private final GoogleTranslateAPI_v2 googleTranslateAPI_v2;
+    private final GoogleTranslateAPI googleTranslateAPI;
 
-    public GoogleTranslateService(GoogleTranslateAPI_v2 googleTranslateAPI_v2) {
-        this.googleTranslateAPI_v2 = googleTranslateAPI_v2;
+    public GoogleTranslateService(GoogleTranslateAPI googleTranslateAPI) {
+        this.googleTranslateAPI = googleTranslateAPI;
     }
 
-    public void translateCocktail(String cocktailName){
-        googleTranslateAPI_v2.translateAndSaveCocktail(cocktailName);
+    public void translateCocktail(String cocktailName) {
+        try {
+            googleTranslateAPI.translateAndSaveCocktail(cocktailName);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
     }
 
 
-//    private final GoogleTranslateAPI_v2 googleTranslateAPI_v2;
+//    private final GoogleTranslateAPI googleTranslateAPI_v2;
 //    private final CocktailRepository cocktailRepository;
 //
-//    public GoogleTranslateService(GoogleTranslateAPI_v2 googleTranslateAPI_v2, CocktailRepository cocktailRepository) {
+//    public GoogleTranslateService(GoogleTranslateAPI googleTranslateAPI_v2, CocktailRepository cocktailRepository) {
 //        this.googleTranslateAPI_v2 = googleTranslateAPI_v2;
 //        this.cocktailRepository = cocktailRepository;
 //    }

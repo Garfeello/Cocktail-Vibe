@@ -8,6 +8,7 @@ import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 
 @Component
@@ -23,34 +24,37 @@ public class CocktailDbService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public Cocktail checkIfCocktailExists(String cocktailName) {
-        if (cocktailRepository.findFirstByName(cocktailName).isPresent()) {
-            Cocktail cocktail = cocktailRepository.findFirstByName(cocktailName).get();
-            return cocktail;
+    public Cocktail getCocktail(String cocktailName) {
+        Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(cocktailName);
+        if (cocktailOptional.isPresent()) {
+            return cocktailOptional.get();
         } else {
-            queryApi(cocktailName);
-            Cocktail cocktail = cocktailRepository.findFirstByName(cocktailName).get();
-            return cocktail;
+            queryApiCocktail(cocktailName);
+            return cocktailRepository.findFirstByName(cocktailName).orElse(new Cocktail());
         }
     }
 
-    public List<Cocktail> searchCocktailByIngredient(String ingredientName) {
-        String searchByCocktailIngredientUrl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
-        if (ingredientRepository.findFirstByName(ingredientName).isPresent()){
-            Ingredient ingredient = ingredientRepository.findFirstByName(ingredientName).get();
+    public List<Cocktail> getCocktailsByIngredient(String ingredientName) {
+        Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByName(ingredientName);
+        if (optionalIngredient.isPresent()) {
+            Ingredient ingredient = optionalIngredient.get();
             return cocktailRepository.findCocktailsByIngredients(ingredient);
         } else {
-
+            queryApiCocktailByIngredient(ingredientName);
+            Ingredient ingredient = ingredientRepository.findFirstByName(ingredientName).orElse(new Ingredient());
+            return cocktailRepository.findCocktailsByIngredients(ingredient);
         }
-        return null;
     }
 
     public void searchCocktailByMultipleIngredients(String... cocktailName) {
-        String searchByMultipleIngredients = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
     }
 
+    private void queryApiCocktailByIngredient(String ingredientName) {
+        String searchByCocktailIngredient = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
+        getCocktail(theCocktailDbAPI.getDrinkNameByIngredient(searchByCocktailIngredient.replace("$", ingredientName)));
+    }
 
-    private void queryApi(String cocktailName) {
+    private void queryApiCocktail(String cocktailName) {
         String searchByCocktailName = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=$";
         theCocktailDbAPI.findAndSaveCocktail(searchByCocktailName.replace("$", cocktailName));
     }

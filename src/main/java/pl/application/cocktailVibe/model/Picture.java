@@ -16,9 +16,6 @@ public class Picture {
     @NotEmpty
     private String name;
 
-    @URL
-    private String url;
-
     @Lob
     @Column(columnDefinition = "mediumblob")
     private byte[] image;
@@ -40,14 +37,6 @@ public class Picture {
         this.name = name;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public byte[] getImage() {
         return image;
     }
@@ -56,13 +45,11 @@ public class Picture {
         this.image = image;
     }
 
-
     @Override
     public String toString() {
         return "Picture{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", url='" + url + '\'' +
                 ", image=" + Arrays.toString(image) +
                 '}';
     }

@@ -19,7 +19,6 @@ public class Alcohol {
     @Size(min = 2, max = 35)
     private String name;
 
-    @NotNull
     private String alcoholType;
 
     @Max(100)
