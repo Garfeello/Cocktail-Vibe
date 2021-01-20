@@ -14,7 +14,7 @@ public class Cocktail {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 35)
+    @Size(min = 2, max = 40)
     private String name;
 
     @ManyToMany(cascade = CascadeType.ALL)

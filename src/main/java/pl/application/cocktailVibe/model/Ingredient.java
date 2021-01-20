@@ -16,7 +16,7 @@ public class Ingredient {
     @Size(min = 2, max = 25)
     private String name;
 
-    @Size(max = 3000)
+    @Size(max = 4200)
     private String description;
 
     private String type;

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 
+import org.hibernate.exception.ConstraintViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
@@ -13,7 +14,9 @@ import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.IngredientRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -26,14 +29,22 @@ import java.util.*;
 public class TheCocktailDbAPI {
 
     private final CocktailRepository cocktailRepository;
+    private final IngredientRepository ingredientRepository;
+    private final AlcoholRepository alcoholRepository;
 
-
-    public TheCocktailDbAPI(CocktailRepository cocktailRepository) {
+    public TheCocktailDbAPI(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
+                            AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
+        this.ingredientRepository = ingredientRepository;
+        this.alcoholRepository = alcoholRepository;
     }
 
     public void findAndSaveCocktail(String resourceURL) {
-        cocktailRepository.save(getCocktailFromApi(resourceURL));
+        try {
+            cocktailRepository.save(getCocktailFromApi(resourceURL));
+        } catch (ConstraintViolationException e){
+            e.getConstraintName();
+        }
     }
 
     public String getDrinkNameByIngredient(String resourceURL) {
@@ -111,40 +122,46 @@ public class TheCocktailDbAPI {
     }
 
     private void createIngredient(String ingredientName, List<String> strings, List<Ingredient> ingredientList) {
-        Ingredient ingredient = new Ingredient();
-
-
-
-        ingredient.setName(ingredientName);
-        ingredient.setLanguage("Eng");
-        for (String string : strings) {
-            if (string.matches(".*strDescription\".*")) {
-                String ingredientDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
-                ingredient.setDescription(ingredientDescription);
-            } else if (string.matches(".*strType.*")) {
-                String ingredientType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
-                ingredient.setType(ingredientType);
+        Optional<Ingredient> ingredient = ingredientRepository.findFirstByName(ingredientName);
+        if (ingredient.isPresent()) {
+            ingredientList.add(ingredient.get());
+        } else {
+            Ingredient newIngredient = new Ingredient();
+            newIngredient.setName(ingredientName);
+            newIngredient.setLanguage("Eng");
+            for (String string : strings) {
+                if (string.matches(".*strDescription\".*")) {
+                    String ingredientDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
+                    newIngredient.setDescription(ingredientDescription);
+                } else if (string.matches(".*strType.*")) {
+                    String ingredientType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
+                    newIngredient.setType(ingredientType);
+                }
             }
+            ingredientList.add(newIngredient);
         }
-        ingredientList.add(ingredient);
     }
 
     private void createAlcohol(String alcoholName, List<String> strings, List<Alcohol> alcoholList) {
-        Alcohol alcohol = new Alcohol();
-        //if
-        alcohol.setName(alcoholName);
-        alcohol.setLanguage("Eng");
-        alcohol.setAge(0);
-        for (String string : strings) {
-            if (string.matches(".*strDescription\".*")) {
-                String alcoholDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
-                alcohol.setDescription(alcoholDescription);
-            } else if (string.matches(".*strType.*")) {
-                String alcoholType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
-                alcohol.setAlcoholType(alcoholType);
+        Optional<Alcohol> alcohol = alcoholRepository.findFirstByName(alcoholName);
+        if (alcohol.isPresent()) {
+            alcoholList.add(alcohol.get());
+        } else {
+            Alcohol newAlcohol = new Alcohol();
+            newAlcohol.setName(alcoholName);
+            newAlcohol.setLanguage("Eng");
+            newAlcohol.setAge(0);
+            for (String string : strings) {
+                if (string.matches(".*strDescription\".*")) {
+                    String alcoholDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
+                    newAlcohol.setDescription(alcoholDescription);
+                } else if (string.matches(".*strType.*")) {
+                    String alcoholType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
+                    newAlcohol.setAlcoholType(alcoholType);
+                }
             }
+            alcoholList.add(newAlcohol);
         }
-        alcoholList.add(alcohol);
     }
 
 

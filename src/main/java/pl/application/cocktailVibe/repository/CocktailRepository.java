@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.OptBoolean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 
@@ -20,6 +21,10 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
 
     Optional<Cocktail> findFirstByName(String cocktailName);
 
-    List<Cocktail> findCocktailsByIngredients(Ingredient ingredient);
+    Optional<List<Cocktail>> findCocktailsByIngredients(Ingredient ingredient);
+
+    Optional<List<Cocktail>> findCocktailsByAlcoholList(Alcohol alcohol);
+
+
 
 }

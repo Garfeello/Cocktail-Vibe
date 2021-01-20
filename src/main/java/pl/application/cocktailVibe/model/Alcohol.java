@@ -24,7 +24,7 @@ public class Alcohol {
     @Max(100)
     private int age;
 
-    @Size(max = 3000)
+    @Size(max = 5000)
     private String description;
 
     @NotNull

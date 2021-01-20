@@ -2,11 +2,14 @@ package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.apiIntegration.TheCocktailDbAPI;
+import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
+import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,11 +20,15 @@ public class CocktailDbService {
     private final TheCocktailDbAPI theCocktailDbAPI;
     private final CocktailRepository cocktailRepository;
     private final IngredientRepository ingredientRepository;
+    private final AlcoholRepository alcoholRepository;
 
-    public CocktailDbService(TheCocktailDbAPI theCocktailDbAPI, CocktailRepository cocktailRepository, IngredientRepository ingredientRepository) {
+
+    public CocktailDbService(TheCocktailDbAPI theCocktailDbAPI, CocktailRepository cocktailRepository,
+                             IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
         this.theCocktailDbAPI = theCocktailDbAPI;
         this.cocktailRepository = cocktailRepository;
         this.ingredientRepository = ingredientRepository;
+        this.alcoholRepository = alcoholRepository;
     }
 
     public Cocktail getCocktail(String cocktailName) {
@@ -38,11 +45,23 @@ public class CocktailDbService {
         Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByName(ingredientName);
         if (optionalIngredient.isPresent()) {
             Ingredient ingredient = optionalIngredient.get();
-            return cocktailRepository.findCocktailsByIngredients(ingredient);
+            return cocktailRepository.findCocktailsByIngredients(ingredient).get();
         } else {
             queryApiCocktailByIngredient(ingredientName);
             Ingredient ingredient = ingredientRepository.findFirstByName(ingredientName).orElse(new Ingredient());
-            return cocktailRepository.findCocktailsByIngredients(ingredient);
+            return cocktailRepository.findCocktailsByIngredients(ingredient).get();
+        }
+    }
+
+    public List<Cocktail> getCocktailsByAlcohol(String alcoholName) {
+        Optional<Alcohol> optionalAlcohol = alcoholRepository.findFirstByName(alcoholName);
+        if (optionalAlcohol.isPresent()) {
+            Alcohol alcohol = optionalAlcohol.get();
+            return cocktailRepository.findCocktailsByAlcoholList(alcohol).get();
+        } else {
+            queryApiCocktailByIngredient(alcoholName);
+            Alcohol alcohol = alcoholRepository.findFirstByName(alcoholName).orElse(new Alcohol());
+            return cocktailRepository.findCocktailsByAlcoholList(alcohol).get();
         }
     }
 
