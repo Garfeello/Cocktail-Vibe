@@ -13,8 +13,13 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Long>, CrudRep
     @Query("select a from Alcohol a")
     List<Alcohol> findAllAlcohols();
 
+    List<Alcohol> findAlcoholByLanguage(String language);
+
     Optional<Alcohol> findById(Long longId);
 
+    Optional<Alcohol> findFirstByNameAndLanguage(String name, String language);
+
     Optional<Alcohol> findFirstByName(String name);
+
 
 }

@@ -1,6 +1,5 @@
 package pl.application.cocktailVibe.controller;
 
-import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -9,7 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Picture;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
-import pl.application.cocktailVibe.repository.PictureRepository;
+import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import javax.validation.Valid;
 import java.io.IOException;
@@ -21,9 +20,11 @@ import java.util.List;
 public class AlcoholController {
 
     private final AlcoholRepository alcoholRepository;
+    private final GoogleTranslateService googleTranslateService;
 
-    public AlcoholController(AlcoholRepository alcoholRepository) {
+    public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService) {
         this.alcoholRepository = alcoholRepository;
+        this.googleTranslateService = googleTranslateService;
     }
 
     @ModelAttribute("alcoholTypeList")
@@ -56,6 +57,39 @@ public class AlcoholController {
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
         return "redirect:/cocktailVibe/";
+    }
+
+    @GetMapping("/editAlcohol")
+    private String initEditAlcohol() {
+        return "";
+    }
+
+    @PostMapping("/editAlcohol")
+    private String editAlcohol() {
+        return "";
+    }
+
+    @PostMapping("/deleteAlcohol")
+    private String deleteAlcohol() {
+        return "";
+    }
+
+    @GetMapping("/alcoholList")
+    private String getAlcoholListEng(Model model) {
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("Eng"));
+        return "alcohol/alcoholList";
+    }
+
+    @GetMapping("/alcoholListPl")
+    private String getAlcoholListPl(Model model) {
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("Pl"));
+        return "alcohol/alcoholList";
+    }
+
+    @GetMapping("/translateAlcohol")
+    private String translateAlcohol(@RequestParam String alcoholName, Model model) {
+        model.addAttribute("alcohol", googleTranslateService.translateAndGetAlcohol(alcoholName));
+        return "alcohol/translatedAlcoholInfo";
     }
 
 

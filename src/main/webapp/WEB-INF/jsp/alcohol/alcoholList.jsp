@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
 <html lang="pl">
@@ -11,40 +12,32 @@
 </head>
 <body>
 <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-    <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailListPl">
+    <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholListPl">
         <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List Polish</button>
     </form>
-    <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailList">
+    <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholList">
         <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
     </form>
 </div>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
-    <c:forEach items="${cocktailList}" var="cocktail">
+    <c:forEach items="${alcoholList}" var="alcohol">
         <div class="col">
             <div class="card ">
-                <img SRC="/pictureController/getPicture/${cocktail.id}" width="350px"
-                     height="600px">
+                <img SRC="/pictureController/getPicture/${alcohol.id}" width="350px" height="600px">
                 <div class="card-body">
-                    <h5 class="card-title">${cocktail.name}</h5>
-                    <p class="card-text">${cocktail.preparationDescription}</p>
+                    <h5 class="card-title">${alcohol.name}</h5>
+                    <p class="card-text">${alcohol.description}</p>
                 </div>
                 <ul class="list-group list-group-flush"></ul>
                 <ul class="list-group list-group-flush">
-                    <c:forEach items="${cocktail.alcoholList}" var="alcohol">
-                        <li class="list-group-item">${alcohol.name}</li>
-                    </c:forEach>
-                </ul>
-                <ul class="list-group list-group-flush">Ingredients</ul>
-                <ul class="list-group list-group-flush">
-                    <c:forEach items="${cocktail.ingredients}" var="ingredients">
-                        <li class="list-group-item">${ingredients.name}</li>
-                    </c:forEach>
+                    <li class="list-group-item">Type: ${alcohol.alcoholType}</li>
+                    <li class="list-group-item">Age: ${alcohol.age}</li>
                 </ul>
                 <div class="card-footer">
                     <small class="text-muted">
-                        <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktail?cocktailName=${cocktail.name}">
-                            Translate Cocktail</a></small>
+                        <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcohol?alcoholName=${alcohol.name}">
+                            Translate alcohol</a></small>
                 </div>
             </div>
         </div>

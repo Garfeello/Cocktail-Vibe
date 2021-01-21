@@ -6,6 +6,5 @@ import pl.application.cocktailVibe.model.Picture;
 
 import java.io.InputStream;
 
-
 public interface PictureRepository extends JpaRepository<Picture, Long>, CrudRepository<Picture, Long> {
 }

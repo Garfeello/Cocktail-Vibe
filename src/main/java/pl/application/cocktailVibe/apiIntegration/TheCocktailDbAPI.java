@@ -164,7 +164,6 @@ public class TheCocktailDbAPI {
         }
     }
 
-
     //create and parse resource url to readable format
     private List<String> getListOfStringFromArrayNode(String resourceURL) {
         List<String> strings = Collections.emptyList();

@@ -40,7 +40,7 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/addCocktail">All alcohols <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/cocktailVibe/alcoholList">All alcohols <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="d-flex" action="${pageContext.request.contextPath}/cocktailVibe/search" method="get">

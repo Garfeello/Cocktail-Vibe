@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
+import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 
 import java.io.BufferedReader;
@@ -13,6 +14,7 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,13 +22,19 @@ import java.util.Optional;
 public class GoogleTranslateAPI {
 
     private final CocktailRepository cocktailRepository;
+    private final AlcoholRepository alcoholRepository;
 
-    public GoogleTranslateAPI(CocktailRepository cocktailRepository) {
+    public GoogleTranslateAPI(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
+        this.alcoholRepository = alcoholRepository;
     }
 
     public void translateAndSaveCocktail(Cocktail cocktail) {
         cocktailRepository.save(translateCocktail(cocktail));
+    }
+
+    public void translateAndSaveAlcohol(Alcohol alcohol){
+        alcoholRepository.save(translateAlcohols(List.of(alcohol)).get(0));
     }
 
     private Cocktail translateCocktail(Cocktail cocktail) {
