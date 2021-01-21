@@ -49,13 +49,10 @@ public class MainPage {
 
     @GetMapping("/search")
     private String search(@RequestParam String searchedString, Model model) {
-        String prepareSearch = "";
-        if (searchedString != null) {
-            prepareSearch = searchedString.toLowerCase();
-        }
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(searchedString);
         Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(searchedString);
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByName(searchedString);
+        model.addAttribute("searchedString", "- Searching by " + searchedString);
 
         if (ingredientOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
@@ -64,10 +61,9 @@ public class MainPage {
         } else if (alcoholOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcoholOptional.get()).get());
         }
-
-
-        return "mainPage/cocktailInfo";
+        return "cocktail/cocktailInfo";
     }
+
 
     //////////////////////////////////////////////////////////////////////////////////////
     @ResponseBody
@@ -80,7 +76,7 @@ public class MainPage {
     @ResponseBody
     @GetMapping("/testList")
     private List<Cocktail> cocktailList() {
-        return cocktailDbService.getCocktailsByIngredient("sugar");
+        return cocktailDbService.getCocktailsByIngredient("caruva");
 
     }
 
@@ -88,12 +84,6 @@ public class MainPage {
     @GetMapping("/testAlcohol")
     private List<Cocktail> cocktailListAlcohol() {
         return cocktailDbService.getCocktailsByAlcohol("brandy");
-    }
-
-
-    @GetMapping("/error")
-    private String error() {
-        return "mainPage/body";
     }
 
 }

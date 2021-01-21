@@ -21,12 +21,9 @@ import java.util.List;
 public class AlcoholController {
 
     private final AlcoholRepository alcoholRepository;
-    private final PictureRepository pictureRepository;
 
-    public AlcoholController(AlcoholRepository alcoholRepository, PictureRepository pictureRepository) {
+    public AlcoholController(AlcoholRepository alcoholRepository) {
         this.alcoholRepository = alcoholRepository;
-        this.pictureRepository = pictureRepository;
-
     }
 
     @ModelAttribute("alcoholTypeList")

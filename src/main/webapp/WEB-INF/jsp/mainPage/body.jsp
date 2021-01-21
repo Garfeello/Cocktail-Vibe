@@ -2,7 +2,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
 
 
 <!doctype html>
@@ -11,17 +11,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Swietna aplikacja Kamila</title>
+    <title>CocktailVibeApp</title>
 </head>
 <body>
+<h1 class="container"> - Welcome To Cocktail Vibe ! - </h1>
 
-<form class="my-2 my-lg-0 container" action="${pageContext.request.contextPath}/cocktailVibe/search" method="get">
-    <input class="form-control mr-sm-2" type="text" name="searchedString" placeholder="Search" aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-</form>
 <ul class="container">
+    <h3> - Newest Cocktails -</h3>
     <c:forEach items="${fiveNewestCocktails}" var="cocktail">
-
         <li class="list-group-item">
             <div class="container card" style="width: 30rem;">
                 <img class="card-img-top" SRC="/pictureController/getPicture/${cocktail.id}" width="350px" height="600px">

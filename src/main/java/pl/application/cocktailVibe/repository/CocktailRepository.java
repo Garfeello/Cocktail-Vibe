@@ -1,6 +1,5 @@
 package pl.application.cocktailVibe.repository;
 
-import com.fasterxml.jackson.annotation.OptBoolean;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -16,8 +15,14 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
     @Query("select c from Cocktail c")
     List<Cocktail> findAllCocktails();
 
+    List<Cocktail> findCocktailsByLanguage(String language);
+
     @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP order by created_on desc LIMIT 5;")
     List<Cocktail> findFiveNewestCocktails();
+
+    Optional<Cocktail> findFirstByNameAndLanguage(String cocktailName, String cocktailLanguage);
+
+    Optional<Cocktail> findCocktailById(Long id);
 
     Optional<Cocktail> findFirstByName(String cocktailName);
 

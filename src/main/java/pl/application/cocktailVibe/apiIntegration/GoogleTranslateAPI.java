@@ -25,12 +25,11 @@ public class GoogleTranslateAPI {
         this.cocktailRepository = cocktailRepository;
     }
 
-    public void translateAndSaveCocktail(String cocktailName) {
-        cocktailRepository.save(translateCocktail(cocktailName));
+    public void translateAndSaveCocktail(Cocktail cocktail) {
+        cocktailRepository.save(translateCocktail(cocktail));
     }
 
-    private Cocktail translateCocktail(String cocktailName) {
-        Cocktail cocktail = cocktailRepository.findFirstByName(cocktailName).orElseThrow();
+    private Cocktail translateCocktail(Cocktail cocktail) {
         Cocktail translatedCocktail = new Cocktail();
         translatedCocktail.setName(cocktail.getName());
         translatedCocktail.setIngredients(translateIngredients(cocktail.getIngredients()));
