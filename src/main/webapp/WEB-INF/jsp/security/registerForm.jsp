@@ -29,7 +29,7 @@
             </div>
             <div class="form-group">
                 <label for="password">Password</label>
-                <form:input class="form-control" placeholder=" 8-16 characters'" path="password"/>
+                <form:input class="form-control" placeholder=" 8-24 characters'" path="password"/>
             </div>
             <div class="form-group">
                 <label for="matchingPassword">Repeat Password</label>

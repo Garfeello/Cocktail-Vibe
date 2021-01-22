@@ -2,11 +2,11 @@ package pl.application.cocktailVibe.dto;
 
 import com.sun.istack.NotNull;
 import pl.application.cocktailVibe.annotations.PasswordMatches;
+import pl.application.cocktailVibe.annotations.PasswordValidate;
 import pl.application.cocktailVibe.annotations.UniqueAccount;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.Size;
 
 @UniqueAccount
 @PasswordMatches
@@ -18,7 +18,7 @@ public class UserDTO {
 
     @NotNull
     @NotEmpty
-    @Size(min = 8)
+    @PasswordValidate
     private String password;
     private String matchingPassword;
 
