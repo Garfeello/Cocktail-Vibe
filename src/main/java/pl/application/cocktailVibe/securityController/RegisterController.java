@@ -7,17 +7,17 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import pl.application.cocktailVibe.dto.UserDTO;
-import pl.application.cocktailVibe.services.UserService;
+import pl.application.cocktailVibe.services.UserSaveService;
 
 import javax.validation.Valid;
 
 @Controller
 public class RegisterController {
 
-    private final UserService userService;
+    private final UserSaveService userSaveService;
 
-    public RegisterController(UserService userService) {
-        this.userService = userService;
+    public RegisterController(UserSaveService userSaveService) {
+        this.userSaveService = userSaveService;
     }
 
     @GetMapping("/register")
@@ -31,7 +31,7 @@ public class RegisterController {
         if (result.hasErrors()){
             return "security/registerForm";
         }
-        userService.registerNewUserAccount(userDTO);
+        userSaveService.registerNewUserAccount(userDTO);
         return "redirect:/cocktailVibe/";
     }
 

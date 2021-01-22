@@ -1,5 +1,6 @@
 package pl.application.cocktailVibe.model;
 
+import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.List;
 
@@ -16,6 +17,8 @@ public class User {
     private String email;
 
     private String password;
+
+    private String role;
 
     @OneToMany
     private List<Cocktail> cocktailList;
@@ -52,6 +55,14 @@ public class User {
         this.password = password;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public List<Cocktail> getCocktailList() {
         return cocktailList;
     }
@@ -67,6 +78,7 @@ public class User {
                 ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
+                ", role='" + role + '\'' +
                 ", cocktailList=" + cocktailList +
                 '}';
     }

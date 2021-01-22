@@ -8,11 +8,11 @@ import pl.application.cocktailVibe.model.User;
 import pl.application.cocktailVibe.repository.UserRepository;
 
 @Service
-public class UserService {
+public class UserSaveService {
 
     private final UserRepository userRepository;
 
-    public UserService(UserRepository userRepository) {
+    public UserSaveService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
@@ -21,14 +21,12 @@ public class UserService {
         User user = new User();
         user.setNickName(userDto.getNickName());
         user.setEmail(userDto.getEmail());
-
-
+        user.setPassword(hashPassword(userDto.getPassword()));
+        user.setRole("ROLE_USER");
+        userRepository.save(user);
     }
 
     private String hashPassword(String password){
         return BCrypt.hashpw(password, BCrypt.gensalt());
     }
-
-
-
 }
