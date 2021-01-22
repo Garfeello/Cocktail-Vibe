@@ -56,7 +56,7 @@
                     Login
                 </a>
                 <div class="dropdown-menu">
-                    <form:form cssClass="px-4 py-3">
+                    <form:form cssClass="px-4 py-3" action="/login" method="post">
                         <div class="form-group">
                             <label for="exampleDropdownFormEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleDropdownFormEmail1"

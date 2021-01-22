@@ -15,6 +15,7 @@ public class PasswordMatchesValidator implements ConstraintValidator<PasswordMat
     @Override
     public boolean isValid(Object o, ConstraintValidatorContext constraintValidatorContext) {
         UserDTO userDTO = (UserDTO) o;
-        return userDTO.getPassword().equals(userDTO.getMatchingPassword());
+        return userDTO.getPassword().equals(userDTO.getMatchingPassword()) &&
+                userDTO.getPassword().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$");
     }
 }

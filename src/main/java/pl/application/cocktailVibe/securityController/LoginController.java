@@ -12,8 +12,11 @@ public class LoginController {
         return "security/login";
     }
 
-    @PostMapping("/performLogin")
+    @PostMapping("/login")
     private String performLogin(){
+
+
+
         return "redirect:/cocktailVibe/";
     }
 }

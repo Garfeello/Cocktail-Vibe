@@ -17,7 +17,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Constraint(validatedBy = PasswordMatchesValidator.class)
 @Documented
 public @interface PasswordMatches { 
-    String message() default "Passwords don't match";
+    String message() default "Passwords don't match or need to have 1 capital letter and 1 number";
     Class<?>[] groups() default {}; 
     Class<? extends Payload>[] payload() default {};
 }

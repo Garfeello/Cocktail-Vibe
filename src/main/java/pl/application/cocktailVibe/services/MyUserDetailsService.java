@@ -1,0 +1,50 @@
+package pl.application.cocktailVibe.services;
+
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import pl.application.cocktailVibe.model.User;
+import pl.application.cocktailVibe.repository.UserRepository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+@Transactional
+public class MyUserDetailsService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    public MyUserDetailsService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = getUser(email);
+        boolean enabled = true;
+        boolean accountNonExpired = true;
+        boolean credentialsNonExpired = true;
+        boolean accountNonLocked = true;
+
+        return new org.springframework.security.core.userdetails.User(
+                user.getEmail(),
+                user.getPassword().toLowerCase(), enabled, accountNonExpired,
+                credentialsNonExpired, accountNonLocked, List.of(getAuthority(user.getRole())));
+    }
+
+    private User getUser(String email) {
+        Optional<User> optionalUser = userRepository.findByEmail(email);
+        if (optionalUser.isEmpty()) {
+            throw new UsernameNotFoundException("No user found with username: " + email); // log
+        }
+        return optionalUser.get();
+    }
+
+    private GrantedAuthority getAuthority(String roles) {
+        return new SimpleGrantedAuthority(roles);
+    }
+}
