@@ -61,7 +61,7 @@ public class CocktailController {
             return "cocktail/cocktailForm";
         }
         Picture picture = new Picture();
-        picture.setName(cocktail.getName());
+        picture.setName(cocktail.getName() + ".jpg");
         try {
             picture.setImage(file.getBytes());
         } catch (IOException e) {

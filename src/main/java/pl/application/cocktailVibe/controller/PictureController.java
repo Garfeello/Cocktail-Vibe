@@ -14,7 +14,7 @@ import java.io.OutputStream;
 
 
 @Controller
-@RequestMapping("pictureController")
+@RequestMapping("/pictureController")
 public class PictureController {
 
     private final CocktailRepository cocktailRepository;

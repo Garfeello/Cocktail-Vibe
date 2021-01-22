@@ -70,7 +70,7 @@
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </form:form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">New around here? Sign up</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here? Sign up</a>
                 </div>
             </div>
         </ul>
