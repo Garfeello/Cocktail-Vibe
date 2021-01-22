@@ -18,6 +18,7 @@
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-25 p-3 ">
         <form:form method="post" modelAttribute="userDTO">
+            <form:errors cssClass="alert alert-danger" path="*" element="div"/>
             <div class="form-group">
                 <label for="nickName">Nickname</label>
                 <form:input class="form-control" placeholder="'Jeremy28'" path="nickName"/>

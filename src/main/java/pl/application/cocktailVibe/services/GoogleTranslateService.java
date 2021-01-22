@@ -1,6 +1,7 @@
 package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
@@ -10,7 +11,7 @@ import pl.application.cocktailVibe.repository.CocktailRepository;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
-@Component
+@Service
 public class GoogleTranslateService {
 
     private final GoogleTranslateAPI googleTranslateAPI;

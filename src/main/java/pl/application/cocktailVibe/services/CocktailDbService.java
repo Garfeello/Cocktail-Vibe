@@ -1,6 +1,6 @@
 package pl.application.cocktailVibe.services;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import pl.application.cocktailVibe.apiIntegration.TheCocktailDbAPI;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
@@ -9,12 +9,11 @@ import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
 
-@Component
+@Service
 public class CocktailDbService {
 
     private final TheCocktailDbAPI theCocktailDbAPI;

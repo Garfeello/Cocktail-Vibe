@@ -1,8 +1,6 @@
 package pl.application.cocktailVibe.model;
 
 import javax.persistence.*;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.Size;
 import java.util.List;
 
 @Entity
@@ -12,13 +10,11 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(min = 2, max = 26)
-    private String name;
+    private String nickName;
 
-    @Email
+    @Column(unique = true)
     private String email;
 
-    @Size(min = 12)
     private String password;
 
     @OneToMany
@@ -32,12 +28,12 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getNickName() {
+        return nickName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 
     public String getEmail() {
@@ -68,7 +64,7 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
+                ", nickName='" + nickName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
                 ", cocktailList=" + cocktailList +
