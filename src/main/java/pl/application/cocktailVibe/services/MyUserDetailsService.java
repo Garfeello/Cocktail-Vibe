@@ -9,13 +9,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.application.cocktailVibe.model.User;
 import pl.application.cocktailVibe.repository.UserRepository;
+import pl.application.cocktailVibe.securityInterface.SecurityInterface;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
 @Transactional
-public class MyUserDetailsService implements UserDetailsService {
+public class MyUserDetailsService implements SecurityInterface {
 
     private final UserRepository userRepository;
 
@@ -32,7 +33,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
         return new org.springframework.security.core.userdetails.User(
                 user.getEmail(),
-                user.getPassword().toLowerCase(), enabled, accountNonExpired,
+                user.getPassword(), enabled, accountNonExpired,
                 credentialsNonExpired, accountNonLocked, List.of(getAuthority(user.getRole())));
     }
 

@@ -9,25 +9,26 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import pl.application.cocktailVibe.securityInterface.SecurityInterface;
 import pl.application.cocktailVibe.services.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
-    private final MyUserDetailsService userDetailsService;
+    private final SecurityInterface userDetailsService;
 
-    public SecurityConfig(MyUserDetailsService userDetailsService) {
+    public SecurityConfig(SecurityInterface userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
     @Override
-    protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService);
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }
 
     @Override
-    protected void configure(final HttpSecurity http) throws Exception {
+    protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf()
                 .disable()
@@ -47,15 +48,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin()
+                .formLogin();
 //                .loginPage("/login")
 //                .loginProcessingUrl("/performLogin")
-                .defaultSuccessUrl("/cocktailVibe/", true)
-                .failureUrl("/login?errorLogin=wrong email or password")
-                .and()
-                .logout()
+//                .defaultSuccessUrl("/cocktailVibe/", true)
+//                .failureUrl("/login?errorLogin=wrong email or password")
+//                .and()
+//                .logout()
 //                .logoutUrl("/perform_logout")
-                .deleteCookies("JSESSIONID");
+//                .deleteCookies("JSESSIONID");
     }
 
     @Bean
