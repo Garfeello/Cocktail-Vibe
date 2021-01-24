@@ -1,6 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+
 <!doctype html>
 <html lang="pl">
 <head>
@@ -56,7 +58,7 @@
                     Login
                 </a>
                 <div class="dropdown-menu">
-                    <form:form cssClass="px-4 py-3" action="/login" method="post">
+                    <form:form cssClass="px-4 py-3" action="login" method="post">
                         <div class="form-group">
                             <label for="exampleDropdownFormEmail1">Email address</label>
                             <input type="email" class="form-control" id="exampleDropdownFormEmail1"
@@ -70,8 +72,14 @@
                         <button type="submit" class="btn btn-primary">Sign in</button>
                     </form:form>
                     <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here? Sign up</a>
+                    <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here? Sign
+                        up</a>
                 </div>
+                <a>
+                    <sec:authorize access="isAuthenticated()">
+                        authenticated as <sec:authentication property="principal.username"/>
+                    </sec:authorize>
+                </a>
             </div>
         </ul>
     </div>

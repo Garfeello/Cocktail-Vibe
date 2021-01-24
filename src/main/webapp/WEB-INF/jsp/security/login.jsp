@@ -19,7 +19,7 @@
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-25 p-3 ">
 
-        <form class="form-signin" action="/login" method="post">
+        <form class="form-signin" action="login" method="post">
             <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
 
             <label for="inputEmail" class="sr-only">Email address</label>

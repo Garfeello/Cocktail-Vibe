@@ -48,10 +48,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest()
                 .authenticated()
                 .and()
-                .formLogin();
-//                .loginPage("/login")
+                .formLogin()
+                .loginPage("/login")
 //                .loginProcessingUrl("/performLogin")
-//                .defaultSuccessUrl("/cocktailVibe/", true)
+                .defaultSuccessUrl("/cocktailVibe/", true);
 //                .failureUrl("/login?errorLogin=wrong email or password")
 //                .and()
 //                .logout()
