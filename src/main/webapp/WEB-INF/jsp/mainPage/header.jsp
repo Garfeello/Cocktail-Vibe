@@ -32,12 +32,6 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/addCocktail">Add cocktail<span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/addAlcohol">Add alcohol</a>
-            </li>
-            <li class="nav-item active">
                 <a class="nav-link" href="/cocktailVibe/cocktailList">All cocktails<span
                         class="sr-only">(current)</span></a>
             </li>
@@ -50,38 +44,57 @@
                    aria-label="Search">
             <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
         </form>
-        <ul class="navbar-nav mr-auto">
-            <%--DROPDOWN--%>
-            <div class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
-                   aria-haspopup="true" aria-expanded="false">
-                    Login
-                </a>
-                <div class="dropdown-menu">
-                    <form:form cssClass="px-4 py-3" action="login" method="post">
-                        <div class="form-group">
-                            <label for="exampleDropdownFormEmail1">Email address</label>
-                            <input type="email" class="form-control" id="exampleDropdownFormEmail1"
-                                   placeholder="email@example.com">
-                        </div>
-                        <div class="form-group">
-                            <label for="exampleDropdownFormPassword1">Password</label>
-                            <input type="password" class="form-control" id="exampleDropdownFormPassword1"
-                                   placeholder="Password">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Sign in</button>
-                    </form:form>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here? Sign
-                        up</a>
+        <%--DROPDOWN--%>
+        <sec:authorize access="isAnonymous()">
+            <ul class="navbar-nav mr-auto">
+                <div class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                       data-toggle="dropdown"
+                       aria-haspopup="true" aria-expanded="false">
+                        Login
+                    </a>
+                    <div class="dropdown-menu">
+                        <form cssClass="px-4 py-3" action="/login" method="post">
+                            <div class="form-group">
+                                <label for="exampleDropdownFormEmail1">Email address</label>
+                                <input type="email" class="form-control" id="exampleDropdownFormEmail1"
+                                       placeholder="email@example.com" name="username">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleDropdownFormPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleDropdownFormPassword1"
+                                       placeholder="Password" name="password">
+                            </div>
+                            <button type="submit" class="btn btn-primary">Sign in</button>
+                        </form>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here?
+                            Sign
+                            up</a>
+                    </div>
                 </div>
-                <a>
-                    <sec:authorize access="isAuthenticated()">
-                        authenticated as <sec:authentication property="principal.username"/>
-                    </sec:authorize>
-                </a>
-            </div>
-        </ul>
+            </ul>
+        </sec:authorize>
+        <sec:authorize access="isAuthenticated()">
+            <ul class="navbar-nav mr-auto">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
+                            aria-haspopup="true" aria-expanded="false">
+                         <sec:authentication property="principal.username"/>
+                    </button>
+                    <div class="dropdown-menu">
+                        <a class="nav-link" href="/cocktailVibe/addCocktail">Add cocktail</a>
+                        <a class="nav-link" href="/cocktailVibe/addAlcohol">Add alcohol</a>
+                        <a class="nav-link" href="/cocktailVibe/user/cocktails">My cocktails</a>
+                        <a class="nav-link" href="/cocktailVibe/user/alcohols">My alcohols </a>
+                        <div class="dropdown-divider"></div>
+                        <a class="dropdown-item" href="/logout">Logout</a>
+                    </div>
+                </div>
+
+            </ul>
+        </sec:authorize>
+
     </div>
 </nav>
 </body>

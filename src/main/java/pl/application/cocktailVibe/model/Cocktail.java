@@ -35,7 +35,7 @@ public class Cocktail {
     @NotEmpty
     private String language;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     private User user;
 
     @Column(name = "created_on")

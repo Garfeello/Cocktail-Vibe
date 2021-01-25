@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
 <html lang="pl">
@@ -7,17 +8,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Cocktail list</title>
+    <title>My Cocktails</title>
 </head>
 <body>
-<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-    <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailListPl">
-        <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List Polish</button>
-    </form>
-    <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailList">
-        <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
-    </form>
-</div>
+<h1 class="containter">- My cocktails -</h1>
 
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${cocktailList}" var="cocktail">
@@ -43,9 +37,8 @@
                 </ul>
                 <ul class="list-group list-group-flush">Created by: @${cocktail.user.nickName}</ul>
                 <div class="card-footer">
-                    <small class="text-muted">
-                        <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktail?cocktailName=${cocktail.name}">
-                            Translate Cocktail</a></small>
+                    <small class="text-muted"><a class="btn btn-light" href="">edit</a></small>
+                    <small class="text-muted"><a>delete</a></small>
                 </div>
             </div>
         </div>

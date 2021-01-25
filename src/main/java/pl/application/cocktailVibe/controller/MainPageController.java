@@ -19,7 +19,7 @@ import java.util.Optional;
 
 @Controller
 @RequestMapping("/cocktailVibe")
-public class MainPage {
+public class MainPageController {
 
     private final GoogleTranslateService googleTranslateService;
     private final CocktailRepository cocktailRepository;
@@ -28,8 +28,8 @@ public class MainPage {
     private final AlcoholRepository alcoholRepository;
 
 
-    public MainPage(GoogleTranslateService googleTranslateService, CocktailRepository cocktailRepository,
-                    CocktailDbService cocktailDbService, IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
+    public MainPageController(GoogleTranslateService googleTranslateService, CocktailRepository cocktailRepository,
+                              CocktailDbService cocktailDbService, IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
         this.googleTranslateService = googleTranslateService;
         this.cocktailRepository = cocktailRepository;
         this.cocktailDbService = cocktailDbService;

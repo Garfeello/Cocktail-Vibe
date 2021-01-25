@@ -1,6 +1,5 @@
 package pl.application.cocktailVibe.security;
 
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -10,7 +9,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import pl.application.cocktailVibe.securityInterface.SecurityInterface;
-import pl.application.cocktailVibe.services.MyUserDetailsService;
 
 @Configuration
 @EnableWebSecurity
@@ -36,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/pictureController/getPicture/*").permitAll()
                 .antMatchers("/login").permitAll()
                 .antMatchers("/register").permitAll()
+                .antMatchers("/logoutSuccess").permitAll()
                 .antMatchers("/cocktailVibe/").permitAll()
+                .antMatchers("/cocktailVibe/search").permitAll()
                 .antMatchers("/cocktailVibe/cocktailList").permitAll()
                 .antMatchers("/cocktailVibe/cocktailListPl").permitAll()
                 .antMatchers("/cocktailVibe/translateCocktail").permitAll()
@@ -50,13 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .loginPage("/login")
-//                .loginProcessingUrl("/performLogin")
-                .defaultSuccessUrl("/cocktailVibe/", true);
-//                .failureUrl("/login?errorLogin=wrong email or password")
-//                .and()
-//                .logout()
-//                .logoutUrl("/perform_logout")
-//                .deleteCookies("JSESSIONID");
+                .defaultSuccessUrl("/cocktailVibe/")
+                .and()
+                .logout()
+                .logoutSuccessUrl("/logoutSuccess")
+                .deleteCookies("JSESSIONID");
+
     }
 
     @Bean

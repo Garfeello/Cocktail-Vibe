@@ -1,8 +1,5 @@
 package pl.application.cocktailVibe.model;
 
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-
-import javax.management.relation.Role;
 import javax.persistence.*;
 import java.util.List;
 

@@ -1,22 +1,21 @@
 package pl.application.cocktailVibe.controller;
 
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
-import pl.application.cocktailVibe.model.Alcohol;
-import pl.application.cocktailVibe.model.Cocktail;
-import pl.application.cocktailVibe.model.Ingredient;
-import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.model.*;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
-import pl.application.cocktailVibe.services.CocktailDbService;
+import pl.application.cocktailVibe.repository.UserRepository;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,14 +27,17 @@ public class CocktailController {
     private final IngredientRepository ingredientRepository;
     private final CocktailRepository cocktailRepository;
     private final GoogleTranslateService googleTranslateService;
+    private final UserRepository userRepository;
 
 
     public CocktailController(AlcoholRepository alcoholRepository, IngredientRepository ingredientRepository,
-                              CocktailRepository cocktailRepository, GoogleTranslateService googleTranslateService) {
+                              CocktailRepository cocktailRepository, GoogleTranslateService googleTranslateService,
+                              UserRepository userRepository) {
         this.alcoholRepository = alcoholRepository;
         this.ingredientRepository = ingredientRepository;
         this.cocktailRepository = cocktailRepository;
         this.googleTranslateService = googleTranslateService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("alcoholList")
@@ -56,17 +58,22 @@ public class CocktailController {
 
     @PostMapping("/addCocktail")
     private String addCocktail(@ModelAttribute @Valid Cocktail cocktail, BindingResult result,
-                               @RequestParam("image") MultipartFile file) {
+                               @RequestParam("image") MultipartFile file, Principal principal) {
         if (result.hasErrors()) {
             return "cocktail/cocktailForm";
         }
         Picture picture = new Picture();
         picture.setName(cocktail.getName() + ".jpg");
+
         try {
             picture.setImage(file.getBytes());
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        String getUserEmail = principal.getName();
+        Optional<User> optionalUser = userRepository.findByEmail(getUserEmail);
+        optionalUser.ifPresent(cocktail::setUser);
         cocktail.setPicture(picture);
         cocktailRepository.save(cocktail);
         return "redirect:/cocktailVibe/";

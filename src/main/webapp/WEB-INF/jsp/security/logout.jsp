@@ -15,33 +15,12 @@
             crossorigin="anonymous"></script>
     <title>CocktailVibe Login</title>
 </head>
+
 <body class="text-center" style="background-color: lightgray">
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-25 p-3 ">
-
-        <form class="form-signin" action="/login" method="post">
-            <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
-
-            <label for="inputEmail" class="sr-only">Email address</label>
-            <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
-                   name="username">
-
-            <label for="inputPassword" class="sr-only">Password</label>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
-                   name="password">
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Login in</button>
-
-            <div class="alert alert-danger" role="alert">
-                ${empty errorLogin ? "" : errorLogin}
-            </div>
-            <p class="mt-5 mb-3 text-muted">&copy; CocktailVibe 2021</p>
-            <a href="${pageContext.request.contextPath}/cocktailVibe/">Home</a>
-            <div class="card-footer">
-                <small class="text-muted">
-                    <a href="${pageContext.request.contextPath}/register">Register here !</a>
-                </small>
-            </div>
-        </form>
+        <h1 class="container">SUCCESSFUL LOGOUT</h1>
+        <a class="btn btn-outline-secondary" href="/cocktailVibe/">HOME</a>
     </div>
 </div>
 </body>

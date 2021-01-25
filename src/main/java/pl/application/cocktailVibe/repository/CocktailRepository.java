@@ -6,6 +6,7 @@ import org.springframework.data.repository.CrudRepository;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
+import pl.application.cocktailVibe.model.User;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,14 +23,12 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
 
     Optional<Cocktail> findFirstByNameAndLanguage(String cocktailName, String cocktailLanguage);
 
-    Optional<Cocktail> findCocktailById(Long id);
-
     Optional<Cocktail> findFirstByName(String cocktailName);
 
     Optional<List<Cocktail>> findCocktailsByIngredients(Ingredient ingredient);
 
     Optional<List<Cocktail>> findCocktailsByAlcoholList(Alcohol alcohol);
 
-
+    Optional<List<Cocktail>> findCocktailsByUser(User user);
 
 }
