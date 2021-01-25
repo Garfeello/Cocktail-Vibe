@@ -16,6 +16,7 @@ public interface AlcoholRepository extends JpaRepository<Alcohol, Long>, CrudRep
 
     List<Alcohol> findAlcoholByLanguage(String language);
 
+    @Override
     Optional<Alcohol> findById(Long longId);
 
     Optional<Alcohol> findFirstByNameAndLanguage(String name, String language);

@@ -11,13 +11,12 @@
     <title>My Cocktails</title>
 </head>
 <body>
-<h1 class="containter">- My cocktails -</h1>
-
+<h1 class="container">- My Alcohols -</h1>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${alcoholList}" var="alcohol">
         <div class="col">
-            <div class="card ">
-                <img SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px">
+            <div class="card">
+                <img SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px" alt="img">
                 <div class="card-body">
                     <h5 class="card-title">${alcohol.name}</h5>
                     <p class="card-text">${alcohol.description}</p>
@@ -28,10 +27,12 @@
                 </ul>
                 <div class="card-footer">
                     <small class="text-muted">
-                        <a class="btn btn-light" href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">edit</a>
+                        <a class="btn btn-light" href="/cocktailVibe/editAlcohol?alcoholId=${alcohol.id}">edit</a>
                     </small>
                     <small class="text-muted">
-                        <a class="btn btn-light" href="/cocktailVibe/deleteCocktail?cocktailId=${cocktail.id}">delete</a>
+                        <form action="/cocktailVibe/deleteAlcohol" method="post">
+                            <button class="btn btn-light" value="${alcohol.id}" name="alcoholId">delete</button>
+                        </form>
                     </small>
                 </div>
             </div>

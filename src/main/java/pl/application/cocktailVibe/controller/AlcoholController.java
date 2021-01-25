@@ -7,13 +7,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.model.User;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
+import pl.application.cocktailVibe.repository.UserRepository;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import javax.validation.Valid;
 import java.io.IOException;
+import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -21,10 +25,12 @@ public class AlcoholController {
 
     private final AlcoholRepository alcoholRepository;
     private final GoogleTranslateService googleTranslateService;
+    private final UserRepository userRepository;
 
-    public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService) {
+    public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService, UserRepository userRepository) {
         this.alcoholRepository = alcoholRepository;
         this.googleTranslateService = googleTranslateService;
+        this.userRepository = userRepository;
     }
 
     @ModelAttribute("alcoholTypeList")
@@ -40,37 +46,41 @@ public class AlcoholController {
 
     @PostMapping("/addAlcohol")
     private String addAlcohol(@ModelAttribute @Valid Alcohol alcohol, BindingResult result,
-                              @RequestParam("image") MultipartFile file) {
+                              @RequestParam("image") MultipartFile file, Principal principal) {
 
         if (result.hasErrors()) {
             return "alcohol/alcoholForm";
         }
+        Picture picture = getPicture(alcohol.getName(), file);
+        Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
 
-        Picture picture = new Picture();
-        picture.setName(alcohol.getName());
-        try {
-            picture.setImage(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        optionalUser.ifPresent(alcohol::setUser);
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
         return "redirect:/cocktailVibe/";
     }
 
     @GetMapping("/editAlcohol")
-    private String initEditAlcohol() {
-        return "";
+    private String initEditAlcohol(@RequestParam Long alcoholId, Model model) {
+        Optional<Alcohol> optionalAlcohol = alcoholRepository.findById(alcoholId);
+        optionalAlcohol.ifPresent(alcohol -> model.addAttribute("alcohol", alcohol));
+        return "alcohol/alcoholForm";
     }
 
     @PostMapping("/editAlcohol")
-    private String editAlcohol() {
-        return "";
+    private String editAlcohol(@ModelAttribute Alcohol alcohol, @RequestParam("image") MultipartFile file) {
+        if (!file.isEmpty()) {
+            Picture picture = getPicture(alcohol.getName(), file);
+            alcohol.setPicture(picture);
+        }
+        alcoholRepository.save(alcohol);
+        return "redirect:/cocktailVibe/user/alcohols";
     }
 
     @PostMapping("/deleteAlcohol")
-    private String deleteAlcohol() {
-        return "";
+    private String deleteAlcohol(@RequestParam Long alcoholId) {
+        alcoholRepository.deleteById(alcoholId);
+        return "redirect:/cocktailVibe/";
     }
 
     @GetMapping("/alcoholList")
@@ -89,6 +99,17 @@ public class AlcoholController {
     private String translateAlcohol(@RequestParam String alcoholName, Model model) {
         model.addAttribute("alcohol", googleTranslateService.translateAndGetAlcohol(alcoholName));
         return "alcohol/translatedAlcoholInfo";
+    }
+
+    private Picture getPicture(String alcoholName, MultipartFile file) {
+        Picture picture = new Picture();
+        picture.setName(alcoholName);
+        try {
+            picture.setImage(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return picture;
     }
 
 

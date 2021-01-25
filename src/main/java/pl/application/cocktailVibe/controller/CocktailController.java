@@ -50,7 +50,7 @@ public class CocktailController {
     }
 
     @GetMapping("/addCocktail")
-    private String addCocktailInit(Model model) {
+    private String InitAddCocktail(Model model) {
         model.addAttribute("cocktail", new Cocktail());
         return "cocktail/cocktailForm";
     }
@@ -71,7 +71,7 @@ public class CocktailController {
     }
 
     @GetMapping("/editCocktail")
-    private String editCocktailInit(@RequestParam Long cocktailId, Model model) {
+    private String initEditCocktail(@RequestParam Long cocktailId, Model model) {
         Optional<Cocktail> optionalCocktail = cocktailRepository.findById(cocktailId);
         optionalCocktail.ifPresent(cocktail -> model.addAttribute("cocktail", cocktail));
         return "cocktail/cocktailForm";
@@ -87,7 +87,7 @@ public class CocktailController {
         return "redirect:/cocktailVibe/user/cocktails";
     }
 
-    @GetMapping("/deleteCocktail")
+    @PostMapping("/deleteCocktail")
     private String deleteCocktail(@RequestParam Long cocktailId) {
         cocktailRepository.deleteById(cocktailId);
         return "redirect:/cocktailVibe/user/cocktails";
@@ -104,7 +104,6 @@ public class CocktailController {
         model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("Pl"));
         return "cocktail/cocktailList";
     }
-
 
     @GetMapping("/translateCocktail")
     private String translateCocktail(@RequestParam String cocktailName, Model model) {

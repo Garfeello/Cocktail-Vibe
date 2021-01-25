@@ -26,6 +26,7 @@
         <form:form method="post" modelAttribute="alcohol" enctype="multipart/form-data">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
             <form:hidden path="id"/>
+            <form:hidden path="picture"/>
             <form:hidden path="user"/>
             <div class="form-group">
                 <label for="name">Alcohol name</label>
