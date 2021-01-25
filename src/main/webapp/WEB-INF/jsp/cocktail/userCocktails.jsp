@@ -35,7 +35,6 @@
                         <li class="list-group-item">${ingredients.name}</li>
                     </c:forEach>
                 </ul>
-                <ul class="list-group list-group-flush">Created by: @${cocktail.user.nickName}</ul>
                 <div class="card-footer">
                     <small class="text-muted">
                         <a class="btn btn-light" href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">edit</a>

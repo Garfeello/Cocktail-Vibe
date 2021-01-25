@@ -70,7 +70,7 @@
             </div>
             <div class="form-group">
                 <label for="image">Input Picture</label>
-                <input class="form-control-file" type="file" name="image" id="image" value="${cocktail.picture}"/>
+                <input class="form-control-file" type="file" name="image" id="image"/>
             </div>
             <button class="btn btn-primary">Save</button>
         </form:form>

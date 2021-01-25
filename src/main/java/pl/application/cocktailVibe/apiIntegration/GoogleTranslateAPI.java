@@ -76,8 +76,9 @@ public class GoogleTranslateAPI {
             alcoholForTranslation.setLanguage("Pl");
             alcoholForTranslation.setName(alcohol.getName());
             alcoholForTranslation.setAlcoholType(alcohol.getAlcoholType());
-            alcoholForTranslation.setAge(0);
+            alcoholForTranslation.setAge(alcohol.getAge());
             alcoholForTranslation.setDescription("przykładowy opis Alkoholu");
+            alcoholForTranslation.setPicture(alcohol.getPicture());
             copiedList.add(alcoholForTranslation);
         }
         return copiedList;

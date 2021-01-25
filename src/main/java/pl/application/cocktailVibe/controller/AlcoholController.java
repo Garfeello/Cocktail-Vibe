@@ -53,7 +53,6 @@ public class AlcoholController {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
         return "redirect:/cocktailVibe/";

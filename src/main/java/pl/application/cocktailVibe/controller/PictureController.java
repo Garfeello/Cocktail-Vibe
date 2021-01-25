@@ -5,6 +5,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 
 import javax.servlet.http.HttpServletResponse;
@@ -18,13 +19,15 @@ import java.io.OutputStream;
 public class PictureController {
 
     private final CocktailRepository cocktailRepository;
+    private final AlcoholRepository alcoholRepository;
 
-    public PictureController(CocktailRepository cocktailRepository) {
+    public PictureController(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
+        this.alcoholRepository = alcoholRepository;
     }
 
     @GetMapping("/getPicture/{id}")
-    private void getPicture(@PathVariable Long id, HttpServletResponse response) {
+    private void getCocktailPicture(@PathVariable Long id, HttpServletResponse response) {
         try  {
             OutputStream o = response.getOutputStream();
             o.write(cocktailRepository.getOne(id).getPicture().getImage());
@@ -34,4 +37,14 @@ public class PictureController {
         }
     }
 
+    @GetMapping("/getAlcoholPicture/{id}")
+    private void getAlcoholPicture(@PathVariable Long id, HttpServletResponse response) {
+        try  {
+            OutputStream o = response.getOutputStream();
+            o.write(alcoholRepository.getOne(id).getPicture().getImage());
+            response.setContentType("image/jpg");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
 }

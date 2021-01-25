@@ -1,12 +1,10 @@
 package pl.application.cocktailVibe.model;
 
-
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
-
 
 @Entity
 public class Alcohol {
@@ -32,6 +30,17 @@ public class Alcohol {
 
     @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     public Long getId() {
         return id;
@@ -99,6 +108,7 @@ public class Alcohol {
                 ", description='" + description + '\'' +
                 ", language='" + language + '\'' +
                 ", picture=" + picture +
+                ", user=" + user +
                 '}';
     }
 }
