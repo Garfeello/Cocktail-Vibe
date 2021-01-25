@@ -19,7 +19,7 @@ public class User {
 
     private String role;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Cocktail> cocktailList;
 
     public Long getId() {

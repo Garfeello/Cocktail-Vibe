@@ -34,8 +34,10 @@
         <h2>- CREATE COCKTAIL -</h2>
         <form:form method="post" modelAttribute="cocktail" enctype="multipart/form-data">
             <form:errors path="*" cssClass="alert alert-danger" element="div" />
+            <form:hidden path="picture"/>
+            <form:hidden path="user"/>
+            <form:hidden path="createdOn"/>
             <form:hidden path="id"/>
-            <form:hidden path="user.id"/>
             <div class="form-group">
                 <label for="name">Cocktail name</label>
                 <form:input class="form-control" placeholder="'Margarita'" path="name"/>
@@ -68,7 +70,7 @@
             </div>
             <div class="form-group">
                 <label for="image">Input Picture</label>
-                <input class="form-control-file" type="file" name="image" id="image"/>
+                <input class="form-control-file" type="file" name="image" id="image" value="${cocktail.picture}"/>
             </div>
             <button class="btn btn-primary">Save</button>
         </form:form>

@@ -37,8 +37,12 @@
                 </ul>
                 <ul class="list-group list-group-flush">Created by: @${cocktail.user.nickName}</ul>
                 <div class="card-footer">
-                    <small class="text-muted"><a class="btn btn-light" href="">edit</a></small>
-                    <small class="text-muted"><a>delete</a></small>
+                    <small class="text-muted">
+                        <a class="btn btn-light" href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">edit</a>
+                    </small>
+                    <small class="text-muted">
+                        <a class="btn btn-light" href="/cocktailVibe/deleteCocktail?cocktailId=${cocktail.id}">delete</a>
+                    </small>
                 </div>
             </div>
         </div>

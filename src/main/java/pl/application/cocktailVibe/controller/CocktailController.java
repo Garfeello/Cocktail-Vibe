@@ -1,6 +1,5 @@
 package pl.application.cocktailVibe.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,17 +61,9 @@ public class CocktailController {
         if (result.hasErrors()) {
             return "cocktail/cocktailForm";
         }
-        Picture picture = new Picture();
-        picture.setName(cocktail.getName() + ".jpg");
+        Picture picture = getPicture(cocktail.getName(), file);
+        Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
 
-        try {
-            picture.setImage(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        String getUserEmail = principal.getName();
-        Optional<User> optionalUser = userRepository.findByEmail(getUserEmail);
         optionalUser.ifPresent(cocktail::setUser);
         cocktail.setPicture(picture);
         cocktailRepository.save(cocktail);
@@ -80,18 +71,26 @@ public class CocktailController {
     }
 
     @GetMapping("/editCocktail")
-    private String editCocktailInit() {
-        return "";
+    private String editCocktailInit(@RequestParam Long cocktailId, Model model) {
+        Optional<Cocktail> optionalCocktail = cocktailRepository.findById(cocktailId);
+        optionalCocktail.ifPresent(cocktail -> model.addAttribute("cocktail", cocktail));
+        return "cocktail/cocktailForm";
     }
 
     @PostMapping("/editCocktail")
-    private String editCocktail() {
-        return "";
+    private String editCocktail(@ModelAttribute Cocktail cocktail, @RequestParam("image") MultipartFile file) {
+        if (!file.isEmpty()) {
+            Picture picture = getPicture(cocktail.getName(), file);
+            cocktail.setPicture(picture);
+        }
+        cocktailRepository.save(cocktail);
+        return "redirect:/cocktailVibe/user/cocktails";
     }
 
     @GetMapping("/deleteCocktail")
-    private String deleteCocktail() {
-        return "";
+    private String deleteCocktail(@RequestParam Long cocktailId) {
+        cocktailRepository.deleteById(cocktailId);
+        return "redirect:/cocktailVibe/user/cocktails";
     }
 
     @GetMapping("/cocktailList")
@@ -113,5 +112,15 @@ public class CocktailController {
         return "cocktail/cocktailInfo";
     }
 
-
+    // czy to moze byc w kontrolerze?
+    private Picture getPicture(String cocktailName, MultipartFile file) {
+        Picture picture = new Picture();
+        picture.setName(cocktailName + ".jpg");
+        try {
+            picture.setImage(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return picture;
+    }
 }

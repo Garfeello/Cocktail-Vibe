@@ -17,7 +17,7 @@ public class Cocktail {
     @Size(min = 2, max = 40)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Alcohol> alcoholList;
 
     @ManyToMany(cascade = CascadeType.ALL)
@@ -29,13 +29,13 @@ public class Cocktail {
     @Size(max = 200)
     private String userInspiration;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Picture picture;
 
     @NotEmpty
     private String language;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private User user;
 
     @Column(name = "created_on")
