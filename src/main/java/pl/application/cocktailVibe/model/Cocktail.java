@@ -23,10 +23,10 @@ public class Cocktail {
     @ManyToMany(cascade = CascadeType.MERGE)
     private List<Ingredient> ingredients;
 
-    @Size(max = 1000)
+    @Size(max = 1000, message = "description max characters - 1000")
     private String preparationDescription;
 
-    @Size(max = 200)
+    @Size(max = 200, message = "user inspiration max characters - 500")
     private String userInspiration;
 
     @OneToOne(cascade = CascadeType.ALL)

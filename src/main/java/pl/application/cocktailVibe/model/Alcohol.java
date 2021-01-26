@@ -13,16 +13,16 @@ public class Alcohol {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
+    @NotEmpty(message = "name cant be left blank")
     @Size(min = 2, max = 35)
     private String name;
 
     private String alcoholType;
 
-    @Max(100)
+    @Max(value = 100, message = "maximum age is 100")
     private int age;
 
-    @Size(max = 5000)
+    @Size(max = 5000, message = "max word 5000")
     private String description;
 
     @NotNull
