@@ -30,8 +30,9 @@
             <label for="inputPassword" class="sr-only">Password</label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
                    name="password">
+            <br/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login in</button>
-
+            <br/>
             <div class="alert alert-danger" role="alert">
                 <%=((Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage()%>;
             </div>
