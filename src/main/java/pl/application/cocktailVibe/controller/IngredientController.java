@@ -6,9 +6,12 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.IngredientRepository;
+import pl.application.cocktailVibe.services.GoogleTranslateService;
 
+import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -16,20 +19,22 @@ import java.util.stream.Collectors;
 public class IngredientController {
 
     private final IngredientRepository ingredientRepository;
+    private final GoogleTranslateService googleTranslateService;
 
-    public IngredientController(IngredientRepository ingredientRepository) {
+    public IngredientController(IngredientRepository ingredientRepository, GoogleTranslateService googleTranslateService) {
         this.ingredientRepository = ingredientRepository;
+        this.googleTranslateService = googleTranslateService;
     }
 
     @GetMapping("/addIngredient")
-    private String initAddIngredient(Model model){
+    private String initAddIngredient(Model model) {
         model.addAttribute("ingredient", new Ingredient());
         return "ingredient/ingredientForm";
     }
 
     @PostMapping("/addIngredient")
-    private String addIngredient(@ModelAttribute Ingredient ingredient, BindingResult bindingResult){
-        if (bindingResult.hasErrors()){
+    private String addIngredient(@ModelAttribute Ingredient ingredient, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
             return "ingredient/ingredientForm";
         }
         ingredientRepository.save(ingredient);
@@ -37,21 +42,36 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredientList")
-    private String ingredientList(Model model){
-        List<Ingredient> sortedIngredients = ingredientRepository.findAllIngredients()
-                .stream()
-                .sorted(Comparator.comparing(Ingredient::getName))
-                .collect(Collectors.toList());
-        model.addAttribute("ingredientList", sortedIngredients);
+    private String ingredientList(Model model) {
+        List<Ingredient> ingredientList = new ArrayList<>();
+        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("Eng");
+        if (optionalIngredients.isPresent()) {
+            ingredientList = sortFromOptional(optionalIngredients.get());
+        }
+        model.addAttribute("ingredientList", ingredientList);
         return "ingredient/ingredientList";
     }
 
+    @GetMapping("/ingredientListPl")
+    private String ingredientListPl(Model model) {
+        List<Ingredient> ingredientList = new ArrayList<>();
+        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("Pl");
+        if (optionalIngredients.isPresent()) {
+            ingredientList = sortFromOptional(optionalIngredients.get());
+        }
+        model.addAttribute("ingredientList", ingredientList);
+        return "ingredient/ingredientList";
+    }
+
+    @GetMapping("/translateIngredient")
+    private String translateIngredient(@RequestParam String ingredientName, Model model) {
+        model.addAttribute("ingredient", googleTranslateService.translateAndGetIngredient(ingredientName));
+        return "ingredient/translatedIngredientInfo";
+    }
 
 
-
-
-
-
-
+    private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {
+        return ingredientList.stream().sorted(Comparator.comparing(Ingredient::getName)).collect(Collectors.toList());
+    }
 
 }

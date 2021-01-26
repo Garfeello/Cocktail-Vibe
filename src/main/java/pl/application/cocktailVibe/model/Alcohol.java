@@ -31,7 +31,7 @@ public class Alcohol {
     @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.MERGE)
     private User user;
 
     public User getUser() {

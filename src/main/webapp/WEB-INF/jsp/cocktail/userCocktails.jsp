@@ -40,7 +40,9 @@
                         <a class="btn btn-light" href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">edit</a>
                     </small>
                     <small class="text-muted">
-                        <a class="btn btn-light" href="/cocktailVibe/deleteCocktail?cocktailId=${cocktail.id}">delete</a>
+                        <form action="/cocktailVibe/deleteCocktail" method="post">
+                            <button class="btn btn-light" value="${cocktail.id}" name="cocktailId">delete</button>
+                        </form>
                     </small>
                 </div>
             </div>

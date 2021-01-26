@@ -12,6 +12,14 @@
 </head>
 <body>
 <h3>- Ingredient List -</h3>
+<div class="btn-group" role="group" aria-label="Basic radio toggle button group">
+    <form action="${pageContext.request.contextPath}/cocktailVibe/ingredient/ingredientListPl">
+        <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List Polish</button>
+    </form>
+    <form action="${pageContext.request.contextPath}/cocktailVibe/ingredient/ingredientList">
+        <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
+    </form>
+</div>
 <div class="card-group">
     <c:forEach items="${ingredientList}" var="ingredient">
         <div class="col-3">

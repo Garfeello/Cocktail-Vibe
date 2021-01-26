@@ -57,7 +57,7 @@ public class AlcoholController {
         optionalUser.ifPresent(alcohol::setUser);
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
-        return "redirect:/cocktailVibe/";
+        return "redirect:/cocktailVibe/user/alcohols";
     }
 
     @GetMapping("/editAlcohol")
@@ -80,7 +80,7 @@ public class AlcoholController {
     @PostMapping("/deleteAlcohol")
     private String deleteAlcohol(@RequestParam Long alcoholId) {
         alcoholRepository.deleteById(alcoholId);
-        return "redirect:/cocktailVibe/";
+        return "redirect:/cocktailVibe/user/alcohols";
     }
 
     @GetMapping("/alcoholList")

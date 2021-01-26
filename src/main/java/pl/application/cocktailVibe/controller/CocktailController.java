@@ -72,7 +72,7 @@ public class CocktailController {
         optionalUser.ifPresent(cocktail::setUser);
         cocktail.setPicture(picture);
         cocktailRepository.save(cocktail);
-        return "redirect:/cocktailVibe/";
+        return "redirect:/cocktailVibe/user/cocktails";
     }
 
     @GetMapping("/editCocktail")
