@@ -12,6 +12,7 @@
 </head>
 <body>
 <h1 class="container">- My Alcohols -</h1>
+<h3>${empty cocktailList ? "Nothing to display here :(" : ""}</h3>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${alcoholList}" var="alcohol">
         <div class="col">

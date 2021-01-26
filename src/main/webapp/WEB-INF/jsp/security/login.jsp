@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -32,7 +33,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login in</button>
 
             <div class="alert alert-danger" role="alert">
-                ${empty errorLogin ? "" : errorLogin}
+                <%=((Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage()%>;
             </div>
             <p class="mt-5 mb-3 text-muted">&copy; CocktailVibe 2021</p>
             <a href="${pageContext.request.contextPath}/cocktailVibe/">Home</a>

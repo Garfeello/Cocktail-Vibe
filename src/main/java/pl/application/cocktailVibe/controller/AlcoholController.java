@@ -53,7 +53,6 @@ public class AlcoholController {
         }
         Picture picture = getPicture(alcohol.getName(), file);
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
-
         optionalUser.ifPresent(alcohol::setUser);
         alcohol.setPicture(picture);
         alcoholRepository.save(alcohol);
@@ -68,7 +67,11 @@ public class AlcoholController {
     }
 
     @PostMapping("/editAlcohol")
-    private String editAlcohol(@ModelAttribute Alcohol alcohol, @RequestParam("image") MultipartFile file) {
+    private String editAlcohol(@ModelAttribute @Valid Alcohol alcohol, BindingResult bindingResult,
+                               @RequestParam("image") MultipartFile file) {
+        if (bindingResult.hasErrors()){
+            return "alcohol/alcoholForm";
+        }
         if (!file.isEmpty()) {
             Picture picture = getPicture(alcohol.getName(), file);
             alcohol.setPicture(picture);
@@ -111,6 +114,4 @@ public class AlcoholController {
         }
         return picture;
     }
-
-
 }

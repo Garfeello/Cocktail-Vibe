@@ -15,6 +15,7 @@
     <div class="shadow p-3 mb-5 bg-white rounded w-5 p-10">
         <h2>- CREATE INGREDIENT -</h2>
         <form:form method="post" modelAttribute="ingredient">
+            <form:errors path="*" cssClass="alert alert-danger" element="div"/>
             <div class="form-group">
                 <label for="name">Ingredient name</label>
                 <form:input class="form-control" placeholder="'Orange Juice'" path="name"/>

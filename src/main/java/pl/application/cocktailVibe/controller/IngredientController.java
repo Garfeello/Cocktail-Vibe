@@ -8,6 +8,7 @@ import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
 
+import javax.validation.Valid;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -33,7 +34,7 @@ public class IngredientController {
     }
 
     @PostMapping("/addIngredient")
-    private String addIngredient(@ModelAttribute Ingredient ingredient, BindingResult bindingResult) {
+    private String addIngredient(@ModelAttribute @Valid Ingredient ingredient, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             return "ingredient/ingredientForm";
         }
@@ -68,8 +69,7 @@ public class IngredientController {
         model.addAttribute("ingredient", googleTranslateService.translateAndGetIngredient(ingredientName));
         return "ingredient/translatedIngredientInfo";
     }
-
-
+    
     private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {
         return ingredientList.stream().sorted(Comparator.comparing(Ingredient::getName)).collect(Collectors.toList());
     }

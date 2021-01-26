@@ -83,7 +83,12 @@ public class CocktailController {
     }
 
     @PostMapping("/editCocktail")
-    private String editCocktail(@ModelAttribute Cocktail cocktail, @RequestParam("image") MultipartFile file) {
+    private String editCocktail(@ModelAttribute @Valid Cocktail cocktail, BindingResult bindingResult,
+                                @RequestParam("image") MultipartFile file) {
+        if (bindingResult.hasErrors()){
+            return "cocktail/cocktailForm";
+        }
+
         if (!file.isEmpty()) {
             Picture picture = getPicture(cocktail.getName(), file);
             cocktail.setPicture(picture);
