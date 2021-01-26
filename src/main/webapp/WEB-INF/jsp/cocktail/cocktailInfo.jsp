@@ -17,7 +17,7 @@
 <c:forEach items="${cocktail}" var="cocktail">
     <li class="list-group-item">
         <div class="container card">
-            <img class="card-img-top" SRC="/pictureController/getPicture/${cocktail.id}" width="350px" height="600px">
+            <img class="card-img-top" SRC="/pictureController/getPicture/${cocktail.id}" width="400px" height="700px">
             <div class="card-body">
                 <h5 class="card-title">${cocktail.name}</h5>
                 <p class="card-text">${cocktail.preparationDescription}</p>

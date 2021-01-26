@@ -9,11 +9,11 @@ public class MyErrorController implements ErrorController {
 
     @RequestMapping("/error")
     public String handleError() {
-        return "error";
+        return "error/errorView";
     }
 
     @Override
     public String getErrorPath() {
-        return null;
+        return "error/errorView";
     }
 }

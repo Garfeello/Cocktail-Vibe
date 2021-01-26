@@ -36,7 +36,11 @@
                         class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/alcoholList">All alcohols <span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/cocktailVibe/alcoholList">All alcohols<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="/cocktailVibe/ingredient/ingredientList">All ingredients <span
+                        class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="d-flex" action="${pageContext.request.contextPath}/cocktailVibe/search" method="get">
@@ -80,11 +84,12 @@
                 <div class="btn-group">
                     <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown"
                             aria-haspopup="true" aria-expanded="false">
-                         <sec:authentication property="principal.username"/>
+                        <sec:authentication property="principal.username"/>
                     </button>
                     <div class="dropdown-menu">
                         <a class="nav-link" href="/cocktailVibe/addCocktail">Add cocktail</a>
                         <a class="nav-link" href="/cocktailVibe/addAlcohol">Add alcohol</a>
+                        <a class="nav-link" href="/cocktailVibe/ingredient/addIngredient">Add ingredient</a>
                         <a class="nav-link" href="/cocktailVibe/user/cocktails">My cocktails</a>
                         <a class="nav-link" href="/cocktailVibe/user/alcohols">My alcohols </a>
                         <div class="dropdown-divider"></div>

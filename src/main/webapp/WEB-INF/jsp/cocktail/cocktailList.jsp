@@ -24,7 +24,7 @@
         <div class="col">
             <div class="card ">
                 <img SRC="/pictureController/getPicture/${cocktail.id}" width="350px"
-                     height="600px">
+                     height="550px">
                 <div class="card-body">
                     <h5 class="card-title">${cocktail.name}</h5>
                     <p class="card-text">${cocktail.preparationDescription}</p>

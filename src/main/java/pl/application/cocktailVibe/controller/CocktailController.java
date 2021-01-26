@@ -15,8 +15,10 @@ import pl.application.cocktailVibe.services.GoogleTranslateService;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.security.Principal;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -46,7 +48,10 @@ public class CocktailController {
 
     @ModelAttribute("ingredientList")
     private List<Ingredient> ingredientList() {
-        return ingredientRepository.findAllIngredients();
+        return ingredientRepository.findAllIngredients()
+                .stream()
+                .sorted(Comparator.comparing(Ingredient::getName))
+                .collect(Collectors.toList());
     }
 
     @GetMapping("/addCocktail")

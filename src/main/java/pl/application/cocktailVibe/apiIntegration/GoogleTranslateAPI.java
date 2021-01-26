@@ -6,6 +6,7 @@ import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.IngredientRepository;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -14,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,10 +23,14 @@ public class GoogleTranslateAPI {
 
     private final CocktailRepository cocktailRepository;
     private final AlcoholRepository alcoholRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public GoogleTranslateAPI(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository) {
+
+    public GoogleTranslateAPI(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository,
+                              IngredientRepository ingredientRepository) {
         this.cocktailRepository = cocktailRepository;
         this.alcoholRepository = alcoholRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public void translateAndSaveCocktail(Cocktail cocktail) {
@@ -35,6 +39,10 @@ public class GoogleTranslateAPI {
 
     public void translateAndSaveAlcohol(Alcohol alcohol){
         alcoholRepository.save(translateAlcohols(List.of(alcohol)).get(0));
+    }
+
+    public void translateAndSaveIngredient(Ingredient ingredient){
+        ingredientRepository.save(translateIngredients(List.of(ingredient)).get(0));
     }
 
     private Cocktail translateCocktail(Cocktail cocktail) {
@@ -62,7 +70,6 @@ public class GoogleTranslateAPI {
             newIngredient.setLanguage("Pl");
             newIngredient.setName(prepareAndGetTranslation(ingredient.getName()));
             newIngredient.setType(prepareAndGetTranslation(ingredient.getType()));
-            newIngredient.setDescription("przykładowy opis składnika w języku polskim");
             translatedIngredients.add(newIngredient);
         }
         return translatedIngredients;

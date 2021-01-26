@@ -21,16 +21,13 @@ import java.util.Optional;
 @RequestMapping("/cocktailVibe")
 public class MainPageController {
 
-    private final GoogleTranslateService googleTranslateService;
     private final CocktailRepository cocktailRepository;
     private final CocktailDbService cocktailDbService;
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
 
-
-    public MainPageController(GoogleTranslateService googleTranslateService, CocktailRepository cocktailRepository,
-                              CocktailDbService cocktailDbService, IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
-        this.googleTranslateService = googleTranslateService;
+    public MainPageController(CocktailRepository cocktailRepository, CocktailDbService cocktailDbService,
+                              IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
         this.cocktailDbService = cocktailDbService;
         this.ingredientRepository = ingredientRepository;
@@ -58,9 +55,8 @@ public class MainPageController {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
         } else if (cocktailOptional.isPresent()) {
             model.addAttribute("cocktail", List.of(cocktailOptional.get()));
-        } else if (alcoholOptional.isPresent()) {
-            model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcoholOptional.get()).get());
-        }
+        } else
+            alcoholOptional.ifPresent(alcohol -> model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcohol).get()));
         return "cocktail/cocktailInfo";
     }
 

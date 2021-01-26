@@ -64,9 +64,6 @@ public class CocktailDbService {
         }
     }
 
-    public void searchCocktailByMultipleIngredients(String... cocktailName) {
-    }
-
     private void queryApiCocktailByIngredient(String ingredientName) {
         String searchByCocktailIngredient = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=$";
         getCocktail(theCocktailDbAPI.getDrinkNameByIngredient(searchByCocktailIngredient.replace("$", ingredientName)));

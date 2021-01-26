@@ -42,7 +42,7 @@ public class TheCocktailDbAPI {
     public void findAndSaveCocktail(String resourceURL) {
         try {
             cocktailRepository.save(getCocktailFromApi(resourceURL));
-        } catch (ConstraintViolationException e){
+        } catch (ConstraintViolationException e) {
             e.getConstraintName();
         }
     }
@@ -130,10 +130,7 @@ public class TheCocktailDbAPI {
             newIngredient.setName(ingredientName);
             newIngredient.setLanguage("Eng");
             for (String string : strings) {
-                if (string.matches(".*strDescription\".*")) {
-                    String ingredientDescription = string.replaceAll(".*strDescription\"[:][\"]", "");
-                    newIngredient.setDescription(ingredientDescription);
-                } else if (string.matches(".*strType.*")) {
+                if (string.matches(".*strType.*")) {
                     String ingredientType = string.replaceAll(".*strType\"[:][\"]", "").replace("\"", "");
                     newIngredient.setType(ingredientType);
                 }

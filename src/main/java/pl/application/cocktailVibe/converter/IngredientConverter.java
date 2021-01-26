@@ -16,5 +16,4 @@ public class IngredientConverter implements Converter<String, Ingredient> {
     public Ingredient convert(String source) {
         return ingredientRepository.findById(Long.parseLong(source)).orElse(new Ingredient());
     }
-    // czy stworzyc defaultowy obiekt
 }

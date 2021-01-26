@@ -4,7 +4,6 @@ import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 
-
 @Entity
 public class Ingredient {
 
@@ -14,10 +13,8 @@ public class Ingredient {
 
     @NotEmpty
     @Size(min = 2, max = 25)
+    @Column(unique = true)
     private String name;
-
-    @Size(max = 4200)
-    private String description;
 
     private String type;
 
@@ -39,13 +36,6 @@ public class Ingredient {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
 
     public String getType() {
         return type;
@@ -68,7 +58,6 @@ public class Ingredient {
         return "Ingredient{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
                 ", type='" + type + '\'' +
                 ", language='" + language + '\'' +
                 '}';

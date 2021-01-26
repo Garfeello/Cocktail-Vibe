@@ -5,8 +5,10 @@ import org.springframework.stereotype.Service;
 import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
+import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.IngredientRepository;
 
 import java.util.NoSuchElementException;
 import java.util.Optional;
@@ -17,12 +19,14 @@ public class GoogleTranslateService {
     private final GoogleTranslateAPI googleTranslateAPI;
     private final CocktailRepository cocktailRepository;
     private final AlcoholRepository alcoholRepository;
+    private final IngredientRepository ingredientRepository;
 
     public GoogleTranslateService(GoogleTranslateAPI googleTranslateAPI, CocktailRepository cocktailRepository,
-                                  AlcoholRepository alcoholRepository) {
+                                  AlcoholRepository alcoholRepository, IngredientRepository ingredientRepository) {
         this.googleTranslateAPI = googleTranslateAPI;
         this.cocktailRepository = cocktailRepository;
         this.alcoholRepository = alcoholRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public Cocktail translateAngGetCocktail(String cocktailName) {
@@ -43,6 +47,25 @@ public class GoogleTranslateService {
             alcoholOptional = alcoholRepository.findFirstByNameAndLanguage(alcoholName, "Pl");
         }
         return alcoholOptional.orElse(new Alcohol());
+    }
+
+    public Ingredient translateAndGetIngredient(String ingredientName){
+        Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(ingredientName, "PL");
+        if (ingredientOptional.isEmpty()){
+            ingredientOptional = ingredientRepository.findFirstByName(ingredientName);
+            ingredientOptional.ifPresent(this::translateIngredient);
+            ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(ingredientName, "PL");
+        }
+        return ingredientOptional.orElse(new Ingredient());
+    }
+
+
+    private void translateIngredient(Ingredient ingredient) {
+        try {
+            googleTranslateAPI.translateAndSaveIngredient(ingredient);
+        } catch (NoSuchElementException e) {
+            e.printStackTrace();
+        }
     }
 
     private void translateCocktail(Cocktail cocktail) {
