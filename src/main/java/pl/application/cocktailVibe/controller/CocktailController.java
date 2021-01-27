@@ -118,6 +118,7 @@ public class CocktailController {
     @GetMapping("/translateCocktail")
     private String translateCocktail(@RequestParam String cocktailName, Model model) {
         model.addAttribute("cocktail", List.of(googleTranslateService.translateAngGetCocktail(cocktailName)));
+        model.addAttribute("searchedString", "Translated/Przetlumaczono !");
         return "cocktail/cocktailInfo";
     }
 

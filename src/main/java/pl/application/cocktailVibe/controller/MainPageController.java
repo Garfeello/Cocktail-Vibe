@@ -10,10 +10,7 @@ import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.services.CocktailDbService;
-import pl.application.cocktailVibe.services.GoogleTranslateService;
 
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -36,7 +33,7 @@ public class MainPageController {
 
     @ModelAttribute("fiveNewestCocktails")
     private List<Cocktail> newestCocktailList() {
-        return cocktailRepository.findFiveNewestCocktails();
+        return cocktailRepository.findSixNewestCocktails();
     }
 
     @GetMapping("/")
@@ -49,7 +46,7 @@ public class MainPageController {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(searchedString);
         Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(searchedString);
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByName(searchedString);
-        model.addAttribute("searchedString", "- Searching by " + searchedString);
+        model.addAttribute("searchedString", "Searching by " + searchedString);
 
         if (ingredientOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());

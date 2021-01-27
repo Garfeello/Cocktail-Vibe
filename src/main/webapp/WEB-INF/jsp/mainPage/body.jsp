@@ -1,10 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
-
 <jsp:include page="header.jsp"/>
-
-
 <!doctype html>
 <html lang="pl">
 <head>
@@ -14,35 +10,48 @@
     <title>CocktailVibeApp</title>
 </head>
 <body>
-<h1 class="container"> - Welcome To Cocktail Vibe ! - </h1>
-
-<ul class="container">
-    <h3> - Newest Cocktails -</h3>
-    <c:forEach items="${fiveNewestCocktails}" var="cocktail">
-        <li class="list-group-item">
-            <div class="container card" style="width: 30rem;">
-                <img class="card-img-top" SRC="/pictureController/getPicture/${cocktail.id}" width="350px"
-                     height="600px">
-                <div class="card-body">
-                    <h5 class="card-title">${cocktail.name}</h5>
-                    <p class="card-text">${cocktail.preparationDescription}</p>
-                </div>
-                <ul class="list-group list-group-flush">
-                    Cocktail Alcohols:
-                    <c:forEach items="${cocktail.alcoholList}" var="alcohol">
-                        <li class="list-group-item">${alcohol.name}</li>
-                    </c:forEach>
-                    Cocktail Ingredients
-                    <c:forEach items="${cocktail.ingredients}" var="ingredients">
-                        <li class="list-group-item">${ingredients.name}</li>
-                    </c:forEach>
-                </ul>
-                <div class="card-footer">
-                    <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+<div class="container-fluid" style="padding: 30px 5% 15px 5%">
+    <h1 style="text-align: center;"> - Welcome To Cocktail Vibe ! - </h1>
+    <h3 style="text-align: center;"> - Newest Cocktails -</h3>
+    <div class="row">
+        <c:forEach items="${fiveNewestCocktails}" var="cocktail">
+            <div class="col-4">
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin-bottom: 0;">${cocktail.name}</h3>
+                    </div>
+                    <div style="position: relative;">
+                        <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"
+                             style="object-fit: cover;"
+                             height="300">
+                        <div style="width: 100%; height: 100%; position: absolute; left: 0; bottom: 0;
+                            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3) 80%);">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
+                        <div>
+                            <h4>Cocktail Alcohols:</h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
+                                <c:forEach items="${cocktail.alcoholList}" var="alcohol">
+                                    <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
+                                </c:forEach>
+                            </div>
+                            <h4>Cocktail Ingredients:</h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                                <c:forEach items="${cocktail.ingredients}" var="ingredients">
+                                    <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
+                                </c:forEach>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </li>
-    </c:forEach>
-</ul>
+        </c:forEach>
+    </div>
+</div>
 </body>
 </html>

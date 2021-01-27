@@ -10,27 +10,45 @@
     <meta name="generator" content="Jekyll v4.1.1">
     <title>Searching Cocktails</title>
 </head>
-<body class="container">
-<div class="container">
-    <h1 class="container"> ${ empty searchedString ? "" : searchedString} -</h1>
-</div>
-<c:forEach items="${cocktail}" var="cocktail">
-    <li class="list-group-item">
-        <div class="container card">
-            <img class="card-img-top" SRC="/pictureController/getPicture/${cocktail.id}" width="400px" height="700px">
-            <div class="card-body">
-                <h5 class="card-title">${cocktail.name}</h5>
-                <p class="card-text">${cocktail.preparationDescription}</p>
+<body>
+<div class="container-fluid" style="padding: 30px 5% 15px 5%">
+    <h1 style="text-align: center;"> - ${ empty searchedString ? "" : searchedString} -</h1>
+        <c:forEach items="${cocktail}" var="cocktail">
+            <div class="col-4">
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin-bottom: 0;">${cocktail.name}</h3>
+                    </div>
+                    <div style="position: relative;">
+                        <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"
+                             style="object-fit: cover;"
+                             height="300">
+                        <div style="width: 100%; height: 100%; position: absolute; left: 0; bottom: 0;
+                            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3) 80%);">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
+                        <div>
+                            <h4>Cocktail Alcohols:</h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
+                                <c:forEach items="${cocktail.alcoholList}" var="alcohol">
+                                    <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
+                                </c:forEach>
+                            </div>
+                            <h4>Cocktail Ingredients:</h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                                <c:forEach items="${cocktail.ingredients}" var="ingredients">
+                                    <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
+                                </c:forEach>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <ul class="list-group list-group-flush">
-                <c:forEach items="${cocktail.alcoholList}" var="alcohol">
-                    <li class="list-group-item">${alcohol.name}</li>
-                </c:forEach>
-                <c:forEach items="${cocktail.ingredients}" var="ingredients">
-                    <li class="list-group-item">${ingredients.name}</li>
-                </c:forEach>
-            </ul>
-        </div>
-    </li>
-</c:forEach>
+        </c:forEach>
+</div>
 </body>

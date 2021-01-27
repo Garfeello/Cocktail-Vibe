@@ -16,22 +16,22 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
     @Query("select c from Cocktail c")
     List<Cocktail> findAllCocktails();
 
-    List<Cocktail> findCocktailsByLanguage(String language);
-
-    @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP order by created_on desc LIMIT 5;")
-    List<Cocktail> findFiveNewestCocktails();
-
-    Optional<Cocktail> findFirstByNameAndLanguage(String cocktailName, String cocktailLanguage);
-
-    Optional<Cocktail> findFirstByName(String cocktailName);
+    @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP order by created_on desc LIMIT 6;")
+    List<Cocktail> findSixNewestCocktails();
 
     @Override
     Optional<Cocktail> findById(Long id);
 
+    Optional<Cocktail> findFirstByName(String cocktailName);
+
+    Optional<Cocktail> findFirstByNameAndLanguage(String cocktailName, String cocktailLanguage);
+
+    List<Cocktail> findCocktailsByLanguage(String language);
+
+    Optional<List<Cocktail>> findCocktailsByUser(User user);
+
     Optional<List<Cocktail>> findCocktailsByIngredients(Ingredient ingredient);
 
     Optional<List<Cocktail>> findCocktailsByAlcoholList(Alcohol alcohol);
-
-    Optional<List<Cocktail>> findCocktailsByUser(User user);
 
 }

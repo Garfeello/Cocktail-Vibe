@@ -118,7 +118,6 @@ public class GoogleTranslateAPI {
             response.append(inputLine);
         }
         reader.close();
-
         return response.toString();
     }
 }
