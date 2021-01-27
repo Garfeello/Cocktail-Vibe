@@ -27,7 +27,8 @@ public class AlcoholController {
     private final GoogleTranslateService googleTranslateService;
     private final UserRepository userRepository;
 
-    public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService, UserRepository userRepository) {
+    public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService,
+                             UserRepository userRepository) {
         this.alcoholRepository = alcoholRepository;
         this.googleTranslateService = googleTranslateService;
         this.userRepository = userRepository;
@@ -47,7 +48,6 @@ public class AlcoholController {
     @PostMapping("/addAlcohol")
     private String addAlcohol(@ModelAttribute @Valid Alcohol alcohol, BindingResult result,
                               @RequestParam("image") MultipartFile file, Principal principal) {
-
         if (result.hasErrors()) {
             return "alcohol/alcoholForm";
         }

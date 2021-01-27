@@ -45,7 +45,7 @@ public class IngredientController {
     @GetMapping("/ingredientList")
     private String ingredientList(Model model) {
         List<Ingredient> ingredientList = new ArrayList<>();
-        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("Eng");
+        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("en");
         if (optionalIngredients.isPresent()) {
             ingredientList = sortFromOptional(optionalIngredients.get());
         }
@@ -56,20 +56,12 @@ public class IngredientController {
     @GetMapping("/ingredientListPl")
     private String ingredientListPl(Model model) {
         List<Ingredient> ingredientList = new ArrayList<>();
-        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("Pl");
+        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("pl");
         if (optionalIngredients.isPresent()) {
             ingredientList = sortFromOptional(optionalIngredients.get());
         }
         model.addAttribute("ingredientList", ingredientList);
         return "ingredient/ingredientList";
-    }
-
-    @GetMapping("/translateIngredient")
-    private String translateIngredient(@RequestParam String ingredientName, Model model,
-                                       @RequestParam String translateFrom,
-                                       @RequestParam String translateTo) {
-        model.addAttribute("ingredient", googleTranslateService.translateAndGetIngredient(ingredientName, translateFrom, translateTo));
-        return "ingredient/translatedIngredientInfo";
     }
 
     private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {
