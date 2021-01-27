@@ -26,8 +26,7 @@
                     </div>
                     <div style="position: relative;">
                         <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"
-                             style="object-fit: cover;"
-                             height="300">
+                             style="object-fit: cover;" height="300" alt="${cocktail.name}">
                         <div style="width: 100%; height: 100%; position: absolute; left: 0; bottom: 0;
                             background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3) 80%);">
                         </div>

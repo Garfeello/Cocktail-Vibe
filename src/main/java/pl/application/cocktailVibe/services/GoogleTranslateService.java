@@ -10,6 +10,7 @@ import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -46,7 +47,7 @@ public class GoogleTranslateService {
         } else {
             return alcoholOptional.get();
         }
-        return googleTranslateAPI.translateAndSaveAlcohol(cocktailOptional.get(), translatedFrom, translatedTo);
+        return googleTranslateAPI.translateAlcohols(List.of(alcoholOptional.get()), translatedTo).get(0);
     }
 
     public Ingredient translateAndGetIngredient(String ingredientName, String translatedFrom, String translatedTo) {

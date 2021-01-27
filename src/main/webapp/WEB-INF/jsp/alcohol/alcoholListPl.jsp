@@ -1,6 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
 <html lang="pl">
@@ -8,15 +7,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Cocktail list</title>
+    <title>Alcohol list</title>
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-
-    <h1 style="text-align: center;"> - Alcohol List ENG! - </h1>
+    <h1 style="text-align: center;"> - List ALkoholi Pl! - </h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Alkoholi w j.Polskim</button>
+        <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholList">
+            <button class="btn-group btn-group-sm btn btn-outline-dark">Alcohol List English</button>
         </form>
     </div>
 
@@ -37,8 +35,8 @@
                     </ul>
                     <div class="card-footer">
                         <small class="text-muted">
-                            <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcoholToPl?alcoholName=${alcohol.name}&translateFrom=en&translateTo=pl">
-                                Przetłumacz na język Polski</a></small>
+                            <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcoholToEn?alcoholName=${alcohol.name}&translateFrom=pl&translateTo=en">
+                                Translate to english</a></small>
                     </div>
                 </div>
             </div>

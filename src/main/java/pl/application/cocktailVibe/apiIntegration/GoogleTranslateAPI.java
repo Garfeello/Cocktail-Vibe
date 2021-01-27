@@ -32,10 +32,6 @@ public class GoogleTranslateAPI {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public void translateAndSaveAlcohol(Alcohol alcohol, String translatedTo) {
-        alcoholRepository.save(translateAlcohols(List.of(alcohol), translatedTo).get(0));
-    }
-
     public void translateAndSaveIngredient(Ingredient ingredient, String translatedFrom, String translatedTo) {
         ingredientRepository.save(translateIngredients(List.of(ingredient), translatedFrom, translatedTo).get(0));
     }
@@ -66,7 +62,7 @@ public class GoogleTranslateAPI {
 
     //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
     //It is only for academical purposes after all :)
-    private List<Alcohol> translateAlcohols(List<Alcohol> alcoholList, String translatedTo) {
+    public List<Alcohol> translateAlcohols(List<Alcohol> alcoholList, String translatedTo) {
         List<Alcohol> copiedList = new ArrayList<>();
         for (Alcohol alcohol : alcoholList) {
             Alcohol alcoholForTranslation = new Alcohol();
@@ -74,7 +70,7 @@ public class GoogleTranslateAPI {
             alcoholForTranslation.setName(alcohol.getName());
             alcoholForTranslation.setAlcoholType(alcohol.getAlcoholType());
             alcoholForTranslation.setAge(alcohol.getAge());
-            alcoholForTranslation.setDescription("przykładowy opis Alkoholu");
+            alcoholForTranslation.setDescription("przykładowy opis Alkoholu/example alcohol description");
             alcoholForTranslation.setPicture(alcohol.getPicture());
             copiedList.add(alcoholForTranslation);
         }

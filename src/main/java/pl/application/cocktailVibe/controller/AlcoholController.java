@@ -69,7 +69,7 @@ public class AlcoholController {
     @PostMapping("/editAlcohol")
     private String editAlcohol(@ModelAttribute @Valid Alcohol alcohol, BindingResult bindingResult,
                                @RequestParam("image") MultipartFile file) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "alcohol/alcoholForm";
         }
         if (!file.isEmpty()) {
@@ -88,20 +88,29 @@ public class AlcoholController {
 
     @GetMapping("/alcoholList")
     private String getAlcoholListEng(Model model) {
-        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("Eng"));
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("en"));
         return "alcohol/alcoholList";
     }
 
     @GetMapping("/alcoholListPl")
     private String getAlcoholListPl(Model model) {
-        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("Pl"));
-        return "alcohol/alcoholList";
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("pl"));
+        return "alcohol/alcoholListPl";
     }
 
-    @GetMapping("/translateAlcohol")
+    @GetMapping("/translateAlcoholToPl")
     private String translateAlcohol(@RequestParam String alcoholName, Model model,
                                     @RequestParam String translateTo) {
-        model.addAttribute("alcohol", googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
+        alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
+        model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));
+        return "alcohol/translatedAlcoholInfo";
+    }
+
+    @GetMapping("/translateAlcoholToEn")
+    private String translateAlcoholEn(@RequestParam String alcoholName, Model model,
+                                      @RequestParam String translateTo) {
+        alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
+        model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));
         return "alcohol/translatedAlcoholInfo";
     }
 

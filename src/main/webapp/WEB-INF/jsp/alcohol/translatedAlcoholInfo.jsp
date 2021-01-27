@@ -13,7 +13,8 @@
 <body class="container">
 <li class="list-group-item">
     <div class="container card">
-        <img class="card-img-top" SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px">
+        <img class="card-img-top" SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px"
+             alt="${alcohol.name}">
         <div class="card-body">
             <h5 class="card-title">${alcohol.name}</h5>
             <p class="card-text">${alcohol.description}</p>
