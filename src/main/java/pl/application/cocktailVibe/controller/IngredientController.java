@@ -65,11 +65,13 @@ public class IngredientController {
     }
 
     @GetMapping("/translateIngredient")
-    private String translateIngredient(@RequestParam String ingredientName, Model model) {
-        model.addAttribute("ingredient", googleTranslateService.translateAndGetIngredient(ingredientName));
+    private String translateIngredient(@RequestParam String ingredientName, Model model,
+                                       @RequestParam String translateFrom,
+                                       @RequestParam String translateTo) {
+        model.addAttribute("ingredient", googleTranslateService.translateAndGetIngredient(ingredientName, translateFrom, translateTo));
         return "ingredient/translatedIngredientInfo";
     }
-    
+
     private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {
         return ingredientList.stream().sorted(Comparator.comparing(Ingredient::getName)).collect(Collectors.toList());
     }

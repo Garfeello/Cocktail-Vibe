@@ -11,11 +11,8 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - Cocktail List ! - </h1>
+    <h1 style="text-align: center;"> - Lista Koktajli PL ! - </h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List Polish</button>
-        </form>
         <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailList">
             <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
         </form>
@@ -38,25 +35,25 @@
                     <div class="card-body">
                         <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
                         <div>
-                            <h4>Cocktail Alcohols:</h4>
+                            <h4>Alkohole Koktajlu:</h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
                                 <c:forEach items="${cocktail.alcoholList}" var="alcohol">
                                     <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
                                 </c:forEach>
                             </div>
-                            <h4>Cocktail Ingredients:</h4>
+                            <h4>Składniki Koktajlu:</h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
                                 <c:forEach items="${cocktail.ingredients}" var="ingredients">
                                     <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
                                 </c:forEach>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+                                <small class="text-muted"><a>Stworzono przez: @${cocktail.user.nickName}</a></small>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktail?cocktailName=${cocktail.name}">
-                                        Translate alcohol</a></small>
+                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktailToEn?cocktailName=${cocktail.name}&translateFrom=pl&translateTo=en">
+                                        Translate to english</a></small>
                             </div>
                         </div>
                     </div>

@@ -17,10 +17,10 @@ public class Cocktail {
     @Size(min = 2, max = 40)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Alcohol> alcoholList;
 
-    @ManyToMany(cascade = CascadeType.MERGE)
+    @ManyToMany(cascade = CascadeType.PERSIST)
     private List<Ingredient> ingredients;
 
     @Size(max = 1000, message = "description max characters - 1000")
@@ -35,7 +35,7 @@ public class Cocktail {
     @NotEmpty
     private String language;
 
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     private User user;
 
     @Column(name = "created_on")

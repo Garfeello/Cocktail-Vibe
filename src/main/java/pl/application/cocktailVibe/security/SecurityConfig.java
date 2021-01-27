@@ -43,6 +43,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/cocktailVibe/ingredient/ingredientListPl").permitAll()
                 .antMatchers("/cocktailVibe/ingredient/translateIngredient").permitAll()
                 .antMatchers("/cocktailVibe/translateCocktail").permitAll()
+                .antMatchers("/cocktailVibe/translateCocktailToPl").permitAll()
+                .antMatchers("/cocktailVibe/translateCocktailToEn").permitAll()
                 .antMatchers("/cocktailVibe/alcoholList").permitAll()
                 .antMatchers("/cocktailVibe/alcoholListPl").permitAll()
                 .antMatchers("/cocktailVibe/translateAlcohol").permitAll()

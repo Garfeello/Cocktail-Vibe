@@ -99,8 +99,9 @@ public class AlcoholController {
     }
 
     @GetMapping("/translateAlcohol")
-    private String translateAlcohol(@RequestParam String alcoholName, Model model) {
-        model.addAttribute("alcohol", googleTranslateService.translateAndGetAlcohol(alcoholName));
+    private String translateAlcohol(@RequestParam String alcoholName, Model model,
+                                    @RequestParam String translateTo) {
+        model.addAttribute("alcohol", googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
         return "alcohol/translatedAlcoholInfo";
     }
 

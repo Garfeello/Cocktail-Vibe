@@ -1,6 +1,6 @@
 package pl.application.cocktailVibe.services;
 
-import org.springframework.stereotype.Component;
+
 import org.springframework.stereotype.Service;
 import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.model.Alcohol;
@@ -29,60 +29,42 @@ public class GoogleTranslateService {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public Cocktail translateAngGetCocktail(String cocktailName) {
-        Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByNameAndLanguage(cocktailName, "Pl");
+    public Cocktail translateAngGetCocktail(String cocktailName, String translatedFrom, String translatedTo) {
+        Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByNameAndLanguage(cocktailName, translatedTo);
         if (cocktailOptional.isEmpty()) {
             cocktailOptional = cocktailRepository.findFirstByName(cocktailName);
-            cocktailOptional.ifPresent(this::translateCocktail);
-            cocktailOptional = cocktailRepository.findFirstByNameAndLanguage(cocktailName, "Pl");
+        } else {
+            return cocktailOptional.get();
         }
-        return cocktailOptional.orElse(new Cocktail());
+        return googleTranslateAPI.translateCocktail(cocktailOptional.get(), translatedFrom, translatedTo);
     }
 
-    public Alcohol translateAndGetAlcohol(String alcoholName) {
+    public Alcohol translateAndGetAlcohol(String alcoholName, String translatedTo) {
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByNameAndLanguage(alcoholName, "Pl");
         if (alcoholOptional.isEmpty()) {
             alcoholOptional = alcoholRepository.findFirstByName(alcoholName);
-            alcoholOptional.ifPresent(this::translateAlcohol);
-            alcoholOptional = alcoholRepository.findFirstByNameAndLanguage(alcoholName, "Pl");
+        } else {
+            return alcoholOptional.get();
         }
-        return alcoholOptional.orElse(new Alcohol());
+        return googleTranslateAPI.translateAndSaveAlcohol(cocktailOptional.get(), translatedFrom, translatedTo);
     }
 
-    public Ingredient translateAndGetIngredient(String ingredientName){
+    public Ingredient translateAndGetIngredient(String ingredientName, String translatedFrom, String translatedTo) {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(ingredientName, "PL");
-        if (ingredientOptional.isEmpty()){
+        if (ingredientOptional.isEmpty()) {
             ingredientOptional = ingredientRepository.findFirstByName(ingredientName);
-            ingredientOptional.ifPresent(this::translateIngredient);
+            ingredientOptional.ifPresent(ingredient -> translateIngredient(ingredient, translatedFrom, translatedTo));
             ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(ingredientName, "PL");
         }
         return ingredientOptional.orElse(new Ingredient());
     }
 
-
-    private void translateIngredient(Ingredient ingredient) {
+    private void translateIngredient(Ingredient ingredient, String translatedFrom, String translatedTo) {
         try {
-            googleTranslateAPI.translateAndSaveIngredient(ingredient);
+            googleTranslateAPI.translateAndSaveIngredient(ingredient, translatedFrom, translatedTo);
         } catch (NoSuchElementException e) {
             e.printStackTrace();
         }
     }
-
-    private void translateCocktail(Cocktail cocktail) {
-        try {
-            googleTranslateAPI.translateAndSaveCocktail(cocktail);
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-    }
-
-    private void translateAlcohol(Alcohol alcohol) {
-        try {
-            googleTranslateAPI.translateAndSaveAlcohol(alcohol);
-        } catch (NoSuchElementException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

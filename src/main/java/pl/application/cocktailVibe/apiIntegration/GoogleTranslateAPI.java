@@ -25,7 +25,6 @@ public class GoogleTranslateAPI {
     private final AlcoholRepository alcoholRepository;
     private final IngredientRepository ingredientRepository;
 
-
     public GoogleTranslateAPI(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository,
                               IngredientRepository ingredientRepository) {
         this.cocktailRepository = cocktailRepository;
@@ -33,54 +32,45 @@ public class GoogleTranslateAPI {
         this.ingredientRepository = ingredientRepository;
     }
 
-    public void translateAndSaveCocktail(Cocktail cocktail) {
-        cocktailRepository.save(translateCocktail(cocktail));
+    public void translateAndSaveAlcohol(Alcohol alcohol, String translatedTo) {
+        alcoholRepository.save(translateAlcohols(List.of(alcohol), translatedTo).get(0));
     }
 
-    public void translateAndSaveAlcohol(Alcohol alcohol){
-        alcoholRepository.save(translateAlcohols(List.of(alcohol)).get(0));
+    public void translateAndSaveIngredient(Ingredient ingredient, String translatedFrom, String translatedTo) {
+        ingredientRepository.save(translateIngredients(List.of(ingredient), translatedFrom, translatedTo).get(0));
     }
 
-    public void translateAndSaveIngredient(Ingredient ingredient){
-        ingredientRepository.save(translateIngredients(List.of(ingredient)).get(0));
-    }
-
-    private Cocktail translateCocktail(Cocktail cocktail) {
+    public Cocktail translateCocktail(Cocktail cocktail, String translatedFrom, String translatedTo) {
         Cocktail translatedCocktail = new Cocktail();
         translatedCocktail.setName(cocktail.getName());
-        translatedCocktail.setIngredients(translateIngredients(cocktail.getIngredients()));
-        translatedCocktail.setAlcoholList(translateAlcohols(cocktail.getAlcoholList()));
-        translatedCocktail.setPreparationDescription(translatePreparationDescription(cocktail.getPreparationDescription()));
-        translatedCocktail.setLanguage("Pl");
+        translatedCocktail.setIngredients(translateIngredients(cocktail.getIngredients(), translatedFrom, translatedTo));
+        translatedCocktail.setAlcoholList(translateAlcohols(cocktail.getAlcoholList(), translatedTo));
+        translatedCocktail.setPreparationDescription(translatePrepDescription(cocktail.getPreparationDescription(), translatedFrom, translatedTo));
+        translatedCocktail.setLanguage(translatedTo);
         translatedCocktail.setUserInspiration("przykładowa inspiracja użytkownika");
         translatedCocktail.setPicture(cocktail.getPicture());
         return translatedCocktail;
     }
 
-    private String translatePreparationDescription(String description) {
-        return prepareAndGetTranslation(description);
-    }
-
-    //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
-    //It is only for academical purposes after all :)
-    private List<Ingredient> translateIngredients(List<Ingredient> ingredientList) {
+    private List<Ingredient> translateIngredients(List<Ingredient> ingredientList, String translatedFrom, String translatedTo) {
         List<Ingredient> translatedIngredients = new ArrayList<>();
         for (Ingredient ingredient : ingredientList) {
             Ingredient newIngredient = new Ingredient();
-            newIngredient.setLanguage("Pl");
-            newIngredient.setName(prepareAndGetTranslation(ingredient.getName()));
-            newIngredient.setType(prepareAndGetTranslation(ingredient.getType()));
+            newIngredient.setLanguage(translatedTo);
+            newIngredient.setName(prepareAndGetTranslation(ingredient.getName(), translatedFrom, translatedTo));
+            newIngredient.setType(prepareAndGetTranslation(ingredient.getType(), translatedFrom, translatedTo));
             translatedIngredients.add(newIngredient);
         }
         return translatedIngredients;
     }
 
-    //here should be alcohol translation implementation which is not included due to reasons mentioned above.
-    private List<Alcohol> translateAlcohols(List<Alcohol> alcoholList) {
+    //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
+    //It is only for academical purposes after all :)
+    private List<Alcohol> translateAlcohols(List<Alcohol> alcoholList, String translatedTo) {
         List<Alcohol> copiedList = new ArrayList<>();
         for (Alcohol alcohol : alcoholList) {
             Alcohol alcoholForTranslation = new Alcohol();
-            alcoholForTranslation.setLanguage("Pl");
+            alcoholForTranslation.setLanguage(translatedTo);
             alcoholForTranslation.setName(alcohol.getName());
             alcoholForTranslation.setAlcoholType(alcohol.getAlcoholType());
             alcoholForTranslation.setAge(alcohol.getAge());
@@ -91,10 +81,14 @@ public class GoogleTranslateAPI {
         return copiedList;
     }
 
-    private String prepareAndGetTranslation(String text) {
+    private String translatePrepDescription(String description, String translatedFrom, String translatedTo) {
+        return prepareAndGetTranslation(description, translatedFrom, translatedTo);
+    }
+
+    private String prepareAndGetTranslation(String text, String translatedFrom, String translatedTo) {
         String translation = "Couldn't translate";
         try {
-            translation = translate("en", "pl", text);
+            translation = translate(translatedFrom, translatedTo, text);
         } catch (IOException e) {
             e.printStackTrace();
         }

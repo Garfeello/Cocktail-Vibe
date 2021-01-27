@@ -85,7 +85,7 @@ public class CocktailController {
     @PostMapping("/editCocktail")
     private String editCocktail(@ModelAttribute @Valid Cocktail cocktail, BindingResult bindingResult,
                                 @RequestParam("image") MultipartFile file) {
-        if (bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             return "cocktail/cocktailForm";
         }
 
@@ -105,20 +105,31 @@ public class CocktailController {
 
     @GetMapping("/cocktailList")
     private String getCocktailListEng(Model model) {
-        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("Eng"));
+        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("en"));
         return "cocktail/cocktailList";
     }
 
     @GetMapping("/cocktailListPl")
     private String getCocktailListPl(Model model) {
-        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("Pl"));
-        return "cocktail/cocktailList";
+        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("pl"));
+        return "cocktail/cocktailListPl";
     }
 
-    @GetMapping("/translateCocktail")
-    private String translateCocktail(@RequestParam String cocktailName, Model model) {
-        model.addAttribute("cocktail", List.of(googleTranslateService.translateAngGetCocktail(cocktailName)));
-        model.addAttribute("searchedString", "Translated/Przetlumaczono !");
+    @GetMapping("/translateCocktailToPl")
+    private String translateCocktailToPl(@RequestParam String cocktailName, @RequestParam String translateFrom,
+                                         @RequestParam String translateTo, Model model) {
+        cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, translateFrom, translateTo));
+        model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
+        model.addAttribute("searchedString", "Przetlumaczono !");
+        return "cocktail/cocktailInfo";
+    }
+
+    @GetMapping("/translateCocktailToEn")
+    private String translateCocktailToEn(@RequestParam String cocktailName, @RequestParam String translateFrom,
+                                         @RequestParam String translateTo, Model model) {
+        cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, translateFrom, translateTo));
+        model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
+        model.addAttribute("searchedString", "Translated !");
         return "cocktail/cocktailInfo";
     }
 

@@ -11,13 +11,10 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - Cocktail List ! - </h1>
+    <h1 style="text-align: center;"> - Cocktail List ENG! - </h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List Polish</button>
-        </form>
-        <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailList">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
+            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Koktajli w j.Polskim</button>
         </form>
     </div>
     <div class="row">
@@ -55,8 +52,7 @@
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktail?cocktailName=${cocktail.name}">
-                                        Translate alcohol</a></small>
+                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktailToPl?cocktailName=${cocktail.name}&translateFrom=en&translateTo=pl">Przetłumacz na język Polski</a></small>
                             </div>
                         </div>
                     </div>
