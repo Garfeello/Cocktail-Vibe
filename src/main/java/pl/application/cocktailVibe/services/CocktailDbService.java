@@ -74,5 +74,4 @@ public class CocktailDbService {
         theCocktailDbAPI.findAndSaveCocktail(searchByCocktailName.replace("$", cocktailName));
     }
 
-
 }

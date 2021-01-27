@@ -21,8 +21,8 @@
             <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
         </form>
     </div>
+    <h4> - Pl -</h4>
     <div class="card-group">
-        <h4> - Pl -</h4>
         <c:forEach items="${ingredientList}" var="ingredient">
             <div class="col-3">
                 <div class="card">

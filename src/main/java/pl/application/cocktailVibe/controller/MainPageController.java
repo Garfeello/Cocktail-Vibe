@@ -57,7 +57,6 @@ public class MainPageController {
         return "cocktail/cocktailInfo";
     }
 
-
     //////////////////////////////////////////////////////////////////////////////////////
     @ResponseBody
     @GetMapping("/test")
@@ -70,7 +69,6 @@ public class MainPageController {
     @GetMapping("/testList")
     private List<Cocktail> cocktailList() {
         return cocktailDbService.getCocktailsByIngredient("caruva");
-
     }
 
     @ResponseBody
