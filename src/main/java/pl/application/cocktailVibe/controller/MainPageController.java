@@ -61,7 +61,7 @@ public class MainPageController {
     @ResponseBody
     @GetMapping("/testAlcohol")
     private void cocktailListAlcohol() {
-        cocktailDbApiService.test(11007);
+        cocktailDbApiService.getCocktailDto(11007);
     }
 
 }

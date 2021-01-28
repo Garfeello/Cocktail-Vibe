@@ -24,7 +24,7 @@ public class CocktailDbAPI {
 
     public ApiObjectsWrapper getApiObjectFromDrinkId(int drinkId) {
         DrinkApiModel drinkApiModel = getDrinkApiModelById(drinkId);
-        List<IngredientApiModel> ingredientApiModelList = getIngredientApiModels(drinkApiModel);
+        List<IngredientApiModel> ingredientApiModelList = getIngredientModels(drinkApiModel);
 
         ApiObjectsWrapper apiObjectsWrapper = new ApiObjectsWrapper();
         apiObjectsWrapper.setDrinkApiModel(drinkApiModel);
@@ -32,8 +32,8 @@ public class CocktailDbAPI {
         return apiObjectsWrapper;
     }
 
-    private List<IngredientApiModel> getIngredientApiModels(DrinkApiModel drinkApiModel) {
-        List<String> ingredientList = getIngredientListAndFilterNull(drinkApiModel);
+    private List<IngredientApiModel> getIngredientModels(DrinkApiModel drinkApiModel) {
+        List<String> ingredientList = getIngredientList(drinkApiModel);
         List<IngredientApiModel> ingredientApiModels = new ArrayList<>();
         for (String ingredientName : ingredientList){
             ingredientApiModels.add(getIngredientAPiModelByName(ingredientName));
@@ -41,12 +41,16 @@ public class CocktailDbAPI {
         return ingredientApiModels;
     }
 
-    private List<String> getIngredientListAndFilterNull(DrinkApiModel drinkApiModel) {
+    private List<String> getIngredientList(DrinkApiModel drinkApiModel) {
         List<String> ingredientList = new ArrayList<>();
         Collections.addAll(ingredientList, drinkApiModel.getStrIngredient1(), drinkApiModel.getStrIngredient2(),
                 drinkApiModel.getStrIngredient3(), drinkApiModel.getStrIngredient4(), drinkApiModel.getStrIngredient5(),
                 drinkApiModel.getStrIngredient6(), drinkApiModel.getStrIngredient7(), drinkApiModel.getStrIngredient8(),
                 drinkApiModel.getStrIngredient9(), drinkApiModel.getStrIngredient10());
+        return filterNullFromIngredientList(ingredientList);
+    }
+
+    private List<String> filterNullFromIngredientList(List<String> ingredientList) {
         return ingredientList.stream().filter(x -> !(x == null)).collect(Collectors.toList());
     }
 
