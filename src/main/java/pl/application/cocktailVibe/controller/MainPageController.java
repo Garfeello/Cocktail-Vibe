@@ -9,6 +9,7 @@ import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
+import pl.application.cocktailVibe.services.CocktailDbApiService;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,12 +21,14 @@ public class MainPageController {
     private final CocktailRepository cocktailRepository;
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
+    private final CocktailDbApiService cocktailDbApiService;
 
     public MainPageController(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
-                              AlcoholRepository alcoholRepository) {
+                              AlcoholRepository alcoholRepository, CocktailDbApiService cocktailDbApiService) {
         this.cocktailRepository = cocktailRepository;
         this.ingredientRepository = ingredientRepository;
         this.alcoholRepository = alcoholRepository;
+        this.cocktailDbApiService = cocktailDbApiService;
     }
 
     @ModelAttribute("fiveNewestCocktails")
@@ -58,6 +61,7 @@ public class MainPageController {
     @ResponseBody
     @GetMapping("/testAlcohol")
     private void cocktailListAlcohol() {
+        cocktailDbApiService.test(11007);
     }
 
 }

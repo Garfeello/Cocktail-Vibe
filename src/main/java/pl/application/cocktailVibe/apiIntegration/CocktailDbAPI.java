@@ -22,8 +22,8 @@ public class CocktailDbAPI {
         this.objectMapper = objectMapper;
     }
 
-    public ApiObjectsWrapper getApiObjects() {
-        DrinkApiModel drinkApiModel = getDrinkApiModelById("11007");
+    public ApiObjectsWrapper getApiObjectFromDrinkId(int drinkId) {
+        DrinkApiModel drinkApiModel = getDrinkApiModelById(drinkId);
         List<IngredientApiModel> ingredientApiModelList = getIngredientApiModels(drinkApiModel);
 
         ApiObjectsWrapper apiObjectsWrapper = new ApiObjectsWrapper();
@@ -62,7 +62,7 @@ public class CocktailDbAPI {
         return ingredientApiModel;
     }
 
-    private DrinkApiModel getDrinkApiModelById(String drinkId) {
+    private DrinkApiModel getDrinkApiModelById(int drinkId) {
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId;
         DrinkApiModel drinkApiModel = new DrinkApiModel();
         try {
