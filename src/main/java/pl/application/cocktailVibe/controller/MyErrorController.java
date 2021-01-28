@@ -1,30 +1,29 @@
 package pl.application.cocktailVibe.controller;
 
-import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.boot.web.servlet.error.ErrorController;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.servlet.ModelAndView;
-
-import javax.servlet.http.HttpServletRequest;
+import org.springframework.web.client.HttpServerErrorException;
 
 @Controller
-public class MyErrorController {
+public class MyErrorController implements ErrorController {
 
-    @ResponseStatus(value = HttpStatus.CONFLICT, reason = "Data integrity violation")  // 409
-    @ExceptionHandler(DataIntegrityViolationException.class)
+
+    @ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR, reason = "Data integrity violation")
+    @ExceptionHandler(HttpServerErrorException.InternalServerError.class)
     public void conflict() {
     }
 
-    @ExceptionHandler(Exception.class)
-    public ModelAndView handleError(HttpServletRequest req, Exception ex) {
+    @RequestMapping("/error")
+    public String handleError() {
+        return "error/errorView";
+    }
 
-        ModelAndView mav = new ModelAndView();
-        mav.addObject("exception", ex);
-        mav.addObject("url", req.getRequestURL());
-        mav.setViewName("errorView");
-        return mav;
-
+    @Override
+    public String getErrorPath() {
+        return null;
     }
 }
