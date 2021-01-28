@@ -61,7 +61,7 @@ public class IngredientController {
             ingredientList = sortFromOptional(optionalIngredients.get());
         }
         model.addAttribute("ingredientList", ingredientList);
-        return "ingredient/ingredientList";
+        return "ingredient/ingredientListPl";
     }
 
     private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {

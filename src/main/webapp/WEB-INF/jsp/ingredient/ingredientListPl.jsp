@@ -14,8 +14,8 @@
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
     <h1 style="text-align: center;"> - Ingredient List! - </h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/ingredient/ingredientListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Składników w j.Polskim</button>
+        <form action="${pageContext.request.contextPath}/cocktailVibe/ingredient/ingredientList">
+            <button class="btn-group btn-group-sm btn btn-outline-dark">Ingredient List en</button>
         </form>
     </div>
     <div class="card-group">
@@ -23,10 +23,10 @@
             <div class="col-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Name:
+                        <h5 class="card-title">Nazwa:
                             <a href="/cocktailVibe/getCocktailsFromIngredient?ingredientName=${ingredient.name}">${ingredient.name}</a>
                         </h5>
-                        <p class="card-text">Type: ${ingredient.type}</p>
+                        <p class="card-text">Typ: ${ingredient.type}</p>
                     </div>
                 </div>
             </div>

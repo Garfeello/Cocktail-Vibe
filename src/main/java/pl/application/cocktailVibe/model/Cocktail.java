@@ -29,7 +29,7 @@ public class Cocktail {
     @Size(max = 200, message = "user inspiration max characters - 500")
     private String userInspiration;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.PERSIST)
     private Picture picture;
 
     @NotEmpty

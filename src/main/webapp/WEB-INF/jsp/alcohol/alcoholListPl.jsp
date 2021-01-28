@@ -17,7 +17,6 @@
             <button class="btn-group btn-group-sm btn btn-outline-dark">Alcohol List English</button>
         </form>
     </div>
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${alcoholList}" var="alcohol">
             <div class="col">
@@ -30,8 +29,8 @@
                     </div>
                     <ul class="list-group list-group-flush"></ul>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Type: ${alcohol.alcoholType}</li>
-                        <li class="list-group-item">Age: ${alcohol.age}</li>
+                        <li class="list-group-item">Typ: ${alcohol.alcoholType}</li>
+                        <li class="list-group-item">Wiek: ${alcohol.age}</li>
                     </ul>
                     <div class="card-footer">
                         <small class="text-muted">
