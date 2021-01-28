@@ -21,13 +21,14 @@
             <button class="btn-group btn-group-sm btn btn-outline-dark">Cocktail List English</button>
         </form>
     </div>
-    <h4> - Pl -</h4>
     <div class="card-group">
         <c:forEach items="${ingredientList}" var="ingredient">
             <div class="col-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Name: ${ingredient.name}</h5>
+                        <h5 class="card-title">Name:
+                            <a href="/cocktailVibe/getCocktailsFromIngredient?ingredientName=${ingredient.name}">${ingredient.name}</a>
+                        </h5>
                         <p class="card-text">Type: ${ingredient.type}</p>
                     </div>
                 </div>

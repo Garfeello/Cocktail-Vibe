@@ -88,7 +88,6 @@ public class CocktailController {
         if (bindingResult.hasErrors()) {
             return "cocktail/cocktailForm";
         }
-
         if (!file.isEmpty()) {
             Picture picture = getPicture(cocktail.getName(), file);
             cocktail.setPicture(picture);
@@ -130,6 +129,18 @@ public class CocktailController {
         cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, translateFrom, translateTo));
         model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
         model.addAttribute("searchedString", "Translated !");
+        return "cocktail/cocktailInfo";
+    }
+
+    @GetMapping("/getCocktailsFromIngredient")
+    private String getCocktailsFromIngredient(@RequestParam String ingredientName, Model model) {
+        Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(ingredientName);
+        Optional<List<Cocktail>> cocktailOptional = Optional.empty();
+        if (ingredientOptional.isPresent()){
+            cocktailOptional = cocktailRepository.findCocktailsByIngredients(ingredientOptional.get());
+        }
+        cocktailOptional.ifPresent(cocktails -> model.addAttribute("cocktail", cocktails));
+        model.addAttribute("searchedString", "Searching by " + ingredientName);
         return "cocktail/cocktailInfo";
     }
 

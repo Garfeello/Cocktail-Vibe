@@ -22,7 +22,7 @@
             </div>
             <div class="form-group">
                 <label for="type">Ingredient type</label>
-                <form:input class="form-control"  path="type"/>
+                <form:input placeholder="'Herb/soft beverage/mineral'" class="form-control"  path="type"/>
             </div>
             <div class="form-group">
                 <label for="language">Choose language of your Ingredient</label>
