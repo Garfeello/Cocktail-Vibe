@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DrinkApiModel {
 
-    private long idDrink;
     private String strDrink;
     private String strInstructions;
     private String strIngredient1;
@@ -18,18 +17,11 @@ public class DrinkApiModel {
     private String strIngredient8;
     private String strIngredient9;
     private String strIngredient10;
-    private String strImageSource;
+    private String strDrinkThumb;
 
     public DrinkApiModel() {
     }
 
-    public long getIdDrink() {
-        return idDrink;
-    }
-
-    public void setIdDrink(long idDrink) {
-        this.idDrink = idDrink;
-    }
 
     public String getStrDrink() {
         return strDrink;
@@ -127,19 +119,18 @@ public class DrinkApiModel {
         this.strIngredient10 = strIngredient10;
     }
 
-    public String getStrImageSource() {
-        return strImageSource;
+    public String getStrDrinkThumb() {
+        return strDrinkThumb;
     }
 
-    public void setStrImageSource(String strImageSource) {
-        this.strImageSource = strImageSource;
+    public void setStrDrinkThumb(String strDrinkThumb) {
+        this.strDrinkThumb = strDrinkThumb;
     }
 
     @Override
     public String toString() {
         return "DrinkApiModel{" +
-                "idDrink=" + idDrink +
-                ", strDrink='" + strDrink + '\'' +
+                "strDrink='" + strDrink + '\'' +
                 ", strInstructions='" + strInstructions + '\'' +
                 ", strIngredient1='" + strIngredient1 + '\'' +
                 ", strIngredient2='" + strIngredient2 + '\'' +
@@ -151,7 +142,7 @@ public class DrinkApiModel {
                 ", strIngredient8='" + strIngredient8 + '\'' +
                 ", strIngredient9='" + strIngredient9 + '\'' +
                 ", strIngredient10='" + strIngredient10 + '\'' +
-                ", strImageSource='" + strImageSource + '\'' +
+                ", strDrinkThumb='" + strDrinkThumb + '\'' +
                 '}';
     }
 }

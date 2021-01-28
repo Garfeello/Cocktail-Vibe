@@ -9,7 +9,6 @@ import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
-import pl.application.cocktailVibe.services.CocktailDbService;
 
 import java.util.List;
 import java.util.Optional;
@@ -19,14 +18,12 @@ import java.util.Optional;
 public class MainPageController {
 
     private final CocktailRepository cocktailRepository;
-    private final CocktailDbService cocktailDbService;
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
 
-    public MainPageController(CocktailRepository cocktailRepository, CocktailDbService cocktailDbService,
-                              IngredientRepository ingredientRepository, AlcoholRepository alcoholRepository) {
+    public MainPageController(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
+                              AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
-        this.cocktailDbService = cocktailDbService;
         this.ingredientRepository = ingredientRepository;
         this.alcoholRepository = alcoholRepository;
     }
@@ -59,22 +56,8 @@ public class MainPageController {
 
     //////////////////////////////////////////////////////////////////////////////////////
     @ResponseBody
-    @GetMapping("/test")
-    public Cocktail cocktail() {
-        cocktailDbService.getCocktail("Kir");
-        return cocktailRepository.findFirstByName("Kir").orElse(new Cocktail());
-    }
-
-    @ResponseBody
-    @GetMapping("/testList")
-    private List<Cocktail> cocktailList() {
-        return cocktailDbService.getCocktailsByIngredient("caruva");
-    }
-
-    @ResponseBody
     @GetMapping("/testAlcohol")
-    private List<Cocktail> cocktailListAlcohol() {
-        return cocktailDbService.getCocktailsByAlcohol("brandy");
+    private void cocktailListAlcohol() {
     }
 
 }

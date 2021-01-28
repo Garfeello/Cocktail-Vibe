@@ -1,2 +1,4 @@
-package pl.application.cocktailVibe.dto;public class AlcoholDTO {
+package pl.application.cocktailVibe.dto;
+
+public class AlcoholDTO {
 }

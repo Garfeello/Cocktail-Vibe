@@ -33,9 +33,9 @@
             <br/>
             <button class="btn btn-lg btn-primary btn-block" type="submit">Login in</button>
             <br/>
-            <div class="alert alert-danger" role="alert">
-                <%=((Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage()%>;
-            </div>
+<%--            <div class="alert alert-danger" role="alert">--%>
+<%--                <%=((Exception) request.getSession().getAttribute("SPRING_SECURITY_LAST_EXCEPTION")).getMessage()%>;--%>
+<%--            </div>--%>
             <p class="mt-5 mb-3 text-muted">&copy; CocktailVibe 2021</p>
             <a href="${pageContext.request.contextPath}/cocktailVibe/">Home</a>
             <div class="card-footer">
