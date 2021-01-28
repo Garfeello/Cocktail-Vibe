@@ -1,6 +1,7 @@
 package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
+import pl.application.cocktailVibe.dto.PictureDTO;
 import pl.application.cocktailVibe.model.Picture;
 
 import javax.imageio.ImageIO;
@@ -12,8 +13,8 @@ import java.net.URL;
 @Component
 public class PictureService {
 
-    public Picture createPictureFromUrl(String pictureURL, String cocktailName) {
-        Picture picture = new Picture();
+    public PictureDTO createPictureFromUrl(String pictureURL, String cocktailName) {
+        PictureDTO picture = new PictureDTO();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             URL url = new URL(pictureURL);

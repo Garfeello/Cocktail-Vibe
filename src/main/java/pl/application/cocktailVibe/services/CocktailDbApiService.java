@@ -26,24 +26,25 @@ public class CocktailDbApiService {
     public void getCocktailDto(int drinkId) {
         ApiObjectsWrapper apiObjectsWrapper = cocktailDbAPI.getApiObjectFromDrinkId(drinkId);
         CocktailDTO cocktailDTO = prepareCocktailDto(apiObjectsWrapper.getDrinkApiModel(), apiObjectsWrapper.getIngredientApiModelList());
-        System.out.println(cocktailDTO);
-
+        System.out.println(cocktailDTO.getAlcoholDTOList() + " " + cocktailDTO.getIngredientDTOList() + " " +
+                cocktailDTO.getLanguage() + " " + cocktailDTO.getName() + " " + cocktailDTO.getPreparationDescription());
     }
 
     private CocktailDTO prepareCocktailDto(DrinkApiModel drinkApiModel, List<IngredientApiModel> ingredientApiModels) {
         CocktailDTO cocktailDTO = new CocktailDTO();
         cocktailDTO.setName(drinkApiModel.getStrDrink());
-        cocktailDTO.setAlcoholList(prepareAlcoholDto(ingredientApiModels));
-        cocktailDTO.setIngredients(prepareIngredientDto(ingredientApiModels));
-        cocktailDTO.setPicture(pictureService.createPictureFromUrl(drinkApiModel.getStrDrinkThumb(), drinkApiModel.getStrDrink()));
+        cocktailDTO.setPreparationDescription(drinkApiModel.getStrInstructions());
+        cocktailDTO.setAlcoholDTOList(prepareAlcoholDto(ingredientApiModels));
+        cocktailDTO.setIngredientDTOList(prepareIngredientDto(ingredientApiModels));
+        cocktailDTO.setPictureDTO(pictureService.createPictureFromUrl(drinkApiModel.getStrDrinkThumb(), drinkApiModel.getStrDrink()));
         cocktailDTO.setLanguage("en");
         return cocktailDTO;
     }
 
     private List<AlcoholDTO> prepareAlcoholDto(List<IngredientApiModel> ingredientApiModels) {
         List<AlcoholDTO> alcoholDTOList = new ArrayList<>();
-        for (IngredientApiModel ingredient : ingredientApiModels){
-            if (ingredient.getStrAlcohol().equals("Yes")){
+        for (IngredientApiModel ingredient : ingredientApiModels) {
+            if (ingredient.getStrAlcohol() != null && ingredient.getStrAlcohol().equals("Yes")) {
                 AlcoholDTO alcoholDTO = new AlcoholDTO();
                 alcoholDTO.setName(ingredient.getStrIngredient());
                 alcoholDTO.setDescription(ingredient.getStrDescription());
@@ -58,8 +59,8 @@ public class CocktailDbApiService {
 
     private List<IngredientDTO> prepareIngredientDto(List<IngredientApiModel> ingredientApiModels) {
         List<IngredientDTO> ingredientDTOList = new ArrayList<>();
-        for (IngredientApiModel ingredient : ingredientApiModels){
-            if (ingredient.getStrAlcohol() != null){
+        for (IngredientApiModel ingredient : ingredientApiModels) {
+            if (ingredient.getStrAlcohol() != null) {
                 IngredientDTO ingredientDTO = new IngredientDTO();
                 ingredientDTO.setName(ingredient.getStrIngredient());
                 ingredientDTO.setType(ingredient.getStrType());

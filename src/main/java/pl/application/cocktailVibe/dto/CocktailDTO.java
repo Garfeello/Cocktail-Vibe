@@ -1,9 +1,5 @@
 package pl.application.cocktailVibe.dto;
 
-import pl.application.cocktailVibe.model.Alcohol;
-import pl.application.cocktailVibe.model.Ingredient;
-import pl.application.cocktailVibe.model.Picture;
-
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.Size;
 import java.util.List;
@@ -13,9 +9,9 @@ public class CocktailDTO {
     @Size(min = 2, max = 40)
     private String name;
 
-    private List<AlcoholDTO> alcoholList;
+    private List<AlcoholDTO> alcoholDTOList;
 
-    private List<IngredientDTO> ingredients;
+    private List<IngredientDTO> ingredientDTOList;
 
     @Size(max = 1000, message = "description max characters - 1000")
     private String preparationDescription;
@@ -23,7 +19,7 @@ public class CocktailDTO {
     @Size(max = 200, message = "user inspiration max characters - 500")
     private String userInspiration;
 
-    private Picture picture;
+    private PictureDTO pictureDTO;
 
     @NotEmpty
     private String language;
@@ -36,20 +32,20 @@ public class CocktailDTO {
         this.name = name;
     }
 
-    public List<AlcoholDTO> getAlcoholList() {
-        return alcoholList;
+    public List<AlcoholDTO> getAlcoholDTOList() {
+        return alcoholDTOList;
     }
 
-    public void setAlcoholList(List<AlcoholDTO> alcoholList) {
-        this.alcoholList = alcoholList;
+    public void setAlcoholDTOList(List<AlcoholDTO> alcoholDTOList) {
+        this.alcoholDTOList = alcoholDTOList;
     }
 
-    public List<IngredientDTO> getIngredients() {
-        return ingredients;
+    public List<IngredientDTO> getIngredientDTOList() {
+        return ingredientDTOList;
     }
 
-    public void setIngredients(List<IngredientDTO> ingredients) {
-        this.ingredients = ingredients;
+    public void setIngredientDTOList(List<IngredientDTO> ingredientDTOList) {
+        this.ingredientDTOList = ingredientDTOList;
     }
 
     public String getPreparationDescription() {
@@ -68,12 +64,12 @@ public class CocktailDTO {
         this.userInspiration = userInspiration;
     }
 
-    public Picture getPicture() {
-        return picture;
+    public PictureDTO getPictureDTO() {
+        return pictureDTO;
     }
 
-    public void setPicture(Picture picture) {
-        this.picture = picture;
+    public void setPictureDTO(PictureDTO pictureDTO) {
+        this.pictureDTO = pictureDTO;
     }
 
     public String getLanguage() {
@@ -88,11 +84,11 @@ public class CocktailDTO {
     public String toString() {
         return "CocktailDTO{" +
                 "name='" + name + '\'' +
-                ", alcoholList=" + alcoholList +
-                ", ingredients=" + ingredients +
+                ", alcoholList=" + alcoholDTOList +
+                ", ingredients=" + ingredientDTOList +
                 ", preparationDescription='" + preparationDescription + '\'' +
                 ", userInspiration='" + userInspiration + '\'' +
-                ", picture=" + picture +
+                ", picture=" + pictureDTO +
                 ", language='" + language + '\'' +
                 '}';
     }
