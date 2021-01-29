@@ -15,7 +15,6 @@ public class Alcohol {
 
     @NotEmpty(message = "name cant be left blank")
     @Size(min = 2, max = 35)
-    @Column(unique = true)
     private String name;
 
     private String alcoholType;

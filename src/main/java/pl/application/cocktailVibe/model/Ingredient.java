@@ -13,7 +13,6 @@ public class Ingredient {
 
     @NotEmpty
     @Size(min = 2, max = 25)
-    @Column(unique = true)
     private String name;
 
     private String type;

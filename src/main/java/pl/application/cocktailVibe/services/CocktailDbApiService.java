@@ -9,6 +9,7 @@ import pl.application.cocktailVibe.dto.CocktailDTO;
 import pl.application.cocktailVibe.dto.IngredientDTO;
 import pl.application.cocktailVibe.wrapper.ApiObjectsWrapper;
 
+import javax.validation.ConstraintValidator;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -40,6 +41,7 @@ public class CocktailDbApiService {
         cocktailDTO.setIngredientDTOList(prepareIngredientDto(ingredientApiModels));
         cocktailDTO.setPictureDTO(pictureService.createPictureFromUrl(drinkApiModel.getStrDrinkThumb(), drinkApiModel.getStrDrink()));
         cocktailDTO.setLanguage("en");
+
         return cocktailDTO;
     }
 

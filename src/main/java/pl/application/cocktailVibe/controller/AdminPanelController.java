@@ -33,15 +33,13 @@ public class AdminPanelController {
     @GetMapping("/test")
     private String cocktailListAlcohol(Model model) {
         List<CocktailDTO> cocktailDTOList = new ArrayList<>();
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 1; i++) {
             cocktailDTOList.add(cocktailDbApiService.getCocktailDto());
         }
         List<CocktailDTO> distinctList = cocktailDTOList.stream().filter(x -> !(x == null)).distinct().collect(Collectors.toList());
         List<Cocktail> cocktailList = cocktailService.getCocktail(distinctList);
         cocktailRepository.saveAll(cocktailList);
 
-
         return "redirect:/cocktailVibe/";
-
     }
 }
