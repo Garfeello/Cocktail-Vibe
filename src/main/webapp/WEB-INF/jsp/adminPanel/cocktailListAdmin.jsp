@@ -11,7 +11,7 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center">${cocktailListSize}</h1>
+    <h1 style="text-align: center">${cocktailListSize} cocktails</h1>
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${cocktailList}" var="cocktailDto">
             <div class="col">
