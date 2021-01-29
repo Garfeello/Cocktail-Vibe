@@ -12,6 +12,16 @@ public class PictureDTO {
     @Lob
     private byte[] image;
 
+    private boolean pictureLoaded;
+
+    public boolean isPictureLoaded() {
+        return image != null;
+    }
+
+    public void setPictureLoaded(boolean pictureLoaded) {
+        this.pictureLoaded = pictureLoaded;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,6 +37,7 @@ public class PictureDTO {
     public void setImage(byte[] image) {
         this.image = image;
     }
+
 
     @Override
     public String toString() {

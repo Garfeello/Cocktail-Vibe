@@ -3,6 +3,7 @@ package pl.application.cocktailVibe.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import pl.application.cocktailVibe.dto.CocktailDTO;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
@@ -11,8 +12,10 @@ import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.services.CocktailDbApiService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -21,14 +24,12 @@ public class MainPageController {
     private final CocktailRepository cocktailRepository;
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
-    private final CocktailDbApiService cocktailDbApiService;
 
     public MainPageController(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
-                              AlcoholRepository alcoholRepository, CocktailDbApiService cocktailDbApiService) {
+                              AlcoholRepository alcoholRepository) {
         this.cocktailRepository = cocktailRepository;
         this.ingredientRepository = ingredientRepository;
         this.alcoholRepository = alcoholRepository;
-        this.cocktailDbApiService = cocktailDbApiService;
     }
 
     @ModelAttribute("fiveNewestCocktails")
@@ -57,11 +58,5 @@ public class MainPageController {
         return "cocktail/cocktailInfo";
     }
 
-    //////////////////////////////////////////////////////////////////////////////////////
-    @ResponseBody
-    @GetMapping("/testAlcohol")
-    private void cocktailListAlcohol() {
-        cocktailDbApiService.getCocktailDto(11007);
-    }
 
 }

@@ -15,6 +15,7 @@ public class Cocktail {
     private Long id;
 
     @Size(min = 2, max = 40)
+    @Column(unique = true)
     private String name;
 
     @ManyToMany(cascade = CascadeType.PERSIST)

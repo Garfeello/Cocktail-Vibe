@@ -22,8 +22,12 @@ public class CocktailDbAPI {
         this.objectMapper = objectMapper;
     }
 
-    public ApiObjectsWrapper getApiObjectFromDrinkId(int drinkId) {
-        DrinkApiModel drinkApiModel = getDrinkApiModelById(drinkId);
+    public ApiObjectsWrapper getApiObjectFromDrinkId() {
+        DrinkApiModel drinkApiModel = getDrinkApiModelById();
+        if (drinkApiModel.getStrDrink() == null){
+            return new ApiObjectsWrapper();
+        }
+
         List<IngredientApiModel> ingredientApiModelList = getIngredientModels(drinkApiModel);
 
         ApiObjectsWrapper apiObjectsWrapper = new ApiObjectsWrapper();
@@ -35,7 +39,7 @@ public class CocktailDbAPI {
     private List<IngredientApiModel> getIngredientModels(DrinkApiModel drinkApiModel) {
         List<String> ingredientList = getIngredientList(drinkApiModel);
         List<IngredientApiModel> ingredientApiModels = new ArrayList<>();
-        for (String ingredientName : ingredientList){
+        for (String ingredientName : ingredientList) {
             ingredientApiModels.add(getIngredientAPiModelByName(ingredientName));
         }
         return ingredientApiModels;
@@ -55,8 +59,10 @@ public class CocktailDbAPI {
     }
 
     private IngredientApiModel getIngredientAPiModelByName(String ingredientName) {
+
+        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredientName.replace(" ", "%20");
         IngredientApiModel ingredientApiModel = new IngredientApiModel();
-        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredientName;
+
         try {
             IngredientApiCollection ingredientApiCollection = objectMapper.readValue(new URL(resourceURL), IngredientApiCollection.class);
             ingredientApiModel = ingredientApiCollection.getIngredientApiModelList().get(0);
@@ -66,15 +72,20 @@ public class CocktailDbAPI {
         return ingredientApiModel;
     }
 
-    private DrinkApiModel getDrinkApiModelById(int drinkId) {
-        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=" + drinkId;
-        DrinkApiModel drinkApiModel = new DrinkApiModel();
+    private DrinkApiModel getDrinkApiModelById() {
+        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+        Optional<List<DrinkApiModel>> drinkApiModel = Optional.empty();
         try {
             DrinkApiCollection drinkApiCollection = objectMapper.readValue(new URL(resourceURL), DrinkApiCollection.class);
-            drinkApiModel = drinkApiCollection.getDrinksList().get(0);
+            drinkApiModel = Optional.ofNullable(drinkApiCollection.getDrinksList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return drinkApiModel;
+
+        if (drinkApiModel.isPresent()){
+            return drinkApiModel.get().get(0);
+        } else {
+            return new DrinkApiModel();
+        }
     }
 }

@@ -2,7 +2,6 @@ package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.dto.PictureDTO;
-import pl.application.cocktailVibe.model.Picture;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;

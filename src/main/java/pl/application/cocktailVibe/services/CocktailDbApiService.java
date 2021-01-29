@@ -23,11 +23,13 @@ public class CocktailDbApiService {
         this.pictureService = pictureService;
     }
 
-    public void getCocktailDto(int drinkId) {
-        ApiObjectsWrapper apiObjectsWrapper = cocktailDbAPI.getApiObjectFromDrinkId(drinkId);
-        CocktailDTO cocktailDTO = prepareCocktailDto(apiObjectsWrapper.getDrinkApiModel(), apiObjectsWrapper.getIngredientApiModelList());
-        System.out.println(cocktailDTO.getAlcoholDTOList() + " " + cocktailDTO.getIngredientDTOList() + " " +
-                cocktailDTO.getLanguage() + " " + cocktailDTO.getName() + " " + cocktailDTO.getPreparationDescription());
+    public CocktailDTO getCocktailDto() {
+       ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkId();
+       if (objectsWrapper.getDrinkApiModel() == null){
+           return new CocktailDTO();
+       } else {
+           return prepareCocktailDto(objectsWrapper.getDrinkApiModel(), objectsWrapper.getIngredientApiModelList());
+       }
     }
 
     private CocktailDTO prepareCocktailDto(DrinkApiModel drinkApiModel, List<IngredientApiModel> ingredientApiModels) {
@@ -60,11 +62,12 @@ public class CocktailDbApiService {
     private List<IngredientDTO> prepareIngredientDto(List<IngredientApiModel> ingredientApiModels) {
         List<IngredientDTO> ingredientDTOList = new ArrayList<>();
         for (IngredientApiModel ingredient : ingredientApiModels) {
-            if (ingredient.getStrAlcohol() != null) {
+            if (ingredient.getStrAlcohol() == null) {
                 IngredientDTO ingredientDTO = new IngredientDTO();
                 ingredientDTO.setName(ingredient.getStrIngredient());
                 ingredientDTO.setType(ingredient.getStrType());
                 ingredientDTO.setLanguage("en");
+                ingredientDTOList.add(ingredientDTO);
             }
         }
         return ingredientDTOList;
