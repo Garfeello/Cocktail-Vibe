@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
 <html lang="pl">
@@ -23,6 +24,13 @@
                 <div class="card" style="margin-bottom: 15px;">
                     <div class="card-header">
                         <h3 class="card-title" style="margin-bottom: 0;">${cocktail.name}</h3>
+                        <sec:authorize access="isAuthenticated()">
+                            <h5>
+                                <a class="btn btn-primary"
+                                   href="${pageContext.request.contextPath}/cocktailVibe/getNewCocktailFromCopy?cocktailId=${cocktail.id}">Skopiuj
+                                    i stwórz nowy</a>
+                            </h5>
+                        </sec:authorize>
                     </div>
                     <div style="position: relative;">
                         <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"

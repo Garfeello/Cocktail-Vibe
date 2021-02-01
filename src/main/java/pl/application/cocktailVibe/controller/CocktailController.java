@@ -68,7 +68,6 @@ public class CocktailController {
         }
         Picture picture = getPicture(cocktail.getName(), file);
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
-
         optionalUser.ifPresent(cocktail::setUser);
         cocktail.setPicture(picture);
         cocktailRepository.save(cocktail);
@@ -95,6 +94,29 @@ public class CocktailController {
         cocktailRepository.save(cocktail);
         return "redirect:/cocktailVibe/user/cocktails";
     }
+
+    @GetMapping("/getNewCocktailFromCopy")
+    private String initGetCocktailFromCopy(@RequestParam Long cocktailId, Model model) {
+        model.addAttribute("cocktail", cocktailRepository.findById(cocktailId).orElse(new Cocktail()));
+        return "cocktail/cocktailForm";
+    }
+
+    @PostMapping("/getNewCocktailFromCopy")
+    private String getCocktailFromCopy(@ModelAttribute @Valid Cocktail cocktail, BindingResult result,
+                                       @RequestParam("image") MultipartFile file, Principal principal) {
+        if (result.hasErrors()) {
+            return "cocktail/cocktailForm";
+        }
+        if (!file.isEmpty()) {
+            Picture picture = getPicture(cocktail.getName(), file);
+            cocktail.setPicture(picture);
+        }
+        Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
+        optionalUser.ifPresent(cocktail::setUser);
+        cocktailRepository.save(cocktail);
+        return "redirect:/cocktailVibe/user/cocktails";
+    }
+
 
     @PostMapping("/deleteCocktail")
     private String deleteCocktail(@RequestParam Long cocktailId) {
@@ -136,7 +158,7 @@ public class CocktailController {
     private String getCocktailsFromIngredient(@RequestParam String ingredientName, Model model) {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(ingredientName);
         Optional<List<Cocktail>> cocktailOptional = Optional.empty();
-        if (ingredientOptional.isPresent()){
+        if (ingredientOptional.isPresent()) {
             cocktailOptional = cocktailRepository.findCocktailsByIngredients(ingredientOptional.get());
         }
         cocktailOptional.ifPresent(cocktails -> model.addAttribute("cocktail", cocktails));
