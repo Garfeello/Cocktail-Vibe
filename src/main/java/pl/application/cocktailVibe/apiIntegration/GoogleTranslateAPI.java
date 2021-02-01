@@ -43,7 +43,6 @@ public class GoogleTranslateAPI {
         translatedCocktail.setAlcoholList(translateAlcohols(cocktail.getAlcoholList(), translatedTo));
         translatedCocktail.setPreparationDescription(translatePrepDescription(cocktail.getPreparationDescription(), translatedFrom, translatedTo));
         translatedCocktail.setLanguage(translatedTo);
-        translatedCocktail.setUserInspiration("przykładowa inspiracja użytkownika");
         translatedCocktail.setPicture(cocktail.getPicture());
         return translatedCocktail;
     }
