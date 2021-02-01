@@ -1,7 +1,9 @@
 package pl.application.cocktailVibe.services;
 
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
 import pl.application.cocktailVibe.dto.PictureDTO;
+import pl.application.cocktailVibe.model.Picture;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -25,6 +27,17 @@ public class PictureService {
         }
         picture.setImage(byteArrayOutputStream.toByteArray());
         picture.setName(cocktailName + ".jpg");
+        return picture;
+    }
+
+    public Picture getPicture(String cocktailName, MultipartFile file) {
+        Picture picture = new Picture();
+        picture.setName(cocktailName + ".jpg");
+        try {
+            picture.setImage(file.getBytes());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         return picture;
     }
 

@@ -11,9 +11,9 @@ import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.repository.UserRepository;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
+import pl.application.cocktailVibe.services.PictureService;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.Comparator;
 import java.util.List;
@@ -29,16 +29,17 @@ public class CocktailController {
     private final CocktailRepository cocktailRepository;
     private final GoogleTranslateService googleTranslateService;
     private final UserRepository userRepository;
-
+    private final PictureService pictureService;
 
     public CocktailController(AlcoholRepository alcoholRepository, IngredientRepository ingredientRepository,
                               CocktailRepository cocktailRepository, GoogleTranslateService googleTranslateService,
-                              UserRepository userRepository) {
+                              UserRepository userRepository, PictureService pictureService) {
         this.alcoholRepository = alcoholRepository;
         this.ingredientRepository = ingredientRepository;
         this.cocktailRepository = cocktailRepository;
         this.googleTranslateService = googleTranslateService;
         this.userRepository = userRepository;
+        this.pictureService = pictureService;
     }
 
     @ModelAttribute("alcoholList")
@@ -66,7 +67,7 @@ public class CocktailController {
         if (result.hasErrors()) {
             return "cocktail/cocktailForm";
         }
-        Picture picture = getPicture(cocktail.getName(), file);
+        Picture picture = pictureService.getPicture(cocktail.getName(), file);
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
         optionalUser.ifPresent(cocktail::setUser);
         cocktail.setPicture(picture);
@@ -88,7 +89,7 @@ public class CocktailController {
             return "cocktail/cocktailForm";
         }
         if (!file.isEmpty()) {
-            Picture picture = getPicture(cocktail.getName(), file);
+            Picture picture = pictureService.getPicture(cocktail.getName(), file);
             cocktail.setPicture(picture);
         }
         cocktailRepository.save(cocktail);
@@ -108,7 +109,7 @@ public class CocktailController {
             return "cocktail/cocktailForm";
         }
         if (!file.isEmpty()) {
-            Picture picture = getPicture(cocktail.getName(), file);
+            Picture picture = pictureService.getPicture(cocktail.getName(), file);
             cocktail.setPicture(picture);
         }
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
@@ -116,7 +117,6 @@ public class CocktailController {
         cocktailRepository.save(cocktail);
         return "redirect:/cocktailVibe/user/cocktails";
     }
-
 
     @PostMapping("/deleteCocktail")
     private String deleteCocktail(@RequestParam Long cocktailId) {
@@ -164,17 +164,5 @@ public class CocktailController {
         cocktailOptional.ifPresent(cocktails -> model.addAttribute("cocktail", cocktails));
         model.addAttribute("searchedString", "Searching by " + ingredientName);
         return "cocktail/cocktailInfo";
-    }
-
-    // czy to moze byc w kontrolerze?
-    private Picture getPicture(String cocktailName, MultipartFile file) {
-        Picture picture = new Picture();
-        picture.setName(cocktailName + ".jpg");
-        try {
-            picture.setImage(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return picture;
     }
 }

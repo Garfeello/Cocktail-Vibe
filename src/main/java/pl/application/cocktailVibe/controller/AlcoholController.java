@@ -11,9 +11,9 @@ import pl.application.cocktailVibe.model.User;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.UserRepository;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
+import pl.application.cocktailVibe.services.PictureService;
 
 import javax.validation.Valid;
-import java.io.IOException;
 import java.security.Principal;
 import java.util.Arrays;
 import java.util.List;
@@ -26,12 +26,14 @@ public class AlcoholController {
     private final AlcoholRepository alcoholRepository;
     private final GoogleTranslateService googleTranslateService;
     private final UserRepository userRepository;
+    private final PictureService pictureService;
 
     public AlcoholController(AlcoholRepository alcoholRepository, GoogleTranslateService googleTranslateService,
-                             UserRepository userRepository) {
+                             UserRepository userRepository, PictureService pictureService) {
         this.alcoholRepository = alcoholRepository;
         this.googleTranslateService = googleTranslateService;
         this.userRepository = userRepository;
+        this.pictureService = pictureService;
     }
 
     @ModelAttribute("alcoholTypeList")
@@ -51,7 +53,7 @@ public class AlcoholController {
         if (result.hasErrors()) {
             return "alcohol/alcoholForm";
         }
-        Picture picture = getPicture(alcohol.getName(), file);
+        Picture picture = pictureService.getPicture(alcohol.getName(), file);
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
         optionalUser.ifPresent(alcohol::setUser);
         alcohol.setPicture(picture);
@@ -73,7 +75,7 @@ public class AlcoholController {
             return "alcohol/alcoholForm";
         }
         if (!file.isEmpty()) {
-            Picture picture = getPicture(alcohol.getName(), file);
+            Picture picture = pictureService.getPicture(alcohol.getName(), file);
             alcohol.setPicture(picture);
         }
         alcoholRepository.save(alcohol);
@@ -114,14 +116,4 @@ public class AlcoholController {
         return "alcohol/translatedAlcoholInfo";
     }
 
-    private Picture getPicture(String alcoholName, MultipartFile file) {
-        Picture picture = new Picture();
-        picture.setName(alcoholName);
-        try {
-            picture.setImage(file.getBytes());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return picture;
-    }
 }
