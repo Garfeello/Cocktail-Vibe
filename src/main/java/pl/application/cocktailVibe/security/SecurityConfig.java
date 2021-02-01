@@ -36,6 +36,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/logoutSuccess").permitAll()
                 .antMatchers("/cocktailVibe/").permitAll()
+                .antMatchers("/cocktailVibe//getCocktailsFromIngredient").permitAll()
                 .antMatchers("/cocktailVibe/search").permitAll()
                 .antMatchers("/cocktailVibe/cocktailList").permitAll()
                 .antMatchers("/cocktailVibe/cocktailListPl").permitAll()
