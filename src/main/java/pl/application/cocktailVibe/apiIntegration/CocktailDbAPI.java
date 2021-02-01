@@ -24,7 +24,7 @@ public class CocktailDbAPI {
 
     public ApiObjectsWrapper getApiObjectFromDrinkId() {
         DrinkApiModel drinkApiModel = getDrinkApiModelById();
-        if (drinkApiModel.getStrDrink() == null){
+        if (drinkApiModel.getStrDrink() == null) {
             return new ApiObjectsWrapper();
         }
 
@@ -61,29 +61,34 @@ public class CocktailDbAPI {
     private IngredientApiModel getIngredientAPiModelByName(String ingredientName) {
 
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredientName.replace(" ", "%20");
-        IngredientApiModel ingredientApiModel = new IngredientApiModel();
+        Optional<List<IngredientApiModel>> optionalIngredientApiModel = Optional.empty();
 
         try {
             IngredientApiCollection ingredientApiCollection = objectMapper.readValue(new URL(resourceURL), IngredientApiCollection.class);
-            ingredientApiModel = ingredientApiCollection.getIngredientApiModelList().get(0);
+            optionalIngredientApiModel = Optional.ofNullable(ingredientApiCollection.getIngredientApiModelList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return ingredientApiModel;
+
+        if (optionalIngredientApiModel.isPresent()) {
+            return optionalIngredientApiModel.get().get(0);
+        } else {
+            return new IngredientApiModel();
+        }
     }
 
     private DrinkApiModel getDrinkApiModelById() {
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
-        Optional<List<DrinkApiModel>> drinkApiModel = Optional.empty();
+        Optional<List<DrinkApiModel>> optionalDrinkApiModel = Optional.empty();
         try {
             DrinkApiCollection drinkApiCollection = objectMapper.readValue(new URL(resourceURL), DrinkApiCollection.class);
-            drinkApiModel = Optional.ofNullable(drinkApiCollection.getDrinksList());
+            optionalDrinkApiModel = Optional.ofNullable(drinkApiCollection.getDrinksList());
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        if (drinkApiModel.isPresent()){
-            return drinkApiModel.get().get(0);
+        if (optionalDrinkApiModel.isPresent()) {
+            return optionalDrinkApiModel.get().get(0);
         } else {
             return new DrinkApiModel();
         }
