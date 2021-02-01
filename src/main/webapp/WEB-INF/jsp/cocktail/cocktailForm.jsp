@@ -58,10 +58,6 @@
                                path="preparationDescription"/>
             </div>
             <div class="form-group">
-                <label for="userInspiration">What inspired you ?</label>
-                <form:textarea class="form-control" rows="2" placeholder="max 200 characters" path="userInspiration"/>
-            </div>
-            <div class="form-group">
                 <label for="ingredients">Choose language of your cocktail</label>
                 <form:select class="form-control" path="language" >
                     <form:option value="Pl" label="Pl"/>

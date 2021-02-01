@@ -59,17 +59,14 @@ public class CocktailDbAPI {
     }
 
     private IngredientApiModel getIngredientAPiModelByName(String ingredientName) {
-
         String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?i=" + ingredientName.replace(" ", "%20");
         Optional<List<IngredientApiModel>> optionalIngredientApiModel = Optional.empty();
-
         try {
             IngredientApiCollection ingredientApiCollection = objectMapper.readValue(new URL(resourceURL), IngredientApiCollection.class);
             optionalIngredientApiModel = Optional.ofNullable(ingredientApiCollection.getIngredientApiModelList());
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         if (optionalIngredientApiModel.isPresent()) {
             return optionalIngredientApiModel.get().get(0);
         } else {
@@ -86,7 +83,6 @@ public class CocktailDbAPI {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         if (optionalDrinkApiModel.isPresent()) {
             return optionalDrinkApiModel.get().get(0);
         } else {

@@ -3,7 +3,6 @@ package pl.application.cocktailVibe.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import pl.application.cocktailVibe.dto.CocktailDTO;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
@@ -12,10 +11,8 @@ import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.services.CocktailDbApiService;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -24,12 +21,14 @@ public class MainPageController {
     private final CocktailRepository cocktailRepository;
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
+    private final CocktailDbApiService cocktailDbApiService;
 
     public MainPageController(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
-                              AlcoholRepository alcoholRepository) {
+                              AlcoholRepository alcoholRepository, CocktailDbApiService cocktailDbApiService) {
         this.cocktailRepository = cocktailRepository;
         this.ingredientRepository = ingredientRepository;
         this.alcoholRepository = alcoholRepository;
+        this.cocktailDbApiService = cocktailDbApiService;
     }
 
     @ModelAttribute("fiveNewestCocktails")
@@ -53,8 +52,11 @@ public class MainPageController {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
         } else if (cocktailOptional.isPresent()) {
             model.addAttribute("cocktail", List.of(cocktailOptional.get()));
-        } else
+        } else if (alcoholOptional.isPresent()){
             alcoholOptional.ifPresent(alcohol -> model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcohol).get()));
+        }else {
+            model.addAttribute("cocktail", cocktailDbApiService.getCocktailDto());
+        }
         return "cocktail/cocktailInfo";
     }
 

@@ -26,9 +26,6 @@ public class Cocktail {
     @Size(max = 1000, message = "description max characters - 1000")
     private String preparationDescription;
 
-    @Size(max = 200, message = "user inspiration max characters - 500")
-    private String userInspiration;
-
     @OneToOne(cascade = CascadeType.PERSIST)
     private Picture picture;
 
@@ -81,14 +78,6 @@ public class Cocktail {
         this.preparationDescription = preparationDescription;
     }
 
-    public String getUserInspiration() {
-        return userInspiration;
-    }
-
-    public void setUserInspiration(String userInspiration) {
-        this.userInspiration = userInspiration;
-    }
-
     public Picture getPicture() {
         return picture;
     }
@@ -122,7 +111,6 @@ public class Cocktail {
         this.user = user;
     }
 
-
     @Override
     public String toString() {
         return "Cocktail{" +
@@ -131,11 +119,10 @@ public class Cocktail {
                 ", alcoholList=" + alcoholList +
                 ", ingredients=" + ingredients +
                 ", preparationDescription='" + preparationDescription + '\'' +
-                ", userInspiration='" + userInspiration + '\'' +
                 ", picture=" + picture +
                 ", language='" + language + '\'' +
-                ", createdOn=" + createdOn +
                 ", user=" + user +
+                ", createdOn=" + createdOn +
                 '}';
     }
 }
