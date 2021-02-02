@@ -10,6 +10,8 @@ import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 import pl.application.cocktailVibe.services.CocktailDbApiService;
+import pl.application.cocktailVibe.services.CocktailService;
+import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import java.util.List;
 import java.util.Optional;
@@ -22,13 +24,18 @@ public class MainPageController {
     private final IngredientRepository ingredientRepository;
     private final AlcoholRepository alcoholRepository;
     private final CocktailDbApiService cocktailDbApiService;
+    private final CocktailService cocktailService;
+    private final GoogleTranslateService googleTranslateService;
 
     public MainPageController(CocktailRepository cocktailRepository, IngredientRepository ingredientRepository,
-                              AlcoholRepository alcoholRepository, CocktailDbApiService cocktailDbApiService) {
+                              AlcoholRepository alcoholRepository, CocktailDbApiService cocktailDbApiService,
+                              CocktailService cocktailService, GoogleTranslateService googleTranslateService) {
         this.cocktailRepository = cocktailRepository;
         this.ingredientRepository = ingredientRepository;
         this.alcoholRepository = alcoholRepository;
         this.cocktailDbApiService = cocktailDbApiService;
+        this.cocktailService = cocktailService;
+        this.googleTranslateService = googleTranslateService;
     }
 
     @ModelAttribute("fiveNewestCocktails")
@@ -42,21 +49,29 @@ public class MainPageController {
     }
 
     @GetMapping("/search")
-    private String search(@RequestParam String searchedString, Model model) {
+    private String search(@RequestParam(required = false) String searchedString, Model model) {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(searchedString);
         Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(searchedString);
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByName(searchedString);
-        model.addAttribute("searchedString", "Searching by " + searchedString);
+        Cocktail cocktail = new Cocktail();
 
         if (ingredientOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
         } else if (cocktailOptional.isPresent()) {
             model.addAttribute("cocktail", List.of(cocktailOptional.get()));
-        } else if (alcoholOptional.isPresent()){
+        } else if (alcoholOptional.isPresent()) {
             alcoholOptional.ifPresent(alcohol -> model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcohol).get()));
-        }else {
-            model.addAttribute("cocktail", cocktailDbApiService.getCocktailDto());
+        } else {
+            cocktail = cocktailService.getCocktail(cocktailDbApiService.getCocktailDto(searchedString));
+            model.addAttribute("cocktail", List.of(cocktail));
         }
+
+        if (cocktail.getName() != null) {
+            cocktailRepository.save(cocktail);
+            cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), "en", "pl"));
+        }
+
+        model.addAttribute("searchedString", "Searching by " + searchedString);
         return "cocktail/cocktailInfo";
     }
 

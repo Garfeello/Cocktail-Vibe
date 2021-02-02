@@ -1,5 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
@@ -12,7 +14,8 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - ${ empty searchedString ? "" : searchedString} -</h1>
+    <h1 style="text-align: center;">- <spring:message code="lang.cocktailInfo"/> -</h1>
+    <div class="row">
         <c:forEach items="${cocktail}" var="cocktail">
             <div class="col-4">
                 <div class="card" style="margin-bottom: 15px;">
@@ -21,8 +24,7 @@
                     </div>
                     <div style="position: relative;">
                         <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"
-                             style="object-fit: cover;"
-                             height="300">
+                             style="object-fit: cover;" height="300" alt="${cocktail.name}">
                         <div style="width: 100%; height: 100%; position: absolute; left: 0; bottom: 0;
                             background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3) 80%);">
                         </div>
@@ -45,10 +47,16 @@
                             <div class="card-footer">
                                 <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
                             </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktailToPl?cocktailName=${cocktail.name}&translateFrom=en&translateTo=pl">
+                                        Przetłumacz na język Polski</a></small>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </c:forEach>
+    </div>
 </div>
 </body>

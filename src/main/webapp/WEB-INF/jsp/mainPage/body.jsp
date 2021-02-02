@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <jsp:include page="header.jsp"/>
 <!doctype html>
 <html lang="pl">
@@ -11,8 +12,8 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - Welcome To Cocktail Vibe ! - </h1>
-    <h3 style="text-align: center;"> - Newest Cocktails -</h3>
+    <h1 style="text-align: center;"> - <spring:message code="lang.mainPageGreeting"/> - </h1>
+    <h3 style="text-align: center;"> - <spring:message code="lang.newestCocktails"/> -</h3>
     <div class="row">
         <c:forEach items="${fiveNewestCocktails}" var="cocktail">
             <div class="col-4">
@@ -31,20 +32,20 @@
                     <div class="card-body">
                         <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
                         <div>
-                            <h4>Cocktail Alcohols:</h4>
+                            <h4><spring:message code="lang.cocktailAlcohols"/></h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
                                 <c:forEach items="${cocktail.alcoholList}" var="alcohol">
                                     <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
                                 </c:forEach>
                             </div>
-                            <h4>Cocktail Ingredients:</h4>
+                            <h4><spring:message code="lang.cocktailIngredients"/></h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
                                 <c:forEach items="${cocktail.ingredients}" var="ingredients">
                                     <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
                                 </c:forEach>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+                                <small class="text-muted"><a><spring:message code="lang.createdBy"/>: @${cocktail.user.nickName}</a></small>
                             </div>
                         </div>
                     </div>

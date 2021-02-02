@@ -22,14 +22,12 @@ public class CocktailDbAPI {
         this.objectMapper = objectMapper;
     }
 
-    public ApiObjectsWrapper getApiObjectFromDrinkId() {
-        DrinkApiModel drinkApiModel = getDrinkApiModelById();
+    public ApiObjectsWrapper getApiObjectFromDrinkId(String cocktailName) {
+        DrinkApiModel drinkApiModel = getDrinkApiModelByCocktailName(cocktailName);
         if (drinkApiModel.getStrDrink() == null) {
             return new ApiObjectsWrapper();
         }
-
         List<IngredientApiModel> ingredientApiModelList = getIngredientModels(drinkApiModel);
-
         ApiObjectsWrapper apiObjectsWrapper = new ApiObjectsWrapper();
         apiObjectsWrapper.setDrinkApiModel(drinkApiModel);
         apiObjectsWrapper.setIngredientApiModelList(ingredientApiModelList);
@@ -74,8 +72,8 @@ public class CocktailDbAPI {
         }
     }
 
-    private DrinkApiModel getDrinkApiModelById() {
-        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+    private DrinkApiModel getDrinkApiModelByCocktailName(String cocktailName) {
+        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailName;
         Optional<List<DrinkApiModel>> optionalDrinkApiModel = Optional.empty();
         try {
             DrinkApiCollection drinkApiCollection = objectMapper.readValue(new URL(resourceURL), DrinkApiCollection.class);

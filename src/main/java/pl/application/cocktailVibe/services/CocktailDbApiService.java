@@ -23,8 +23,8 @@ public class CocktailDbApiService {
         this.pictureService = pictureService;
     }
 
-    public CocktailDTO getCocktailDto() {
-       ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkId();
+    public CocktailDTO getCocktailDto(String cocktailName) {
+       ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkId(cocktailName);
        if (objectsWrapper.getDrinkApiModel() == null){
            return new CocktailDTO();
        } else {

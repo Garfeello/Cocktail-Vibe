@@ -1,9 +1,6 @@
 package pl.application.cocktailVibe.model;
 
-import org.hibernate.validator.constraints.URL;
-
 import javax.persistence.*;
-import javax.validation.constraints.NotEmpty;
 import java.util.Arrays;
 
 @Entity
@@ -13,7 +10,6 @@ public class Picture {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotEmpty
     private String name;
 
     @Lob

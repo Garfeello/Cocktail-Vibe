@@ -9,32 +9,46 @@ import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.repository.CocktailRepository;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Component
 public class CocktailService {
-    
 
-    public List<Cocktail> getCocktail(List<CocktailDTO> cocktailDTOList) {
-        List<Cocktail> cocktailList = new ArrayList<>();
-        for (CocktailDTO cocktailDTO : cocktailDTOList) {
-            Cocktail cocktail = new Cocktail();
-            cocktail.setName(cocktailDTO.getName());
-            cocktail.setPreparationDescription(cocktailDTO.getPreparationDescription());
-            cocktail.setAlcoholList(getAlcoholList(cocktailDTO.getAlcoholDTOList()));
-            cocktail.setIngredients(getIngredientList(cocktailDTO.getIngredientDTOList()));
-            cocktail.setLanguage(cocktailDTO.getLanguage());
-            cocktail.setPicture(getPicture(cocktailDTO.getPictureDTO()));
+    private final CocktailRepository cocktailRepository;
 
-            cocktailList.add(cocktail);
-        }
-        return cocktailList;
+    public CocktailService(CocktailRepository cocktailRepository) {
+        this.cocktailRepository = cocktailRepository;
     }
+
+    public Cocktail getCocktail(CocktailDTO cocktailDTO) {
+        Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(cocktailDTO.getName());
+        if (cocktailOptional.isPresent()) {
+            return cocktailOptional.get();
+        }
+        Cocktail cocktail = new Cocktail();
+        if (cocktailDTO == null){
+            return cocktail;
+        }
+        cocktail.setName(cocktailDTO.getName());
+        cocktail.setPreparationDescription(cocktailDTO.getPreparationDescription());
+        cocktail.setAlcoholList(getAlcoholList(cocktailDTO.getAlcoholDTOList()));
+        cocktail.setIngredients(getIngredientList(cocktailDTO.getIngredientDTOList()));
+        cocktail.setLanguage(cocktailDTO.getLanguage());
+        cocktail.setPicture(getPicture(cocktailDTO.getPictureDTO()));
+        return cocktail;
+    }
+
 
     private List<Alcohol> getAlcoholList(List<AlcoholDTO> alcoholDTOS) {
         List<Alcohol> alcoholList = new ArrayList<>();
+        if (alcoholDTOS == null) {
+            return alcoholList;
+        }
         for (AlcoholDTO alcoholDTO : alcoholDTOS) {
             Alcohol alcohol = new Alcohol();
             alcohol.setName(alcoholDTO.getName());
@@ -50,6 +64,9 @@ public class CocktailService {
 
     private List<Ingredient> getIngredientList(List<IngredientDTO> ingredientDTOS) {
         List<Ingredient> ingredientList = new ArrayList<>();
+        if (ingredientDTOS == null) {
+            return ingredientList;
+        }
         for (IngredientDTO ingredientDTO : ingredientDTOS) {
             Ingredient ingredient = new Ingredient();
             ingredient.setName(ingredientDTO.getName());
@@ -62,6 +79,9 @@ public class CocktailService {
 
     private Picture getPicture(PictureDTO pictureDTO) {
         Picture picture = new Picture();
+        if (pictureDTO == null){
+            return picture;
+        }
         picture.setImage(pictureDTO.getImage());
         picture.setName(pictureDTO.getName());
         return picture;
