@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <jsp:include page="../mainPage/header.jsp"/>
 <!doctype html>
@@ -13,7 +14,7 @@
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
 
-    <h1 style="text-align: center;"> - Alcohol List ENG! - </h1>
+    <h1 style="text-align: center;"> - <spring:message code="lang.allAlcohols"/> - </h1>
     <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
         <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholListPl">
             <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Alkoholi w j.Polskim</button>
@@ -32,13 +33,15 @@
                     </div>
                     <ul class="list-group list-group-flush"></ul>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Type: ${alcohol.alcoholType}</li>
-                        <li class="list-group-item">Age: ${alcohol.age}</li>
+                        <li class="list-group-item"><spring:message code="lang.alcoholType"/>: ${alcohol.alcoholType}</li>
+                        <li class="list-group-item"><spring:message code="lang.alcoholAge"/>: ${alcohol.age}</li>
                     </ul>
                     <div class="card-footer">
                         <small class="text-muted">
                             <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcoholToPl?alcoholName=${alcohol.name}&translateFrom=en&translateTo=pl">
-                                Przetłumacz na język Polski</a></small>
+                                Przetłumacz na język Polski
+                            </a>
+                        </small>
                     </div>
                 </div>
             </div>

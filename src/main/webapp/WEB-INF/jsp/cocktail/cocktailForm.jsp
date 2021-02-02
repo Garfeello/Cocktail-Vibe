@@ -1,6 +1,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 
 <jsp:include page="../mainPage/header.jsp"/>
 <html lang="pl">
@@ -32,9 +34,9 @@
 <body>
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-5 p-10">
-        <h2>- CREATE COCKTAIL -</h2>
+        <h2>- <spring:message code="lang.createCocktail"/> -</h2>
         <form:form method="post" modelAttribute="cocktail" enctype="multipart/form-data">
-            <form:errors path="*" cssClass="alert alert-danger" element="div" />
+            <form:errors path="*" cssClass="alert alert-danger" element="div"/>
             <form:hidden path="picture"/>
             <form:hidden path="user"/>
             <form:hidden path="createdOn"/>
@@ -60,16 +62,16 @@
             </div>
             <div class="form-group">
                 <label for="ingredients">Choose language of your cocktail</label>
-                <form:select class="form-control" path="language" >
+                <form:select class="form-control" path="language">
                     <form:option value="Pl" label="Pl"/>
                     <form:option value="Eng" label="Eng"/>
                 </form:select>
             </div>
             <div class="form-group">
-                <label for="image">Input Picture</label>
+                <label for="image"><spring:message code="lang.inputPicture"/></label>
                 <input class="form-control-file" type="file" name="image" id="image"/>
             </div>
-            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary"><spring:message code="lang.save"/></button>
         </form:form>
     </div>
 </div>

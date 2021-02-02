@@ -6,7 +6,7 @@
 
 <html lang="pl">
 <head>
-    <TITLE>Alcohol Form</TITLE>
+    <title>CocktailVibe</title>
 </head>
 <body>
 
@@ -19,19 +19,19 @@
             <form:hidden path="picture"/>
             <form:hidden path="user"/>
             <div class="form-group">
-                <label for="name">Alcohol name</label>
+                <label for="name"><spring:message code="lang.alcoholName"/></label>
                 <form:input class="form-control" placeholder="'Jack Daniels'" path="name"/>
             </div>
             <div class="form-group">
-                <label for="alcoholType">Choose your alcohols</label>
+                <label for="alcoholType"><spring:message code="lang.alcoholType"/></label>
                 <form:select cssClass="form-control" items="${alcoholTypeList}" path="alcoholType"/>
             </div>
             <div class="form-group">
-                <label for="age">Age of alcohol</label>
+                <label for="age"><spring:message code="lang.alcoholAge"/></label>
                 <form:input cssClass="form-control" type="number" placeholder="0-100" path="age"/>
             </div>
             <div class="form-group">
-                <label for="description">Write description of an alcohol</label>
+                <label for="description"><spring:message code="lang.alcoholDescription"/></label>
                 <form:textarea class="form-control" rows="3" placeholder="max 500 characters" path="description"/>
             </div>
             <div class="form-group">
@@ -43,11 +43,11 @@
             </div>
             <div class="form-group">
                 <div class="form-group">
-                    <label for="image">Input Picture</label>
+                    <label for="image"><spring:message code="lang.inputPicture"/></label>
                     <input class="form-control-file" type="file" name="image" id="image"/>
                 </div>
             </div>
-            <button class="btn btn-primary">Save</button>
+            <button class="btn btn-primary"><spring:message code="lang.save"/></button>
         </form:form>
     </div>
 </div>
