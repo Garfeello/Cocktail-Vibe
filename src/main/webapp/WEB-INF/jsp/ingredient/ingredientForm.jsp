@@ -13,20 +13,20 @@
 <body>
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-5 p-10">
-        <h2>- CREATE INGREDIENT -</h2>
+        <h2>- <spring:message code="lang.createIngredient"/> -</h2>
         <form:form method="post" modelAttribute="ingredient">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
             <div class="form-group">
-                <label for="name">Ingredient name</label>
+                <label for="name"><spring:message code="lang.ingredientName"/></label>
                 <form:input class="form-control" placeholder="'Orange Juice'" path="name"/>
             </div>
             <div class="form-group">
-                <label for="type">Ingredient type</label>
-                <form:input placeholder="'Herb/soft beverage/mineral'" class="form-control"  path="type"/>
+                <label for="type"><spring:message code="lang.ingredientType"/></label>
+                <form:input placeholder="'Herb/soft beverage/mineral'" class="form-control" path="type"/>
             </div>
             <div class="form-group">
                 <label for="language">Choose language of your Ingredient</label>
-                <form:select class="form-control" path="language" >
+                <form:select class="form-control" path="language">
                     <form:option value="Pl" label="Pl"/>
                     <form:option value="Eng" label="Eng"/>
                 </form:select>

@@ -23,10 +23,10 @@
             <div class="col-3">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title">Name:
-                            <a href="/cocktailVibe/getCocktailsFromIngredient?ingredientName=${ingredient.name}">${ingredient.name}</a>
+                        <h5 class="card-title"><spring:message code="lang.ingredientName"/>:
+                            <a href="/cocktailVibe/getCocktailsFromIngredient?ingredientName=${ingredient.name}"> ${ingredient.name}</a>
                         </h5>
-                        <p class="card-text">Type: ${ingredient.type}</p>
+                        <p class="card-text"><spring:message code="lang.ingredientType"/>: ${ingredient.type}</p>
                     </div>
                 </div>
             </div>
