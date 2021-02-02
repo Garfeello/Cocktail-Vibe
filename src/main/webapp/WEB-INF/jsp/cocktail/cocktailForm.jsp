@@ -27,6 +27,7 @@
             $(this).closest('#inputFormRow').remove();
         });
     </script>
+    <title>CocktailVibe</title>
 </head>
 <body>
 <div class="card-body d-flex justify-content-center">
@@ -39,21 +40,21 @@
             <form:hidden path="createdOn"/>
             <form:hidden path="id"/>
             <div class="form-group">
-                <label for="name">Cocktail name</label>
+                <label for="name"><spring:message code="lang.cocktailName"/></label>
                 <form:input class="form-control" placeholder="'Margarita'" path="name"/>
             </div>
             <div class="form-group">
-                <label for="alcoholList">Choose your alcohols</label>
+                <label for="alcoholList"><spring:message code="lang.chooseCocktailAlcohols"/></label>
                 <form:select class="form-control" items="${alcoholList}" itemLabel="name" path="alcoholList"
                              multiple="true"/>
             </div>
             <div class="form-group">
-                <label for="ingredients">Choose your ingredients</label>
+                <label for="ingredients"><spring:message code="lang.cocktailIngredients"/></label>
                 <form:select class="form-control" items="${ingredientList}" itemLabel="name" path="ingredients"
                              multiple="true"/>
             </div>
             <div class="form-group">
-                <label for="preparationDescription">Write preparation description</label>
+                <label for="preparationDescription"><spring:message code="lang.preparationDescription"/></label>
                 <form:textarea class="form-control" rows="3" placeholder="max 500 characters"
                                path="preparationDescription"/>
             </div>

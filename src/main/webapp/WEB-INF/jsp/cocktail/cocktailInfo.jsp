@@ -10,7 +10,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Jekyll v4.1.1">
-    <title>Searching Cocktails</title>
+    <title>CocktailVibe</title>
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
@@ -32,20 +32,24 @@
                     <div class="card-body">
                         <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
                         <div>
-                            <h4>Cocktail Alcohols:</h4>
+                            <h4><spring:message code="lang.cocktailAlcohols"/></h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
                                 <c:forEach items="${cocktail.alcoholList}" var="alcohol">
                                     <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
                                 </c:forEach>
                             </div>
-                            <h4>Cocktail Ingredients:</h4>
+                            <h4><spring:message code="lang.cocktailIngredients"/></h4>
                             <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
                                 <c:forEach items="${cocktail.ingredients}" var="ingredients">
                                     <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
                                 </c:forEach>
                             </div>
                             <div class="card-footer">
-                                <small class="text-muted"><a>Created by: @${cocktail.user.nickName}</a></small>
+                                <small class="text-muted">
+                                    <a>
+                                        <spring:message code="lang.createdBy"/>: @${cocktail.user.nickName}
+                                    </a>
+                                </small>
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">

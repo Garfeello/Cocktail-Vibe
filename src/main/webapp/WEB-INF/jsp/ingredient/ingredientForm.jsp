@@ -9,6 +9,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="generator" content="Jekyll v4.1.1">
+    <title>CocktailVibe</title>
 </head>
 <body>
 <div class="card-body d-flex justify-content-center">
