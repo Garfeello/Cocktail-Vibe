@@ -1,4 +1,5 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -19,7 +20,7 @@
 <body class="text-center" style="background-color: lightgray">
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-25 p-3 ">
-        <h1 class="container">SUCCESSFUL LOGOUT</h1>
+        <h1 class="container"><spring:message code="lang.successLogout"/></h1>
         <a class="btn btn-outline-secondary" href="/cocktailVibe/">HOME</a>
     </div>
 </div>

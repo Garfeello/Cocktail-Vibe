@@ -1,4 +1,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+
 <html lang="pl">
 <head>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
@@ -20,19 +23,20 @@
         <form:form method="post" modelAttribute="userDTO">
             <form:errors cssClass="alert alert-danger" path="*" element="div"/>
             <div class="form-group">
-                <label for="nickName">Nickname</label>
+                <label for="nickName"><spring:message code="lang.nickName"/></label>
                 <form:input class="form-control" placeholder="'Jeremy28'" path="nickName"/>
             </div>
             <div class="form-group">
-                <label for="email">Email</label>
+                <label for="email"><spring:message code="lang.email"/></label>
                 <form:input class="form-control" placeholder="'Jeremy28@gmail.com'" path="email"/>
             </div>
             <div class="form-group">
-                <label for="password">Password</label>
-                <form:password class="form-control" placeholder="8-24 characters, 1 capital letter, 1 number" path="password"/>
+                <label for="password"><spring:message code="lang.password"/></label>
+                <form:password class="form-control" placeholder="8-24 characters, 1 capital letter, 1 number"
+                               path="password"/>
             </div>
             <div class="form-group">
-                <label for="matchingPassword">Repeat Password</label>
+                <label for="matchingPassword"><spring:message code="lang.repeatPassword"/></label>
                 <form:password class="form-control" placeholder="repeat password" path="matchingPassword"/>
             </div>
             <button class="btn btn-primary">Register</button>

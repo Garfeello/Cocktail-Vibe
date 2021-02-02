@@ -2,7 +2,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
-<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <!doctype html>
 <html lang="pl">
@@ -29,25 +29,27 @@
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
-
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/cocktailList">All cocktails<span
-                        class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/cocktailVibe/cocktailList"><spring:message code="lang.allCocktails"/>
+                    <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/alcoholList">All alcohols<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/cocktailVibe/alcoholList"><spring:message code="lang.allAlcohols"/>
+                    <span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item active">
-                <a class="nav-link" href="/cocktailVibe/ingredient/ingredientList">All ingredients <span
-                        class="sr-only">(current)</span></a>
+                <a class="nav-link" href="/cocktailVibe/ingredient/ingredientList"><spring:message
+                        code="lang.allIngredients"/>
+                    <span class="sr-only">(current)</span></a>
             </li>
         </ul>
         <form class="d-flex" action="${pageContext.request.contextPath}/cocktailVibe/search" method="get">
             <input class="form-control mr-sm-2" type="text" name="searchedString" placeholder="Search"
                    aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><spring:message
+                    code="lang.search"/></button>
         </form>
         <%--DROPDOWN--%>
         <sec:authorize access="isAnonymous()">
@@ -55,27 +57,24 @@
                 <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
                        data-toggle="dropdown"
-                       aria-haspopup="true" aria-expanded="false">
-                        Login
-                    </a>
+                       aria-haspopup="true" aria-expanded="false"><spring:message code="lang.login"/></a>
                     <div class="dropdown-menu">
                         <form cssClass="px-4 py-3" action="/login" method="post">
                             <div class="form-group">
-                                <label for="exampleDropdownFormEmail1">Email address</label>
+                                <label for="exampleDropdownFormEmail1"><spring:message code="lang.email"/></label>
                                 <input type="email" class="form-control" id="exampleDropdownFormEmail1"
                                        placeholder="email@example.com" name="username">
                             </div>
                             <div class="form-group">
-                                <label for="exampleDropdownFormPassword1">Password</label>
+                                <label for="exampleDropdownFormPassword1"><spring:message code="lang.password"/></label>
                                 <input type="password" class="form-control" id="exampleDropdownFormPassword1"
                                        placeholder="Password" name="password">
                             </div>
-                            <button type="submit" class="btn btn-primary">Sign in</button>
+                            <button type="submit" class="btn btn-primary"><spring:message code="lang.login"/></button>
                         </form>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="${pageContext.request.contextPath}/register">New around here?
-                            Sign
-                            up</a>
+                        <a class="dropdown-item" href="${pageContext.request.contextPath}/register">
+                            <spring:message code="lang.register"/></a>
                     </div>
                 </div>
             </ul>
@@ -88,27 +87,30 @@
                         <sec:authentication property="principal.username"/>
                     </button>
                     <div class="dropdown-menu">
-                        <a class="nav-link" href="/cocktailVibe/addCocktail">Add cocktail</a>
-                        <a class="nav-link" href="/cocktailVibe/addAlcohol">Add alcohol</a>
-                        <a class="nav-link" href="/cocktailVibe/ingredient/addIngredient">Add ingredient</a>
-                        <a class="nav-link" href="/cocktailVibe/user/cocktails">My cocktails</a>
-                        <a class="nav-link" href="/cocktailVibe/user/alcohols">My alcohols </a>
+                        <a class="nav-link" href="/cocktailVibe/addCocktail"><spring:message
+                                code="lang.addCocktail"/></a>
+                        <a class="nav-link" href="/cocktailVibe/addAlcohol"><spring:message code="lang.addAlcohol"/></a>
+                        <a class="nav-link" href="/cocktailVibe/ingredient/addIngredient"><spring:message
+                                code="lang.addIngredient"/></a>
+                        <a class="nav-link" href="/cocktailVibe/user/cocktails"><spring:message
+                                code="lang.myCocktails"/></a>
+                        <a class="nav-link" href="/cocktailVibe/user/alcohols"><spring:message
+                                code="lang.myAlcohols"/></a>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="/logout">Logout</a>
+                        <a class="dropdown-item" href="/logout"><spring:message code="lang.logout"/></a>
                     </div>
                 </div>
-
             </ul>
         </sec:authorize>
     </div>
     <div class="btn-group btn-group-sm" role="group">
         <button class="btn btn-outline-secondary"
                 onclick="window.location.href='<%= new UrlPathHelper().getOriginatingRequestUri(request) %>?lang=pl'"
-                name="lang" value="pl">Polish
+                name="lang" value="pl"><spring:message code="lang.polish"/>
         </button>
         <button class="btn btn-outline-secondary"
                 onclick="window.location.href='<%= new UrlPathHelper().getOriginatingRequestUri(request) %>?lang=en'"
-                name="lang" value="en">English
+                name="lang" value="en"><spring:message code="lang.english"/>
         </button>
     </div>
 </nav>

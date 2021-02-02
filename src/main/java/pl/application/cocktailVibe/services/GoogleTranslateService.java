@@ -1,6 +1,5 @@
 package pl.application.cocktailVibe.services;
 
-
 import org.springframework.stereotype.Service;
 import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.model.Alcohol;

@@ -54,7 +54,6 @@ public class MainPageController {
         Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(searchedString);
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByName(searchedString);
         Cocktail cocktail = new Cocktail();
-
         if (ingredientOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
         } else if (cocktailOptional.isPresent()) {
@@ -70,10 +69,7 @@ public class MainPageController {
             cocktailRepository.save(cocktail);
             cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), "en", "pl"));
         }
-
         model.addAttribute("searchedString", "Searching by " + searchedString);
         return "cocktail/cocktailInfo";
     }
-
-
 }
