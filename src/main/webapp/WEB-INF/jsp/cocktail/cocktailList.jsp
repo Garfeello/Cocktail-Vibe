@@ -60,8 +60,10 @@
                             </div>
                             <div class="card-footer">
                                 <small class="text-muted">
-                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktailToPl?cocktailName=${cocktail.name}&translateFrom=en&translateTo=pl">
-                                        Przetłumacz na język Polski</a></small>
+                                    <a href="${pageContext.request.contextPath}/cocktailVibe/translateCocktail?cocktailName=${cocktail.name}">
+                                        <spring:message code="lang.translateTo"/>
+                                    </a>
+                                </small>
                             </div>
                         </div>
                     </div>

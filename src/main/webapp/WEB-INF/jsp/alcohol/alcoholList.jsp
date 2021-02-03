@@ -31,8 +31,8 @@
                     </ul>
                     <div class="card-footer">
                         <small class="text-muted">
-                            <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcoholToPl?alcoholName=${alcohol.name}&translateFrom=en&translateTo=pl">
-                                Przetłumacz na język Polski
+                            <a href="${pageContext.request.contextPath}/cocktailVibe/translateAlcohol?alcoholName=${alcohol.name}">
+                                <spring:message code="lang.translateTo"/>
                             </a>
                         </small>
                     </div>

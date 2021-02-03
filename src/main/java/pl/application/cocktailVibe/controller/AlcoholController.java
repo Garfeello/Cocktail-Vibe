@@ -94,20 +94,18 @@ public class AlcoholController {
         return "alcohol/alcoholList";
     }
 
-    @GetMapping("/translateAlcoholToPl")
-    private String translateAlcohol(@RequestParam String alcoholName, Model model,
-                                    @RequestParam String translateTo) {
+    @GetMapping("/translateAlcohol")
+    private String translateAlcohol(@RequestParam String alcoholName, Model model, Locale locale) {
+        String translateTo;
+        if (locale.getLanguage().equals("pl")){
+            translateTo = "en";
+        } else {
+            translateTo = "pl";
+        }
         alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
         model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));
         return "alcohol/translatedAlcoholInfo";
     }
 
-    @GetMapping("/translateAlcoholToEn")
-    private String translateAlcoholEn(@RequestParam String alcoholName, Model model,
-                                      @RequestParam String translateTo) {
-        alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
-        model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));
-        return "alcohol/translatedAlcoholInfo";
-    }
 
 }

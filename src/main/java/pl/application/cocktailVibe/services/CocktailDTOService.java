@@ -13,12 +13,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CocktailDbApiService {
+public class CocktailDTOService {
 
     private final CocktailDbAPI cocktailDbAPI;
     private final PictureService pictureService;
 
-    public CocktailDbApiService(CocktailDbAPI cocktailDbAPI, PictureService pictureService) {
+    public CocktailDTOService(CocktailDbAPI cocktailDbAPI, PictureService pictureService) {
         this.cocktailDbAPI = cocktailDbAPI;
         this.pictureService = pictureService;
     }

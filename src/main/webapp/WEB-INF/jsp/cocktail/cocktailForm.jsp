@@ -37,6 +37,7 @@
         <h2>- <spring:message code="lang.createCocktail"/> -</h2>
         <form:form method="post" modelAttribute="cocktail" enctype="multipart/form-data">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
+            <form:hidden path="language"/>
             <form:hidden path="picture"/>
             <form:hidden path="user"/>
             <form:hidden path="createdOn"/>
@@ -51,7 +52,7 @@
                              multiple="true"/>
             </div>
             <div class="form-group">
-                <label for="ingredients"><spring:message code="lang.cocktailIngredients"/></label>
+                <label for="ingredients"><spring:message code="lang.chooseCocktailIngredients"/></label>
                 <form:select class="form-control" items="${ingredientList}" itemLabel="name" path="ingredients"
                              multiple="true"/>
             </div>
@@ -59,13 +60,6 @@
                 <label for="preparationDescription"><spring:message code="lang.preparationDescription"/></label>
                 <form:textarea class="form-control" rows="3" placeholder="max 500 characters"
                                path="preparationDescription"/>
-            </div>
-            <div class="form-group">
-                <label for="ingredients">Choose language of your cocktail</label>
-                <form:select class="form-control" path="language">
-                    <form:option value="Pl" label="Pl"/>
-                    <form:option value="Eng" label="Eng"/>
-                </form:select>
             </div>
             <div class="form-group">
                 <label for="image"><spring:message code="lang.inputPicture"/></label>

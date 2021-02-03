@@ -9,10 +9,11 @@ import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
+import pl.application.cocktailVibe.repository.IngredientRepository;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -20,9 +21,13 @@ import java.util.Optional;
 public class CocktailService {
 
     private final CocktailRepository cocktailRepository;
+    private final AlcoholRepository alcoholRepository;
+    private final IngredientRepository ingredientRepository;
 
-    public CocktailService(CocktailRepository cocktailRepository) {
+    public CocktailService(CocktailRepository cocktailRepository, AlcoholRepository alcoholRepository, IngredientRepository ingredientRepository) {
         this.cocktailRepository = cocktailRepository;
+        this.alcoholRepository = alcoholRepository;
+        this.ingredientRepository = ingredientRepository;
     }
 
     public Cocktail getCocktail(CocktailDTO cocktailDTO) {
@@ -43,21 +48,25 @@ public class CocktailService {
         return cocktail;
     }
 
-
     private List<Alcohol> getAlcoholList(List<AlcoholDTO> alcoholDTOS) {
         List<Alcohol> alcoholList = new ArrayList<>();
         if (alcoholDTOS == null) {
             return alcoholList;
         }
         for (AlcoholDTO alcoholDTO : alcoholDTOS) {
-            Alcohol alcohol = new Alcohol();
-            alcohol.setName(alcoholDTO.getName());
-            alcohol.setDescription(alcoholDTO.getDescription());
-            alcohol.setAlcoholType(alcoholDTO.getAlcoholType());
-            alcohol.setAge(alcoholDTO.getAge());
-            alcohol.setPicture(alcoholDTO.getPicture());
-            alcohol.setLanguage(alcoholDTO.getLanguage());
-            alcoholList.add(alcohol);
+            Optional<Alcohol> optionalAlcohol = alcoholRepository.findFirstByName(alcoholDTO.getName());
+            if (optionalAlcohol.isPresent()){
+                alcoholList.add(optionalAlcohol.get());
+            } else {
+                Alcohol alcohol = new Alcohol();
+                alcohol.setName(alcoholDTO.getName());
+                alcohol.setDescription(alcoholDTO.getDescription());
+                alcohol.setAlcoholType(alcoholDTO.getAlcoholType());
+                alcohol.setAge(alcoholDTO.getAge());
+                alcohol.setPicture(alcoholDTO.getPicture());
+                alcohol.setLanguage(alcoholDTO.getLanguage());
+                alcoholList.add(alcohol);
+            }
         }
         return alcoholList;
     }
@@ -68,11 +77,16 @@ public class CocktailService {
             return ingredientList;
         }
         for (IngredientDTO ingredientDTO : ingredientDTOS) {
-            Ingredient ingredient = new Ingredient();
-            ingredient.setName(ingredientDTO.getName());
-            ingredient.setType(ingredientDTO.getType());
-            ingredient.setLanguage(ingredientDTO.getLanguage());
-            ingredientList.add(ingredient);
+            Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByName(ingredientDTO.getName());
+            if (optionalIngredient.isPresent()){
+                ingredientList.add(optionalIngredient.get());
+            } else {
+                Ingredient ingredient = new Ingredient();
+                ingredient.setName(ingredientDTO.getName());
+                ingredient.setType(ingredientDTO.getType());
+                ingredient.setLanguage(ingredientDTO.getLanguage());
+                ingredientList.add(ingredient);
+            }
         }
         return ingredientList;
     }

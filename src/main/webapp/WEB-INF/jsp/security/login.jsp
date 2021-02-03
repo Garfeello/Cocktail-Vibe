@@ -27,7 +27,7 @@
             <input type="text" id="inputEmail" class="form-control" placeholder="Email address" required autofocus
                    name="username">
 
-            <label for="inputPassword" class="sr-only"><spring:message code="lang.password"/></label>
+            <label for="inputPassword" class="sr-only"><spring:message code="lang.accountPassword"/></label>
             <input type="password" id="inputPassword" class="form-control" placeholder="Password" required
                    name="password">
             <br/>

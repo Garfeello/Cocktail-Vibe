@@ -16,7 +16,6 @@ import pl.application.cocktailVibe.services.PictureService;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -48,7 +47,6 @@ public class CocktailController {
     @ModelAttribute("ingredientList")
     private List<Ingredient> ingredientList(Locale locale) {
         return ingredientRepository.findAllByLanguage(locale.getLanguage()).orElse(Collections.emptyList());
-
     }
 
     @GetMapping("/cocktailList")
@@ -128,26 +126,22 @@ public class CocktailController {
         return "redirect:/cocktailVibe/user/cocktails";
     }
 
-    @GetMapping("/translateCocktailToPl")
-    private String translateCocktailToPl(@RequestParam String cocktailName, @RequestParam String translateFrom,
-                                         @RequestParam String translateTo, Model model) {
-        cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, translateFrom, translateTo));
-        model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
-        model.addAttribute("searchedString", "Przetlumaczono !");
-        return "cocktail/cocktailInfo";
-    }
-
-    @GetMapping("/translateCocktailToEn")
-    private String translateCocktailToEn(@RequestParam String cocktailName, @RequestParam String translateFrom,
-                                         @RequestParam String translateTo, Model model) {
-        cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, translateFrom, translateTo));
+    @GetMapping("/translateCocktail")
+    private String translateCocktail(@RequestParam String cocktailName, Model model, Locale locale) {
+        String translateTo;
+        if (locale.getLanguage().equals("pl")){
+            translateTo = "en";
+        } else {
+            translateTo = "pl";
+        }
+        cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, locale.getLanguage(), translateTo));
         model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
         model.addAttribute("searchedString", "Translated !");
         return "cocktail/cocktailInfo";
     }
 
     @GetMapping("/getCocktailsFromIngredient")
-    private String getCocktailsFromIngredient(@RequestParam String ingredientName, Model model) {
+    private String getCocktailsFromIngredient(@RequestParam(required = false) String ingredientName, Model model) {
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(ingredientName);
         Optional<List<Cocktail>> cocktailOptional = Optional.empty();
         if (ingredientOptional.isPresent()) {
