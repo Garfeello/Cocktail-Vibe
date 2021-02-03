@@ -22,8 +22,10 @@ public class IngredientController {
     }
 
     @GetMapping("/addIngredient")
-    private String initAddIngredient(Model model) {
-        model.addAttribute("ingredient", new Ingredient());
+    private String initAddIngredient(Model model, Locale locale) {
+        Ingredient ingredient = new Ingredient();
+        ingredient.setLanguage(locale.getLanguage());
+        model.addAttribute("ingredient", ingredient);
         return "ingredient/ingredientForm";
     }
 

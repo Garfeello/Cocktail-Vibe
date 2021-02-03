@@ -15,6 +15,7 @@
         <h2>- Create Alcohol -</h2>
         <form:form method="post" modelAttribute="alcohol" enctype="multipart/form-data">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
+            <form:hidden path="language"/>
             <form:hidden path="id"/>
             <form:hidden path="picture"/>
             <form:hidden path="user"/>
@@ -33,13 +34,6 @@
             <div class="form-group">
                 <label for="description"><spring:message code="lang.alcoholDescription"/></label>
                 <form:textarea class="form-control" rows="3" placeholder="max 500 characters" path="description"/>
-            </div>
-            <div class="form-group">
-                <label for="language">Choose language of your cocktail</label>
-                <form:select class="form-control" path="language">
-                    <form:option value="Pl" label="Pl"/>
-                    <form:option value="Eng" label="Eng"/>
-                </form:select>
             </div>
             <div class="form-group">
                 <div class="form-group">

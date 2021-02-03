@@ -13,12 +13,7 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - Cocktail List ENG! - </h1>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/cocktailListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Koktajli w j.Polskim</button>
-        </form>
-    </div>
+    <h1 style="text-align: center;"> - <spring:message code="lang.allCocktails"/> - </h1>
     <div class="row">
         <c:forEach items="${cocktailList}" var="cocktail">
             <div class="col-4">

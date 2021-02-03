@@ -15,9 +15,7 @@ import pl.application.cocktailVibe.services.PictureService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -42,8 +40,10 @@ public class AlcoholController {
     }
 
     @GetMapping("/addAlcohol")
-    private String initAddAlcohol(Model model) {
-        model.addAttribute("alcohol", new Alcohol());
+    private String initAddAlcohol(Model model, Locale locale) {
+        Alcohol alcohol = new Alcohol();
+        alcohol.setLanguage(locale.getLanguage());
+        model.addAttribute("alcohol", alcohol);
         return "alcohol/alcoholForm";
     }
 
@@ -89,15 +89,9 @@ public class AlcoholController {
     }
 
     @GetMapping("/alcoholList")
-    private String getAlcoholListEng(Model model) {
-        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("en"));
+    private String getAlcoholListEng(Model model, Locale locale) {
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage(locale.getLanguage()).orElse(Collections.emptyList()));
         return "alcohol/alcoholList";
-    }
-
-    @GetMapping("/alcoholListPl")
-    private String getAlcoholListPl(Model model) {
-        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage("pl"));
-        return "alcohol/alcoholListPl";
     }
 
     @GetMapping("/translateAlcoholToPl")

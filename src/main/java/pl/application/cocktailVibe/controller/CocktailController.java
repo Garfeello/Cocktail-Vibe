@@ -15,9 +15,7 @@ import pl.application.cocktailVibe.services.PictureService;
 
 import javax.validation.Valid;
 import java.security.Principal;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -43,21 +41,27 @@ public class CocktailController {
     }
 
     @ModelAttribute("alcoholList")
-    private List<Alcohol> alcoholList() {
-        return alcoholRepository.findAllAlcohols();
+    private List<Alcohol> alcoholList(Locale locale) {
+        return alcoholRepository.findAlcoholByLanguage(locale.getLanguage()).orElse(Collections.emptyList());
     }
 
     @ModelAttribute("ingredientList")
-    private List<Ingredient> ingredientList() {
-        return ingredientRepository.findAllIngredients()
-                .stream()
-                .sorted(Comparator.comparing(Ingredient::getName))
-                .collect(Collectors.toList());
+    private List<Ingredient> ingredientList(Locale locale) {
+        return ingredientRepository.findAllByLanguage(locale.getLanguage()).orElse(Collections.emptyList());
+
+    }
+
+    @GetMapping("/cocktailList")
+    private String getCocktailListEng(Model model, Locale locale) {
+        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage(locale.getLanguage()));
+        return "cocktail/cocktailList";
     }
 
     @GetMapping("/addCocktail")
-    private String InitAddCocktail(Model model) {
-        model.addAttribute("cocktail", new Cocktail());
+    private String InitAddCocktail(Model model, Locale locale) {
+        Cocktail cocktail = new Cocktail();
+        cocktail.setLanguage(locale.getLanguage());
+        model.addAttribute("cocktail", cocktail);
         return "cocktail/cocktailForm";
     }
 
@@ -122,18 +126,6 @@ public class CocktailController {
     private String deleteCocktail(@RequestParam Long cocktailId) {
         cocktailRepository.deleteById(cocktailId);
         return "redirect:/cocktailVibe/user/cocktails";
-    }
-
-    @GetMapping("/cocktailList")
-    private String getCocktailListEng(Model model) {
-        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("en"));
-        return "cocktail/cocktailList";
-    }
-
-    @GetMapping("/cocktailListPl")
-    private String getCocktailListPl(Model model) {
-        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage("pl"));
-        return "cocktail/cocktailListPl";
     }
 
     @GetMapping("/translateCocktailToPl")

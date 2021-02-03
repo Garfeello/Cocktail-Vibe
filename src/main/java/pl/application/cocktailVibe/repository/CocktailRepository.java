@@ -29,7 +29,7 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
 
     List<Cocktail> findCocktailsByLanguage(String language);
 
-    Optional<List<Cocktail>> findCocktailsByUser(User user);
+    Optional<List<Cocktail>> findCocktailsByUserAndLanguage(User user, String language);
 
     Optional<List<Cocktail>> findCocktailsByIngredients(Ingredient ingredient);
 

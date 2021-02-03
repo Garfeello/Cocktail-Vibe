@@ -17,20 +17,14 @@
         <h2>- <spring:message code="lang.createIngredient"/> -</h2>
         <form:form method="post" modelAttribute="ingredient">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
+            <form:hidden path="language"/>
             <div class="form-group">
-                <label for="name"><spring:message code="lang.ingredientName"/></label>
+                <label for="name"><spring:message code="lang.createIngredientName"/></label>
                 <form:input class="form-control" placeholder="'Orange Juice'" path="name"/>
             </div>
             <div class="form-group">
-                <label for="type"><spring:message code="lang.ingredientType"/></label>
+                <label for="type"><spring:message code="lang.createIngredientType"/></label>
                 <form:input placeholder="'Herb/soft beverage/mineral'" class="form-control" path="type"/>
-            </div>
-            <div class="form-group">
-                <label for="language">Choose language of your Ingredient</label>
-                <form:select class="form-control" path="language">
-                    <form:option value="Pl" label="Pl"/>
-                    <form:option value="Eng" label="Eng"/>
-                </form:select>
             </div>
             <button class="btn btn-primary">Save</button>
         </form:form>

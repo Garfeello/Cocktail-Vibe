@@ -13,6 +13,7 @@ import pl.application.cocktailVibe.repository.UserRepository;
 
 import java.security.Principal;
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -31,19 +32,19 @@ public class UserController {
     }
 
     @GetMapping("/cocktails")
-    private String getUserCocktails(Principal principal, Model model) {
+    private String getUserCocktails(Principal principal, Model model, Locale locale) {
         String getUserEmail = principal.getName();
         Optional<User> optionalUser = userRepository.findByEmail(getUserEmail);
-        Optional<List<Cocktail>> cocktailsByUser = cocktailRepository.findCocktailsByUser(optionalUser.orElse(new User()));
+        Optional<List<Cocktail>> cocktailsByUser = cocktailRepository.findCocktailsByUserAndLanguage(optionalUser.orElse(new User()), locale.getLanguage());
         cocktailsByUser.ifPresent(cocktails -> model.addAttribute("cocktailList", cocktails));
         return "cocktail/userCocktails";
     }
 
     @GetMapping("/alcohols")
-    private String getUserAlcohols(Principal principal, Model model) {
+    private String getUserAlcohols(Principal principal, Model model, Locale locale) {
         String getUserEmail = principal.getName();
         Optional<User> optionalUser = userRepository.findByEmail(getUserEmail);
-        Optional<List<Alcohol>> alcoholsByUser = alcoholRepository.findAllByUser(optionalUser.orElse(new User()));
+        Optional<List<Alcohol>> alcoholsByUser = alcoholRepository.findAllByUserAndLanguage(optionalUser.orElse(new User()), locale.getLanguage());
         alcoholsByUser.ifPresent(alcohols -> model.addAttribute("alcoholList", alcohols));
         return "alcohol/userAlcohols";
     }

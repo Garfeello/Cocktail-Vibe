@@ -11,19 +11,16 @@ import java.util.Optional;
 
 public interface AlcoholRepository extends JpaRepository<Alcohol, Long>, CrudRepository<Alcohol, Long> {
 
-    @Query("select a from Alcohol a")
-    List<Alcohol> findAllAlcohols();
-
-    List<Alcohol> findAlcoholByLanguage(String language);
-
     @Override
     Optional<Alcohol> findById(Long longId);
+
+    Optional<List<Alcohol>> findAlcoholByLanguage(String language);
 
     Optional<Alcohol> findFirstByNameAndLanguage(String name, String language);
 
     Optional<Alcohol> findFirstByName(String name);
 
-    Optional<List<Alcohol>> findAllByUser(User user);
+    Optional<List<Alcohol>> findAllByUserAndLanguage(User user, String language);
 
 
 }
