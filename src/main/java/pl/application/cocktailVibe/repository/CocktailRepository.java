@@ -3,6 +3,7 @@ package pl.application.cocktailVibe.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.repository.query.Param;
 import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
 import pl.application.cocktailVibe.model.Ingredient;
@@ -16,8 +17,8 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
     @Query("select c from Cocktail c")
     List<Cocktail> findAllCocktails();
 
-    @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP order by created_on desc LIMIT 6;")
-    List<Cocktail> findSixNewestCocktails();
+    @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP AND language = :language order by created_on desc LIMIT 6;")
+    List<Cocktail> findSixNewestCocktails(@Param("language") String language);
 
     @Override
     Optional<Cocktail> findById(Long id);

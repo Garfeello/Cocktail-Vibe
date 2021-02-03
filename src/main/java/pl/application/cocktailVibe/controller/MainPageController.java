@@ -14,6 +14,7 @@ import pl.application.cocktailVibe.services.CocktailService;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import java.util.List;
+import java.util.Locale;
 import java.util.Optional;
 
 @Controller
@@ -39,8 +40,8 @@ public class MainPageController {
     }
 
     @ModelAttribute("fiveNewestCocktails")
-    private List<Cocktail> newestCocktailList() {
-        return cocktailRepository.findSixNewestCocktails();
+    private List<Cocktail> newestCocktailList(Locale locale) {
+        return cocktailRepository.findSixNewestCocktails(locale.getLanguage());
     }
 
     @GetMapping("/")

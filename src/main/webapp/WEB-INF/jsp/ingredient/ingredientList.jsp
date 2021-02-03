@@ -12,12 +12,7 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-    <h1 style="text-align: center;"> - Ingredient List! - </h1>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/ingredient/ingredientListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Składników w j.Polskim</button>
-        </form>
-    </div>
+    <h1 style="text-align: center;"> - <spring:message code="lang.allIngredients"/> - </h1>
     <div class="card-group">
         <c:forEach items="${ingredientList}" var="ingredient">
             <div class="col-3">

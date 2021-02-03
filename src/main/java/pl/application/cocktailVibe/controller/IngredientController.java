@@ -6,13 +6,9 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import pl.application.cocktailVibe.model.Ingredient;
 import pl.application.cocktailVibe.repository.IngredientRepository;
-import pl.application.cocktailVibe.services.GoogleTranslateService;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Controller
@@ -20,11 +16,9 @@ import java.util.stream.Collectors;
 public class IngredientController {
 
     private final IngredientRepository ingredientRepository;
-    private final GoogleTranslateService googleTranslateService;
 
-    public IngredientController(IngredientRepository ingredientRepository, GoogleTranslateService googleTranslateService) {
+    public IngredientController(IngredientRepository ingredientRepository) {
         this.ingredientRepository = ingredientRepository;
-        this.googleTranslateService = googleTranslateService;
     }
 
     @GetMapping("/addIngredient")
@@ -43,9 +37,9 @@ public class IngredientController {
     }
 
     @GetMapping("/ingredientList")
-    private String ingredientList(Model model) {
+    private String ingredientList(Model model, Locale locale) {
         List<Ingredient> ingredientList = new ArrayList<>();
-        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("en");
+        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage(locale.getLanguage());
         if (optionalIngredients.isPresent()) {
             ingredientList = sortFromOptional(optionalIngredients.get());
         }
@@ -53,19 +47,7 @@ public class IngredientController {
         return "ingredient/ingredientList";
     }
 
-    @GetMapping("/ingredientListPl")
-    private String ingredientListPl(Model model) {
-        List<Ingredient> ingredientList = new ArrayList<>();
-        Optional<List<Ingredient>> optionalIngredients = ingredientRepository.findAllByLanguage("pl");
-        if (optionalIngredients.isPresent()) {
-            ingredientList = sortFromOptional(optionalIngredients.get());
-        }
-        model.addAttribute("ingredientList", ingredientList);
-        return "ingredient/ingredientListPl";
-    }
-
     private List<Ingredient> sortFromOptional(List<Ingredient> ingredientList) {
         return ingredientList.stream().sorted(Comparator.comparing(Ingredient::getName)).collect(Collectors.toList());
     }
-
 }

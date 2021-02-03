@@ -13,14 +13,7 @@
 </head>
 <body>
 <div class="container-fluid" style="padding: 30px 5% 15px 5%">
-
     <h1 style="text-align: center;"> - <spring:message code="lang.allAlcohols"/> - </h1>
-    <div class="btn-group" role="group" aria-label="Basic radio toggle button group">
-        <form action="${pageContext.request.contextPath}/cocktailVibe/alcoholListPl">
-            <button class="btn-group btn-group-sm btn btn-outline-dark">Lista Alkoholi w j.Polskim</button>
-        </form>
-    </div>
-
     <div class="row row-cols-1 row-cols-md-3 g-4">
         <c:forEach items="${alcoholList}" var="alcohol">
             <div class="col">
