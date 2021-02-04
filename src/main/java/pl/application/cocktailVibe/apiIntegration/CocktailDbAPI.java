@@ -1,6 +1,8 @@
 package pl.application.cocktailVibe.apiIntegration;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.apiIntegrationModel.DrinkApiCollection;
 import pl.application.cocktailVibe.apiIntegrationModel.DrinkApiModel;
@@ -10,12 +12,14 @@ import pl.application.cocktailVibe.wrapper.ApiObjectsWrapper;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.*;
 import java.util.stream.Collectors;
 
 @Component
 public class CocktailDbAPI {
 
+    private final Logger logger = LoggerFactory.getLogger(CocktailDbAPI.class);
     private final ObjectMapper objectMapper;
 
     public CocktailDbAPI(ObjectMapper objectMapper) {
@@ -25,6 +29,7 @@ public class CocktailDbAPI {
     public ApiObjectsWrapper getApiObjectFromDrinkId(String cocktailName) {
         DrinkApiModel drinkApiModel = getDrinkApiModelByCocktailName(cocktailName);
         if (drinkApiModel.getStrDrink() == null) {
+            logger.info("Couldn't find cocktail by name " + cocktailName + " " + LocalDateTime.now());
             return new ApiObjectsWrapper();
         }
         List<IngredientApiModel> ingredientApiModelList = getIngredientModels(drinkApiModel);
@@ -63,7 +68,7 @@ public class CocktailDbAPI {
             IngredientApiCollection ingredientApiCollection = objectMapper.readValue(new URL(resourceURL), IngredientApiCollection.class);
             optionalIngredientApiModel = Optional.ofNullable(ingredientApiCollection.getIngredientApiModelList());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         if (optionalIngredientApiModel.isPresent()) {
             return optionalIngredientApiModel.get().get(0);
@@ -79,7 +84,7 @@ public class CocktailDbAPI {
             DrinkApiCollection drinkApiCollection = objectMapper.readValue(new URL(resourceURL), DrinkApiCollection.class);
             optionalDrinkApiModel = Optional.ofNullable(drinkApiCollection.getDrinksList());
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         if (optionalDrinkApiModel.isPresent()) {
             return optionalDrinkApiModel.get().get(0);

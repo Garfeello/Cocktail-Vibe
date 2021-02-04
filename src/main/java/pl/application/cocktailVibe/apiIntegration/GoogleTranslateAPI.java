@@ -1,5 +1,7 @@
 package pl.application.cocktailVibe.apiIntegration;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 
 import java.io.BufferedReader;
@@ -13,12 +15,14 @@ import java.util.Optional;
 @Component
 public class GoogleTranslateAPI {
 
+    private final Logger logger = LoggerFactory.getLogger(GoogleTranslateAPI.class);
+
     public String prepareAndGetTranslation(String text, String translatedFrom, String translatedTo) {
         String translation = "Couldn't translate";
         try {
             translation = translate(translatedFrom, translatedTo, text);
         } catch (IOException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
         }
         return translation;
     }

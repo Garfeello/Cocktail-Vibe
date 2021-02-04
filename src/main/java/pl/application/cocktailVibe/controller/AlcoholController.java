@@ -16,7 +16,6 @@ import pl.application.cocktailVibe.services.PictureService;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
-import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/cocktailVibe")

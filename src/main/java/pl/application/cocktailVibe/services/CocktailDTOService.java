@@ -1,7 +1,10 @@
 package pl.application.cocktailVibe.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.apiIntegration.CocktailDbAPI;
+import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.apiIntegrationModel.DrinkApiModel;
 import pl.application.cocktailVibe.apiIntegrationModel.IngredientApiModel;
 import pl.application.cocktailVibe.dto.AlcoholDTO;
@@ -9,12 +12,14 @@ import pl.application.cocktailVibe.dto.CocktailDTO;
 import pl.application.cocktailVibe.dto.IngredientDTO;
 import pl.application.cocktailVibe.wrapper.ApiObjectsWrapper;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
 @Component
 public class CocktailDTOService {
 
+    private final Logger logger = LoggerFactory.getLogger(CocktailDTO.class);
     private final CocktailDbAPI cocktailDbAPI;
     private final PictureService pictureService;
 
@@ -26,6 +31,7 @@ public class CocktailDTOService {
     public CocktailDTO getCocktailDto(String cocktailName) {
        ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkId(cocktailName);
        if (objectsWrapper.getDrinkApiModel() == null){
+           logger.info("Drink API model in CocktailDTOService was null " + LocalDateTime.now());
            return new CocktailDTO();
        } else {
            return prepareCocktailDto(objectsWrapper.getDrinkApiModel(), objectsWrapper.getIngredientApiModelList());

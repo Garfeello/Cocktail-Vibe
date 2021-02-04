@@ -1,5 +1,7 @@
 package pl.application.cocktailVibe.services;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.dto.AlcoholDTO;
 import pl.application.cocktailVibe.dto.CocktailDTO;
@@ -13,6 +15,7 @@ import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 import pl.application.cocktailVibe.repository.IngredientRepository;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -20,6 +23,7 @@ import java.util.Optional;
 @Component
 public class CocktailService {
 
+    private final Logger logger = LoggerFactory.getLogger(CocktailService.class);
     private final CocktailRepository cocktailRepository;
     private final AlcoholRepository alcoholRepository;
     private final IngredientRepository ingredientRepository;
@@ -37,6 +41,7 @@ public class CocktailService {
         }
         Cocktail cocktail = new Cocktail();
         if (cocktailDTO == null){
+            logger.info("Cocktail DTO in cocktailService was null " + LocalDateTime.now());
             return cocktail;
         }
         cocktail.setName(cocktailDTO.getName());
