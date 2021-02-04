@@ -12,10 +12,5 @@ import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long>, CrudRepository<User, Long> {
 
-    @Query("select u from  User u")
-    List<User> findAllIngredients();
-
-    Optional<User> findByEmailAndPassword(String email, String password);
-
     Optional<User> findByEmail(String email);
 }

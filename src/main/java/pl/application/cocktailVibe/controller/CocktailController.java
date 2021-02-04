@@ -51,7 +51,7 @@ public class CocktailController {
 
     @GetMapping("/cocktailList")
     private String getCocktailListEng(Model model, Locale locale) {
-        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage(locale.getLanguage()));
+        model.addAttribute("cocktailList", cocktailRepository.findCocktailsByLanguage(locale.getLanguage()).orElse(Collections.emptyList()));
         return "cocktail/cocktailList";
     }
 

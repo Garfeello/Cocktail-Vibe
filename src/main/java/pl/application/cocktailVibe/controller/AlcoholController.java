@@ -16,6 +16,7 @@ import pl.application.cocktailVibe.services.PictureService;
 import javax.validation.Valid;
 import java.security.Principal;
 import java.util.*;
+import java.util.logging.Logger;
 
 @Controller
 @RequestMapping("/cocktailVibe")
@@ -99,7 +100,6 @@ public class AlcoholController {
         if (alcoholName == null) {
             return "alcohol/translatedAlcoholInfo";
         }
-
         String translateTo = locale.getLanguage().equals("pl") ? "en" : "pl";
         alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
         model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));

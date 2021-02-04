@@ -12,8 +12,8 @@
     <title>CocktailVibe</title>
 </head>
 <body>
-<h1 class="containter">- <spring:message code="lang.myCocktails"/> -</h1>
-<h3>${empty cocktailList ? "Nothing to display here :(" : ""}</h3>
+<h1 style="text-align: center" class="containter">- <spring:message code="lang.myCocktails"/> -</h1>
+<h3 style="text-align: center">${empty cocktailList ? "Nothing to display here :(" : ""}</h3>
 <div class="row row-cols-1 row-cols-md-3 g-4">
     <c:forEach items="${cocktailList}" var="cocktail">
         <div class="col">

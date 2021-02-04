@@ -13,6 +13,7 @@ import pl.application.cocktailVibe.services.CocktailDTOService;
 import pl.application.cocktailVibe.services.CocktailService;
 import pl.application.cocktailVibe.services.GoogleTranslateService;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Locale;
 import java.util.Optional;
@@ -41,7 +42,7 @@ public class MainPageController {
 
     @ModelAttribute("fiveNewestCocktails")
     private List<Cocktail> newestCocktailList(Locale locale) {
-        return cocktailRepository.findSixNewestCocktails(locale.getLanguage());
+        return cocktailRepository.findSixNewestCocktails(locale.getLanguage()).orElse(Collections.emptyList());
     }
 
     @GetMapping("/")
@@ -65,7 +66,6 @@ public class MainPageController {
             cocktail = cocktailService.getCocktail(cocktailDTOService.getCocktailDto(searchedString));
             model.addAttribute("cocktail", List.of(cocktail));
         }
-
         if (cocktail.getName() != null) {
             cocktailRepository.save(cocktail);
             cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), "en", "pl"));

@@ -11,9 +11,6 @@ import java.util.Optional;
 
 public interface IngredientRepository extends JpaRepository<Ingredient, Long>, CrudRepository<Ingredient, Long> {
 
-    @Query("select i from Ingredient i")
-    List<Ingredient> findAllIngredients();
-
     Optional<Ingredient> findById(Long ingredientId);
 
     Optional<Ingredient> findFirstByName(String ingredientName);

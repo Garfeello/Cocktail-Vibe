@@ -14,11 +14,8 @@ import java.util.Optional;
 
 public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudRepository<Cocktail, Long> {
 
-    @Query("select c from Cocktail c")
-    List<Cocktail> findAllCocktails();
-
     @Query(nativeQuery = true, value = "SELECT * FROM cocktail where DATE(created_on) < CURRENT_TIMESTAMP AND language = :language order by created_on desc LIMIT 6;")
-    List<Cocktail> findSixNewestCocktails(@Param("language") String language);
+    Optional<List<Cocktail>> findSixNewestCocktails(@Param("language") String language);
 
     @Override
     Optional<Cocktail> findById(Long id);
@@ -27,7 +24,7 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
 
     Optional<Cocktail> findFirstByNameAndLanguage(String cocktailName, String cocktailLanguage);
 
-    List<Cocktail> findCocktailsByLanguage(String language);
+    Optional<List<Cocktail>> findCocktailsByLanguage(String language);
 
     Optional<List<Cocktail>> findCocktailsByUserAndLanguage(User user, String language);
 

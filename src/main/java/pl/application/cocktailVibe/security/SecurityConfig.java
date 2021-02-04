@@ -36,23 +36,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/register").permitAll()
                 .antMatchers("/logoutSuccess").permitAll()
                 .antMatchers("/cocktailVibe/").permitAll()
-                .antMatchers("/cocktailVibe//getCocktailsFromIngredient").permitAll()
+                .antMatchers("/cocktailVibe/getCocktailsFromIngredient").permitAll()
                 .antMatchers("/cocktailVibe/search").permitAll()
                 .antMatchers("/cocktailVibe/cocktailList").permitAll()
-                .antMatchers("/cocktailVibe/cocktailListPl").permitAll()
                 .antMatchers("/cocktailVibe/ingredient/ingredientList").permitAll()
-                .antMatchers("/cocktailVibe/ingredient/ingredientListPl").permitAll()
                 .antMatchers("/cocktailVibe/ingredient/translateIngredient").permitAll()
                 .antMatchers("/cocktailVibe/translateCocktail").permitAll()
-                .antMatchers("/cocktailVibe/translateCocktailToPl").permitAll()
-                .antMatchers("/cocktailVibe/translateCocktailToEn").permitAll()
                 .antMatchers("/cocktailVibe/alcoholList").permitAll()
                 .antMatchers("/cocktailVibe/alcoholListPl").permitAll()
-                .antMatchers("/cocktailVibe/translateAlcoholToPl").permitAll()
-                .antMatchers("/cocktailVibe/translateAlcoholToEn").permitAll()
+                .antMatchers("/cocktailVibe/translateAlcohol").permitAll()
+                .antMatchers("/cocktailVibe/user/*").hasRole("USER")
                 .antMatchers("/cocktailVibe/ingredient/addIngredient").hasRole("USER")
                 .antMatchers("/cocktailVibe/addCocktail").hasRole("USER")
                 .antMatchers("/cocktailVibe/addAlcohol").hasRole("USER")
+                .antMatchers("/cocktailVibe/editCocktail").hasRole("USER")
+                .antMatchers("/cocktailVibe/editAlcohol").hasRole("USER")
                 .anyRequest()
                 .authenticated()
                 .and()
@@ -63,12 +61,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/logoutSuccess")
                 .deleteCookies("JSESSIONID");
-
     }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
 }

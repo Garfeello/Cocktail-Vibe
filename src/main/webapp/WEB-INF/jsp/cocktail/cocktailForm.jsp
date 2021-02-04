@@ -38,7 +38,7 @@
             </div>
             <div class="form-group">
                 <label for="preparationDescription"><spring:message code="lang.preparationDescription"/></label>
-                <form:textarea class="form-control" rows="3" placeholder="max 500 characters"
+                <form:textarea class="form-control" rows="3" placeholder="max 5000 characters"
                                path="preparationDescription"/>
             </div>
             <div class="form-group">
