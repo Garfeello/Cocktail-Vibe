@@ -127,13 +127,11 @@ public class CocktailController {
     }
 
     @GetMapping("/translateCocktail")
-    private String translateCocktail(@RequestParam String cocktailName, Model model, Locale locale) {
-        String translateTo;
-        if (locale.getLanguage().equals("pl")){
-            translateTo = "en";
-        } else {
-            translateTo = "pl";
+    private String translateCocktail(@RequestParam(required = false) String cocktailName, Model model, Locale locale) {
+        if (cocktailName == null){
+            return "cocktail/cocktailInfo";
         }
+        String translateTo = locale.getLanguage().equals("pl") ? "en" : "pl";
         cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktailName, locale.getLanguage(), translateTo));
         model.addAttribute("cocktail", List.of(cocktailRepository.findFirstByNameAndLanguage(cocktailName, translateTo).orElse(new Cocktail())));
         model.addAttribute("searchedString", "Translated !");

@@ -95,13 +95,12 @@ public class AlcoholController {
     }
 
     @GetMapping("/translateAlcohol")
-    private String translateAlcohol(@RequestParam String alcoholName, Model model, Locale locale) {
-        String translateTo;
-        if (locale.getLanguage().equals("pl")){
-            translateTo = "en";
-        } else {
-            translateTo = "pl";
+    private String translateAlcohol(@RequestParam(required = false) String alcoholName, Model model, Locale locale) {
+        if (alcoholName == null) {
+            return "alcohol/translatedAlcoholInfo";
         }
+
+        String translateTo = locale.getLanguage().equals("pl") ? "en" : "pl";
         alcoholRepository.save(googleTranslateService.translateAndGetAlcohol(alcoholName, translateTo));
         model.addAttribute("alcohol", alcoholRepository.findFirstByNameAndLanguage(alcoholName, translateTo).orElse(new Alcohol()));
         return "alcohol/translatedAlcoholInfo";

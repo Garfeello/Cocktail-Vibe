@@ -12,7 +12,7 @@
 
 <div class="card-body d-flex justify-content-center">
     <div class="shadow p-3 mb-5 bg-white rounded w-5 p-10">
-        <h2>- Create Alcohol -</h2>
+        <h2>- <spring:message code="lang.createAlcohol"/> -</h2>
         <form:form method="post" modelAttribute="alcohol" enctype="multipart/form-data">
             <form:errors path="*" cssClass="alert alert-danger" element="div"/>
             <form:hidden path="language"/>
