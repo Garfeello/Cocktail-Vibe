@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 import pl.application.cocktailVibe.model.Alcohol;
+import pl.application.cocktailVibe.model.User;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 
 import javax.transaction.Transactional;
@@ -22,7 +23,7 @@ public class SimpleAlcoholTest {
 
     @Test
     @Transactional
-    public void createAlcoholAndThenSave() {
+    public void givenAlcoholWhenFindThenAlcoholSaveCorrectly() {
         //given
         Alcohol alcohol = new Alcohol();
         alcohol.setId(0L);
@@ -41,7 +42,7 @@ public class SimpleAlcoholTest {
 
     @Test(expected = ConstraintViolationException.class)
     @Transactional
-    public void createAlcoholAndCheckConstraints() {
+    public void givenAlcoholWhenSaveThenThrownConstraintViolationException() {
         //given
         Alcohol alcohol = new Alcohol();
         alcohol.setId(0L);
@@ -50,12 +51,22 @@ public class SimpleAlcoholTest {
         alcohol.setDescription("dsa");
         alcohol.setName(null);
         alcohol.setLanguage(null);
-        alcoholRepository.save(alcohol);
         //when
-
+        alcoholRepository.save(alcohol);
         //then
-
     }
 
-
+    @Test
+    public void givenWrongAlcoholIdWhenFindAlcoholByIDThenAssertNotNullObjectWithNullValues(){
+        //given
+        Alcohol found = alcoholRepository.findById(0L).orElse(new Alcohol());
+        //when
+        Alcohol alcohol = new Alcohol();
+        alcohol.setName(found.getName());
+        alcohol.setDescription(found.getDescription());
+        //then
+        assertNotNull(found);
+        assertNull(alcohol.getDescription());
+        assertNull(alcohol.getName());
+    }
 }

@@ -4,7 +4,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Component;
 import pl.application.cocktailVibe.apiIntegration.CocktailDbAPI;
-import pl.application.cocktailVibe.apiIntegration.GoogleTranslateAPI;
 import pl.application.cocktailVibe.apiIntegrationModel.DrinkApiModel;
 import pl.application.cocktailVibe.apiIntegrationModel.IngredientApiModel;
 import pl.application.cocktailVibe.dto.AlcoholDTO;
@@ -29,7 +28,7 @@ public class CocktailDTOService {
     }
 
     public CocktailDTO getCocktailDto(String cocktailName) {
-       ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkId(cocktailName);
+       ApiObjectsWrapper objectsWrapper  = cocktailDbAPI.getApiObjectFromDrinkName(cocktailName);
        if (objectsWrapper.getDrinkApiModel() == null){
            logger.info("Drink API model in CocktailDTOService was null " + LocalDateTime.now());
            return new CocktailDTO();

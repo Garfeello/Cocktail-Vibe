@@ -39,6 +39,12 @@ public class AlcoholController {
         return Arrays.asList("Vodka", "Whiskey", "Brandy", "Vermouth", "Cognac", "Rum", "Gin", "Port Wine", "Cognac", "Spirit");
     }
 
+    @GetMapping("/alcoholList")
+    private String getAlcoholListEng(Model model, Locale locale) {
+        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage(locale.getLanguage()).orElse(Collections.emptyList()));
+        return "alcohol/alcoholList";
+    }
+
     @GetMapping("/addAlcohol")
     private String initAddAlcohol(Model model, Locale locale) {
         Alcohol alcohol = new Alcohol();
@@ -86,12 +92,6 @@ public class AlcoholController {
     private String deleteAlcohol(@RequestParam Long alcoholId) {
         alcoholRepository.deleteById(alcoholId);
         return "redirect:/cocktailVibe/user/alcohols";
-    }
-
-    @GetMapping("/alcoholList")
-    private String getAlcoholListEng(Model model, Locale locale) {
-        model.addAttribute("alcoholList", alcoholRepository.findAlcoholByLanguage(locale.getLanguage()).orElse(Collections.emptyList()));
-        return "alcohol/alcoholList";
     }
 
     @GetMapping("/translateAlcohol")

@@ -26,7 +26,7 @@ public class CocktailDbAPI {
         this.objectMapper = objectMapper;
     }
 
-    public ApiObjectsWrapper getApiObjectFromDrinkId(String cocktailName) {
+    public ApiObjectsWrapper getApiObjectFromDrinkName(String cocktailName) {
         DrinkApiModel drinkApiModel = getDrinkApiModelByCocktailName(cocktailName);
         if (drinkApiModel.getStrDrink() == null) {
             logger.info("Couldn't find cocktail by name " + cocktailName + " " + LocalDateTime.now());

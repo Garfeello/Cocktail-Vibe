@@ -5,9 +5,7 @@ import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
-import pl.application.cocktailVibe.model.Alcohol;
 import pl.application.cocktailVibe.model.Cocktail;
-import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 
 import javax.transaction.Transactional;
@@ -24,10 +22,9 @@ public class SimpleCocktailTest {
 
     @Test
     @Transactional
-    public void createCocktailThenSave() {
+    public void givenCocktailWhenFindThenUserSaveCorrectly() {
         //given
         Cocktail cocktail = new Cocktail();
-        cocktail.setId(0L);
         cocktail.setLanguage("Pl");
         cocktail.setPreparationDescription("TESTTESTTESTTESTTEST");
         cocktail.setName("Rémy Martin");
@@ -42,10 +39,9 @@ public class SimpleCocktailTest {
 
     @Test(expected = ConstraintViolationException.class)
     @Transactional
-    public void createCocktailAndCheckConstraints() {
+    public void givenCocktailWhenSaveThenThrownConstraintViolationException() {
         //given
         Cocktail cocktail = new Cocktail();
-        cocktail.setId(0L);
         cocktail.setLanguage("Pl");
         cocktail.setPreparationDescription("TESTTESTTESTTESTTEST");
         cocktail.setName(null);
@@ -54,7 +50,7 @@ public class SimpleCocktailTest {
     }
 
     @Test
-    public void checkIfOptionalReturnsNotNull(){
+    public void givenWrongNullCocktailWhenFindCocktailByNameThenAssertNotNullObjectWithNullValues(){
         //given
         Cocktail found = cocktailRepository.findFirstByName(null).orElse(new Cocktail());
         //when
