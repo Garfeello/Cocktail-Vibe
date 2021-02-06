@@ -79,8 +79,7 @@ public class CocktailController {
 
     @GetMapping("/editCocktail")
     private String initEditCocktail(@RequestParam Long cocktailId, Model model) {
-        Optional<Cocktail> optionalCocktail = cocktailRepository.findById(cocktailId);
-        optionalCocktail.ifPresent(cocktail -> model.addAttribute("cocktail", cocktail));
+        model.addAttribute("cocktail", cocktailRepository.findById(cocktailId).orElse(new Cocktail()));
         return "cocktail/cocktailForm";
     }
 
@@ -116,6 +115,7 @@ public class CocktailController {
         }
         Optional<User> optionalUser = userRepository.findByEmail(principal.getName());
         optionalUser.ifPresent(cocktail::setUser);
+        cocktail.setId(null);
         cocktailRepository.save(cocktail);
         return "redirect:/cocktailVibe/user/cocktails";
     }

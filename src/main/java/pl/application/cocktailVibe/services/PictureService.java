@@ -4,6 +4,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
 import pl.application.cocktailVibe.dto.PictureDTO;
 import pl.application.cocktailVibe.model.Picture;
+import pl.application.cocktailVibe.repository.PictureRepository;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
@@ -13,6 +14,12 @@ import java.net.URL;
 
 @Component
 public class PictureService {
+
+    private final PictureRepository pictureRepository;
+
+    public PictureService(PictureRepository pictureRepository) {
+        this.pictureRepository = pictureRepository;
+    }
 
     public PictureDTO createPictureFromUrl(String pictureURL, String cocktailName) {
         PictureDTO picture = new PictureDTO();
@@ -31,7 +38,7 @@ public class PictureService {
     }
 
     public Picture getPicture(String cocktailName, MultipartFile file) {
-        Picture picture = new Picture();
+        Picture picture = pictureRepository.findByName(cocktailName).orElse(new Picture());
         picture.setName(cocktailName + ".jpg");
         try {
             picture.setImage(file.getBytes());

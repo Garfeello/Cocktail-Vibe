@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import org.springframework.web.bind.annotation.ResponseBody;
+import pl.application.cocktailVibe.model.Picture;
 import pl.application.cocktailVibe.repository.AlcoholRepository;
 import pl.application.cocktailVibe.repository.CocktailRepository;
 
@@ -38,7 +40,7 @@ public class PictureController {
         } catch (IOException e) {
             logger.error("IOException", e);
         } catch (NullPointerException e) {
-            logger.info(e.getMessage());
+            e.printStackTrace();
         }
     }
 
@@ -54,4 +56,5 @@ public class PictureController {
             logger.info(e.getMessage());
         }
     }
+
 }

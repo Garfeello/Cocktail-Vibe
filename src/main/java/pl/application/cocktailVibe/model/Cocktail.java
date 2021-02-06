@@ -26,7 +26,7 @@ public class Cocktail {
     @Size(max = 1000, message = "description max characters - 1000")
     private String preparationDescription;
 
-    @OneToOne(cascade = CascadeType.PERSIST)
+    @OneToOne(cascade = CascadeType.ALL)
     private Picture picture;
 
     @NotEmpty
