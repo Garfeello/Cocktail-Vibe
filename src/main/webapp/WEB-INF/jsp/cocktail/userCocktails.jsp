@@ -14,44 +14,57 @@
 <body>
 <h1 style="text-align: center" class="containter">- <spring:message code="lang.myCocktails"/> -</h1>
 <h3 style="text-align: center">${empty cocktailList ? "Nothing to display here :(" : ""}</h3>
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    <c:forEach items="${cocktailList}" var="cocktail">
-        <div class="col">
-            <div class="card ">
-                <img SRC="/pictureController/getPicture/${cocktail.id}" width="350px"
-                     height="600px">
-                <div class="card-body">
-                    <h5 class="card-title">${cocktail.name}</h5>
-                    <p class="card-text">${cocktail.preparationDescription}</p>
-                </div>
-                <ul class="list-group list-group-flush"><spring:message code="lang.allAlcohols"/></ul>
-                <ul class="list-group list-group-flush">
-                    <c:forEach items="${cocktail.alcoholList}" var="alcohol">
-                        <li class="list-group-item">${alcohol.name}</li>
-                    </c:forEach>
-                </ul>
-                <ul class="list-group list-group-flush"><spring:message code="lang.allIngredients"/></ul>
-                <ul class="list-group list-group-flush">
-                    <c:forEach items="${cocktail.ingredients}" var="ingredients">
-                        <li class="list-group-item">${ingredients.name}</li>
-                    </c:forEach>
-                </ul>
-                <div class="card-footer">
-                    <small class="text-muted">
-                        <a class="btn btn-light" href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">
-                            <spring:message code="lang.edit"/>
-                        </a>
-                    </small>
-                    <small class="text-muted">
-                        <form action="/cocktailVibe/deleteCocktail" method="post">
-                            <button class="btn btn-light" value="${cocktail.id}" name="cocktailId">
-                                <spring:message code="lang.delete"/>
-                            </button>
-                        </form>
-                    </small>
+<div class="container-fluid" style="padding: 30px 5% 15px 5%">
+    <div class="row">
+        <c:forEach items="${cocktailList}" var="cocktail">
+            <div class="col-4">
+                <div class="card" style="margin-bottom: 15px;">
+                    <div class="card-header">
+                        <h3 class="card-title" style="margin-bottom: 0;">${cocktail.name}</h3>
+                    </div>
+                    <div style="position: relative;">
+                        <img class="card-img" SRC="/pictureController/getPicture/${cocktail.id}"
+                             style="object-fit: cover;" height="300" alt="${cocktail.name}">
+                        <div style="width: 100%; height: 100%; position: absolute; left: 0; bottom: 0;
+                            background-image: linear-gradient(rgba(0,0,0,0.1), rgba(0,0,0,0.3) 80%);">
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div style="margin-bottom: 10px;" class="card-text">${cocktail.preparationDescription}</div>
+                        <div>
+                            <h4><spring:message code="lang.cocktailAlcohols"/></h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin-bottom: 10px;">
+                                <c:forEach items="${cocktail.alcoholList}" var="alcohol">
+                                    <div style="color:#949494; margin-right: 10px;">${alcohol.name}</div>
+                                </c:forEach>
+                            </div>
+                            <h4><spring:message code="lang.cocktailIngredients"/></h4>
+                            <div style="display: flex; flex-direction: row; flex-wrap: wrap;">
+                                <c:forEach items="${cocktail.ingredients}" var="ingredients">
+                                    <div style="color:#949494; margin-right: 10px;">${ingredients.name}</div>
+                                </c:forEach>
+                            </div>
+                            <div class="card-footer">
+                                <small class="text-muted">
+                                    <a class="btn btn-light"
+                                       href="/cocktailVibe/editCocktail?cocktailId=${cocktail.id}">
+                                        <spring:message code="lang.edit"/>
+                                    </a>
+                                </small>
+                                <small class="text-muted">
+                                    <form action="/cocktailVibe/deleteCocktail" method="post">
+                                        <button class="btn btn-light" value="${cocktail.id}" name="cocktailId">
+                                            <spring:message code="lang.delete"/>
+                                        </button>
+                                    </form>
+                                </small>
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
-    </c:forEach>
+        </c:forEach>
+    </div>
 </div>
 </body>

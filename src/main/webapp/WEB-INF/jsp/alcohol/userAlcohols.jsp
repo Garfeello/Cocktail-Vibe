@@ -17,7 +17,8 @@
     <c:forEach items="${alcoholList}" var="alcohol">
         <div class="col">
             <div class="card">
-                <img SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px" alt="img">
+                <img SRC="/pictureController/getAlcoholPicture/${alcohol.id}" width="350px" height="600px" alt="img"
+                style="object-fit: contain">
                 <div class="card-body">
                     <h5 class="card-title">${alcohol.name}</h5>
                     <p class="card-text">${alcohol.description}</p>
