@@ -53,7 +53,7 @@ public class GoogleTranslateService {
         Cocktail translatedCocktail = new Cocktail();
         translatedCocktail.setName(cocktail.getName());
         translatedCocktail.setIngredients(translateIngredients(cocktail.getIngredients(), translatedFrom, translatedTo));
-        translatedCocktail.setAlcoholList(translateAlcohols(cocktail.getAlcoholList(), translatedFrom ));
+        translatedCocktail.setAlcoholList(translateAlcohols(cocktail.getAlcoholList(), translatedTo));
         translatedCocktail.setPreparationDescription(googleTranslateAPI.prepareAndGetTranslation(cocktail.getPreparationDescription(), translatedFrom, translatedTo));
         translatedCocktail.setLanguage(translatedTo);
         translatedCocktail.setPicture(cocktail.getPicture());
