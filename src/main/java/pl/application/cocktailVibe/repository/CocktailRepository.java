@@ -32,4 +32,6 @@ public interface CocktailRepository extends JpaRepository<Cocktail, Long>, CrudR
 
     Optional<List<Cocktail>> findCocktailsByAlcoholList(Alcohol alcohol);
 
+    Optional<List<Cocktail>> findCocktailsByNameAndLanguage(String name, String language);
+
 }

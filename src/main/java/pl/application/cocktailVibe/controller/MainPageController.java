@@ -51,16 +51,17 @@ public class MainPageController {
     }
 
     @GetMapping("/search")
-    private String search(@RequestParam(required = false) String searchedString, Model model) {
-        Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByName(searchedString);
-        Optional<Cocktail> cocktailOptional = cocktailRepository.findFirstByName(searchedString);
-        Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByName(searchedString);
+    private String search(@RequestParam(required = false) String searchedString, Model model, Locale locale) {
+
+        Optional<List<Cocktail>> cocktailsOptional = cocktailRepository.findCocktailsByNameAndLanguage(searchedString, locale.getLanguage());
+        Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(searchedString, locale.getLanguage());
+        Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByNameAndLanguage(searchedString, locale.getLanguage());
         Cocktail cocktail = new Cocktail();
 
-        if (ingredientOptional.isPresent()) {
+        if (cocktailsOptional.isPresent()) {
+            model.addAttribute("cocktail", cocktailsOptional.get());
+        } else if (ingredientOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailRepository.findCocktailsByIngredients(ingredientOptional.get()).get());
-        } else if (cocktailOptional.isPresent()) {
-            model.addAttribute("cocktail", List.of(cocktailOptional.get()));
         } else if (alcoholOptional.isPresent()) {
             alcoholOptional.ifPresent(alcohol -> model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcohol).get()));
         } else {
@@ -72,6 +73,7 @@ public class MainPageController {
             cocktailRepository.save(cocktail);
             cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), "en", "pl"));
         }
+
         model.addAttribute("searchedString", "Searching by " + searchedString);
         return "cocktail/cocktailInfo";
     }

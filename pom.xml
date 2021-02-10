@@ -8,9 +8,10 @@
         <version>2.4.1</version>
         <relativePath/>
     </parent>
+    <packaging>war</packaging>
     <groupId>pl.application</groupId>
     <artifactId>cocktailVibe</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0</version>
     <name>cocktailVibe</name>
     <description>Koktajl Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
     </description>
