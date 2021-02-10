@@ -60,23 +60,6 @@ public class GoogleTranslateService {
         return translatedCocktail;
     }
 
-    private List<Ingredient> translateIngredients(List<Ingredient> ingredientList, String translatedFrom, String translatedTo) {
-        List<Ingredient> translatedIngredients = new ArrayList<>();
-        for (Ingredient ingredient : ingredientList) {
-            Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByNameAndLanguage(ingredient.getName(), translatedTo);
-            if (optionalIngredient.isPresent()) {
-                translatedIngredients.add(optionalIngredient.get());
-            } else {
-                Ingredient newIngredient = new Ingredient();
-                newIngredient.setLanguage(translatedTo);
-                newIngredient.setName(googleTranslateAPI.prepareAndGetTranslation(ingredient.getName(), translatedFrom, translatedTo));
-                newIngredient.setType(googleTranslateAPI.prepareAndGetTranslation(ingredient.getType(), translatedFrom, translatedTo));
-                translatedIngredients.add(newIngredient);
-            }
-        }
-        return translatedIngredients;
-    }
-
     //google allows max 5000 characters per day so, on free account i cant translate every description unfortunately :(
     //It is only for academical purposes after all :)
     private List<Alcohol> translateAlcohols(List<Alcohol> alcoholList, String translatedTo) {
@@ -99,4 +82,20 @@ public class GoogleTranslateService {
         return translatedAlcohols;
     }
 
+    private List<Ingredient> translateIngredients(List<Ingredient> ingredientList, String translatedFrom, String translatedTo) {
+        List<Ingredient> translatedIngredients = new ArrayList<>();
+        for (Ingredient ingredient : ingredientList) {
+            Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByNameAndLanguage(ingredient.getName(), translatedTo);
+            if (optionalIngredient.isPresent()) {
+                translatedIngredients.add(optionalIngredient.get());
+            } else {
+                Ingredient newIngredient = new Ingredient();
+                newIngredient.setLanguage(translatedTo);
+                newIngredient.setName(googleTranslateAPI.prepareAndGetTranslation(ingredient.getName(), translatedFrom, translatedTo));
+                newIngredient.setType(googleTranslateAPI.prepareAndGetTranslation(ingredient.getType(), translatedFrom, translatedTo));
+                translatedIngredients.add(newIngredient);
+            }
+        }
+        return translatedIngredients;
+    }
 }

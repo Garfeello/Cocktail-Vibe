@@ -58,6 +58,7 @@ public class CocktailDTOService {
                 alcoholDTO.setAlcoholType(ingredient.getStrType());
                 alcoholDTO.setAge(0);
                 alcoholDTO.setLanguage("en");
+                alcoholDTO.setPicture(pictureService.createPictureFromUrl("https://www.thecocktaildb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png", ingredient.getStrIngredient()));
                 alcoholDTOList.add(alcoholDTO);
             }
         }

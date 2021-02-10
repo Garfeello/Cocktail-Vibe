@@ -12,7 +12,7 @@ public class Ingredient {
     private Long id;
 
     @NotEmpty
-    @Size(min = 2, max = 25)
+    @Size(min = 2, max = 35)
     private String name;
 
     private String type;

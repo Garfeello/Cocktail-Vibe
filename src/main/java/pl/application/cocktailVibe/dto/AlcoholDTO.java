@@ -22,7 +22,7 @@ public class AlcoholDTO {
     @NotNull
     private String language;
 
-    private Picture picture;
+    private PictureDTO picture;
 
 
     public String getName() {
@@ -65,11 +65,11 @@ public class AlcoholDTO {
         this.language = language;
     }
 
-    public Picture getPicture() {
+    public PictureDTO getPicture() {
         return picture;
     }
 
-    public void setPicture(Picture picture) {
+    public void setPicture(PictureDTO picture) {
         this.picture = picture;
     }
 

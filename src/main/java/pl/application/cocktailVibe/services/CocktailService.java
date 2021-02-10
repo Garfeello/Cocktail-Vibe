@@ -68,7 +68,7 @@ public class CocktailService {
                 alcohol.setDescription(alcoholDTO.getDescription());
                 alcohol.setAlcoholType(alcoholDTO.getAlcoholType());
                 alcohol.setAge(alcoholDTO.getAge());
-                alcohol.setPicture(alcoholDTO.getPicture());
+                alcohol.setPicture(getPicture(alcoholDTO.getPicture()));
                 alcohol.setLanguage(alcoholDTO.getLanguage());
                 alcoholList.add(alcohol);
             }

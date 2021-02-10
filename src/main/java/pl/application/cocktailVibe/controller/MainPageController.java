@@ -70,8 +70,9 @@ public class MainPageController {
         }
 
         if (cocktail.getName() != null) {
+            String translateTo = locale.getLanguage().equals("pl") ? "en" : "pl";
             cocktailRepository.save(cocktail);
-            cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), "en", "pl"));
+            cocktailRepository.save(googleTranslateService.translateAngGetCocktail(cocktail.getName(), locale.getLanguage(), translateTo));
         }
 
         model.addAttribute("searchedString", "Searching by " + searchedString);
