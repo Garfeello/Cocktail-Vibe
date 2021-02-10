@@ -133,3 +133,212 @@
 2021-02-10 13:28:07.343  INFO 366570 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
 2021-02-10 13:28:07.347  INFO 366570 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
 2021-02-10 13:28:07.364  INFO 366570 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 14:32:18.321  INFO 482171 --- [main] p.a.c.CocktailVibeApplication            : Starting CocktailVibeApplication using Java 11.0.10 on garfeello-GL702VM with PID 482171 (/home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe/target/classes started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 14:32:18.324  INFO 482171 --- [main] p.a.c.CocktailVibeApplication            : No active profile set, falling back to default profiles: default
+2021-02-10 14:32:19.031  INFO 482171 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 14:32:19.071  INFO 482171 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 34 ms. Found 5 JPA repository interfaces.
+2021-02-10 14:32:19.455  INFO 482171 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-10 14:32:19.463  INFO 482171 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-10 14:32:19.463  INFO 482171 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-10 14:32:19.716  INFO 482171 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-10 14:32:19.723  INFO 482171 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-10 14:32:19.724  INFO 482171 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1324 ms
+2021-02-10 14:32:19.821  INFO 482171 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 14:32:19.844  INFO 482171 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 14:32:19.901  INFO 482171 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 14:32:19.954  INFO 482171 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 14:32:20.567  INFO 482171 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 14:32:20.578  INFO 482171 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 14:32:22.524  INFO 482171 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 14:32:22.539  INFO 482171 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 14:32:22.972  WARN 482171 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 14:32:23.086  INFO 482171 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@33845e3d, org.springframework.security.web.context.SecurityContextPersistenceFilter@73905dff, org.springframework.security.web.header.HeaderWriterFilter@5400db7e, org.springframework.security.web.authentication.logout.LogoutFilter@b5bddfe, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@6173863f, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d67bf4d, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7304ca87, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7e615c6a, org.springframework.security.web.session.SessionManagementFilter@76eee0b1, org.springframework.security.web.access.ExceptionTranslationFilter@4880a9d, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@8dc3019]
+2021-02-10 14:32:23.143  INFO 482171 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 14:32:23.298  INFO 482171 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-10 14:32:23.307  INFO 482171 --- [main] p.a.c.CocktailVibeApplication            : Started CocktailVibeApplication in 5.422 seconds (JVM running for 6.284)
+2021-02-10 14:32:30.000  INFO 482171 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-10 14:32:30.000  INFO 482171 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-10 14:32:30.001  INFO 482171 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-02-10 14:33:09.293  INFO 482171 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 14:33:09.296  INFO 482171 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 14:33:09.299  INFO 482171 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 14:33:09.306  INFO 482171 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 14:33:29.678  INFO 484064 --- [main] p.a.c.CocktailVibeApplicationTests       : Starting CocktailVibeApplicationTests using Java 11.0.10 on garfeello-GL702VM with PID 484064 (started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 14:33:29.681  INFO 484064 --- [main] p.a.c.CocktailVibeApplicationTests       : No active profile set, falling back to default profiles: default
+2021-02-10 14:33:30.490  INFO 484064 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 14:33:30.580  INFO 484064 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 81 ms. Found 5 JPA repository interfaces.
+2021-02-10 14:33:31.233  INFO 484064 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 14:33:31.281  INFO 484064 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 14:33:31.401  INFO 484064 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 14:33:31.525  INFO 484064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 14:33:32.198  INFO 484064 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 14:33:32.233  INFO 484064 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 14:33:34.439  INFO 484064 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 14:33:34.445  INFO 484064 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 14:33:35.234  WARN 484064 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 14:33:35.548  INFO 484064 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@73dd3a46, org.springframework.security.web.context.SecurityContextPersistenceFilter@659ac28c, org.springframework.security.web.header.HeaderWriterFilter@1af78e37, org.springframework.security.web.authentication.logout.LogoutFilter@3ffe74da, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@65f96d58, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5d2bc446, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@28dd8786, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@bae5e58, org.springframework.security.web.session.SessionManagementFilter@5c0f508b, org.springframework.security.web.access.ExceptionTranslationFilter@ff1a5a0, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@d7c4fcb]
+2021-02-10 14:33:35.893  INFO 484064 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 14:33:36.313  INFO 484064 --- [main] p.a.c.CocktailVibeApplicationTests       : Started CocktailVibeApplicationTests in 6.919 seconds (JVM running for 7.858)
+2021-02-10 14:33:36.469  INFO 484064 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 14:33:36.474  INFO 484064 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 14:33:36.477  INFO 484064 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 14:33:36.486  INFO 484064 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 14:43:36.680  INFO 501757 --- [main] p.a.c.CocktailVibeApplication            : Starting CocktailVibeApplication using Java 11.0.10 on garfeello-GL702VM with PID 501757 (/home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe/target/classes started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 14:43:36.683  INFO 501757 --- [main] p.a.c.CocktailVibeApplication            : No active profile set, falling back to default profiles: default
+2021-02-10 14:43:37.461  INFO 501757 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 14:43:37.502  INFO 501757 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 35 ms. Found 5 JPA repository interfaces.
+2021-02-10 14:43:37.865  INFO 501757 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-10 14:43:37.872  INFO 501757 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-10 14:43:37.872  INFO 501757 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-10 14:43:38.070  INFO 501757 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-10 14:43:38.078  INFO 501757 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-10 14:43:38.078  INFO 501757 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1305 ms
+2021-02-10 14:43:38.177  INFO 501757 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 14:43:38.200  INFO 501757 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 14:43:38.257  INFO 501757 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 14:43:38.309  INFO 501757 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 14:43:38.922  INFO 501757 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 14:43:38.938  INFO 501757 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 14:43:40.856  INFO 501757 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 14:43:40.862  INFO 501757 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 14:43:41.332  WARN 501757 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 14:43:41.448  INFO 501757 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@613a608e, org.springframework.security.web.context.SecurityContextPersistenceFilter@22c4354d, org.springframework.security.web.header.HeaderWriterFilter@7304ca87, org.springframework.security.web.authentication.logout.LogoutFilter@9fd3b61, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@3bf41cd0, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@41f5389f, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@4e7151b3, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@37b1218, org.springframework.security.web.session.SessionManagementFilter@13ae87a6, org.springframework.security.web.access.ExceptionTranslationFilter@12478b4e, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@49654a35]
+2021-02-10 14:43:41.507  INFO 501757 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 14:43:41.662  INFO 501757 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-10 14:43:41.670  INFO 501757 --- [main] p.a.c.CocktailVibeApplication            : Started CocktailVibeApplication in 5.325 seconds (JVM running for 6.042)
+2021-02-10 14:43:50.388  INFO 501757 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-10 14:43:50.389  INFO 501757 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-10 14:43:50.390  INFO 501757 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-02-10 15:22:02.185  INFO 501757 --- [http-nio-8080-exec-4] p.a.c.controller.PictureController       : null
+2021-02-10 15:22:02.218  INFO 501757 --- [http-nio-8080-exec-2] p.a.c.controller.PictureController       : null
+2021-02-10 15:22:02.232  INFO 501757 --- [http-nio-8080-exec-5] p.a.c.controller.PictureController       : null
+2021-02-10 15:22:05.182  INFO 501757 --- [http-nio-8080-exec-7] p.a.c.controller.PictureController       : null
+2021-02-10 15:22:05.216  INFO 501757 --- [http-nio-8080-exec-9] p.a.c.controller.PictureController       : null
+2021-02-10 15:22:05.222  INFO 501757 --- [http-nio-8080-exec-8] p.a.c.controller.PictureController       : null
+2021-02-10 15:23:00.736  INFO 501757 --- [http-nio-8080-exec-10] p.a.c.controller.PictureController       : null
+2021-02-10 15:23:00.736  INFO 501757 --- [http-nio-8080-exec-8] p.a.c.controller.PictureController       : null
+2021-02-10 15:23:00.757  INFO 501757 --- [http-nio-8080-exec-1] p.a.c.controller.PictureController       : null
+2021-02-10 15:25:38.929  INFO 501757 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:25:38.932  INFO 501757 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:25:38.934  INFO 501757 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 15:25:38.938  INFO 501757 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 15:27:20.221  INFO 579715 --- [main] p.a.c.CocktailVibeApplication            : Starting CocktailVibeApplication using Java 11.0.10 on garfeello-GL702VM with PID 579715 (/home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe/target/classes started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 15:27:20.223  INFO 579715 --- [main] p.a.c.CocktailVibeApplication            : No active profile set, falling back to default profiles: default
+2021-02-10 15:27:20.951  INFO 579715 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 15:27:20.993  INFO 579715 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 36 ms. Found 5 JPA repository interfaces.
+2021-02-10 15:27:21.360  INFO 579715 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-10 15:27:21.366  INFO 579715 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-10 15:27:21.367  INFO 579715 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-10 15:27:21.554  INFO 579715 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-10 15:27:21.560  INFO 579715 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-10 15:27:21.561  INFO 579715 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1282 ms
+2021-02-10 15:27:21.669  INFO 579715 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 15:27:21.694  INFO 579715 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 15:27:21.758  INFO 579715 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 15:27:21.818  INFO 579715 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 15:27:22.424  INFO 579715 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 15:27:22.447  INFO 579715 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 15:27:24.388  INFO 579715 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 15:27:24.404  INFO 579715 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:27:24.862  WARN 579715 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 15:27:24.996  INFO 579715 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@23119bc3, org.springframework.security.web.context.SecurityContextPersistenceFilter@31de8099, org.springframework.security.web.header.HeaderWriterFilter@2119b989, org.springframework.security.web.authentication.logout.LogoutFilter@4e481512, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4ebb7bab, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@75507e68, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@774189d0, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@32f54c2a, org.springframework.security.web.session.SessionManagementFilter@5c0d3715, org.springframework.security.web.access.ExceptionTranslationFilter@1018f702, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@65cc3902]
+2021-02-10 15:27:25.058  INFO 579715 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:27:25.236  INFO 579715 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-10 15:27:25.247  INFO 579715 --- [main] p.a.c.CocktailVibeApplication            : Started CocktailVibeApplication in 5.333 seconds (JVM running for 5.874)
+2021-02-10 15:27:29.066  INFO 579715 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-10 15:27:29.066  INFO 579715 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-10 15:27:29.067  INFO 579715 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2021-02-10 15:28:18.155  INFO 579715 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:28:18.157  INFO 579715 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:28:18.160  INFO 579715 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 15:28:18.166  INFO 579715 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 15:28:21.927  INFO 581628 --- [main] p.a.c.CocktailVibeApplication            : Starting CocktailVibeApplication using Java 11.0.10 on garfeello-GL702VM with PID 581628 (/home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe/target/classes started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 15:28:21.930  INFO 581628 --- [main] p.a.c.CocktailVibeApplication            : No active profile set, falling back to default profiles: default
+2021-02-10 15:28:22.708  INFO 581628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 15:28:22.756  INFO 581628 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 42 ms. Found 5 JPA repository interfaces.
+2021-02-10 15:28:23.147  INFO 581628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-10 15:28:23.154  INFO 581628 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-10 15:28:23.154  INFO 581628 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-10 15:28:23.357  INFO 581628 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-10 15:28:23.365  INFO 581628 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-10 15:28:23.365  INFO 581628 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1379 ms
+2021-02-10 15:28:23.473  INFO 581628 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 15:28:23.500  INFO 581628 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 15:28:23.567  INFO 581628 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 15:28:23.629  INFO 581628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 15:28:24.216  INFO 581628 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 15:28:24.227  INFO 581628 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 15:28:26.258  INFO 581628 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 15:28:26.263  INFO 581628 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:28:26.739  WARN 581628 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 15:28:26.856  INFO 581628 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@67372d20, org.springframework.security.web.context.SecurityContextPersistenceFilter@347f8029, org.springframework.security.web.header.HeaderWriterFilter@4803bf73, org.springframework.security.web.authentication.logout.LogoutFilter@18918d70, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@430db481, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@630e5010, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@1e09c0b, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@25e24908, org.springframework.security.web.session.SessionManagementFilter@1ce8084a, org.springframework.security.web.access.ExceptionTranslationFilter@46051269, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@76980c75]
+2021-02-10 15:28:26.913  INFO 581628 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:28:27.087  INFO 581628 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-10 15:28:27.096  INFO 581628 --- [main] p.a.c.CocktailVibeApplication            : Started CocktailVibeApplication in 5.521 seconds (JVM running for 6.054)
+2021-02-10 15:28:28.603  INFO 581628 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-10 15:28:28.604  INFO 581628 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-10 15:28:28.605  INFO 581628 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-02-10 15:30:08.539  INFO 581628 --- [http-nio-8080-exec-7] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:08.549  INFO 581628 --- [http-nio-8080-exec-2] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:08.549  INFO 581628 --- [http-nio-8080-exec-6] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:08.569  INFO 581628 --- [http-nio-8080-exec-8] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:08.727  INFO 581628 --- [http-nio-8080-exec-3] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:08.736  INFO 581628 --- [http-nio-8080-exec-10] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:41.950  INFO 581628 --- [http-nio-8080-exec-7] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:41.991  INFO 581628 --- [http-nio-8080-exec-5] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:41.993  INFO 581628 --- [http-nio-8080-exec-2] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:41.996  INFO 581628 --- [http-nio-8080-exec-10] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:42.135  INFO 581628 --- [http-nio-8080-exec-9] p.a.c.controller.PictureController       : null
+2021-02-10 15:30:42.190  INFO 581628 --- [http-nio-8080-exec-3] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.163  INFO 581628 --- [http-nio-8080-exec-4] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.171  INFO 581628 --- [http-nio-8080-exec-1] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.173  INFO 581628 --- [http-nio-8080-exec-7] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.193  INFO 581628 --- [http-nio-8080-exec-3] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.348  INFO 581628 --- [http-nio-8080-exec-10] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:10.357  INFO 581628 --- [http-nio-8080-exec-9] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.602  INFO 581628 --- [http-nio-8080-exec-8] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.632  INFO 581628 --- [http-nio-8080-exec-4] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.647  INFO 581628 --- [http-nio-8080-exec-2] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.651  INFO 581628 --- [http-nio-8080-exec-1] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.788  INFO 581628 --- [http-nio-8080-exec-6] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:11.820  INFO 581628 --- [http-nio-8080-exec-10] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.249  INFO 581628 --- [http-nio-8080-exec-5] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.250  INFO 581628 --- [http-nio-8080-exec-8] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.264  INFO 581628 --- [http-nio-8080-exec-2] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.266  INFO 581628 --- [http-nio-8080-exec-7] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.267  INFO 581628 --- [http-nio-8080-exec-4] p.a.c.controller.PictureController       : null
+2021-02-10 15:31:12.267  INFO 581628 --- [http-nio-8080-exec-3] p.a.c.controller.PictureController       : null
+2021-02-10 15:32:51.356  INFO 581628 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:32:51.359  INFO 581628 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:32:51.362  INFO 581628 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 15:32:51.371  INFO 581628 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2021-02-10 15:35:15.440  INFO 594127 --- [main] p.a.c.CocktailVibeApplication            : Starting CocktailVibeApplication using Java 11.0.10 on garfeello-GL702VM with PID 594127 (/home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe/target/classes started by garfeello in /home/garfeello/Desktop/projektyKamil/Projekty/Cocktail-Vibe)
+2021-02-10 15:35:15.443  INFO 594127 --- [main] p.a.c.CocktailVibeApplication            : No active profile set, falling back to default profiles: default
+2021-02-10 15:35:16.245  INFO 594127 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2021-02-10 15:35:16.295  INFO 594127 --- [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 44 ms. Found 5 JPA repository interfaces.
+2021-02-10 15:35:16.640  INFO 594127 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2021-02-10 15:35:16.646  INFO 594127 --- [main] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2021-02-10 15:35:16.646  INFO 594127 --- [main] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.41]
+2021-02-10 15:35:16.834  INFO 594127 --- [main] org.apache.jasper.servlet.TldScanner     : At least one JAR was scanned for TLDs yet contained no TLDs. Enable debug logging for this logger for a complete list of JARs that were scanned but no TLDs were found in them. Skipping unneeded JARs during scanning can improve startup time and JSP compilation time.
+2021-02-10 15:35:16.842  INFO 594127 --- [main] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2021-02-10 15:35:16.842  INFO 594127 --- [main] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1301 ms
+2021-02-10 15:35:16.951  INFO 594127 --- [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2021-02-10 15:35:16.976  INFO 594127 --- [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.4.25.Final
+2021-02-10 15:35:17.034  INFO 594127 --- [main] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2021-02-10 15:35:17.089  INFO 594127 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2021-02-10 15:35:17.697  INFO 594127 --- [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2021-02-10 15:35:17.720  INFO 594127 --- [main] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+2021-02-10 15:35:19.728  INFO 594127 --- [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2021-02-10 15:35:19.734  INFO 594127 --- [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:35:20.238  WARN 594127 --- [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2021-02-10 15:35:20.364  INFO 594127 --- [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6130a6f5, org.springframework.security.web.context.SecurityContextPersistenceFilter@10b5ff4d, org.springframework.security.web.header.HeaderWriterFilter@61d24347, org.springframework.security.web.authentication.logout.LogoutFilter@7c07023, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4930213b, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@222eda8a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@151d216e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@3fb0d9de, org.springframework.security.web.session.SessionManagementFilter@3f78a5ed, org.springframework.security.web.access.ExceptionTranslationFilter@267b678f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@75df4b1d]
+2021-02-10 15:35:20.429  INFO 594127 --- [main] o.s.s.concurrent.ThreadPoolTaskExecutor  : Initializing ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:35:20.615  INFO 594127 --- [main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2021-02-10 15:35:20.624  INFO 594127 --- [main] p.a.c.CocktailVibeApplication            : Started CocktailVibeApplication in 5.734 seconds (JVM running for 6.613)
+2021-02-10 15:35:24.087  INFO 594127 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2021-02-10 15:35:24.088  INFO 594127 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2021-02-10 15:35:24.089  INFO 594127 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2021-02-10 15:35:42.895  INFO 594127 --- [SpringContextShutdownHook] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService 'applicationTaskExecutor'
+2021-02-10 15:35:42.898  INFO 594127 --- [SpringContextShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2021-02-10 15:35:42.901  INFO 594127 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2021-02-10 15:35:42.907  INFO 594127 --- [SpringContextShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.

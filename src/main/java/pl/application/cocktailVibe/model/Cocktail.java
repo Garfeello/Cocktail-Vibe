@@ -17,10 +17,10 @@ public class Cocktail {
     @Size(min = 2, max = 40)
     private String name;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Alcohol> alcoholList;
 
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private List<Ingredient> ingredients;
 
     @Size(max = 1000, message = "description max characters - 1000")
@@ -32,7 +32,7 @@ public class Cocktail {
     @NotEmpty
     private String language;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private User user;
 
     @Column(name = "created_on")
