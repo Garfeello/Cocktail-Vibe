@@ -2,8 +2,8 @@
 
 
 # Cocktail-Vibe
-Cocktail Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)
-Find it under url: http://server786005.nazwa.pl:8080/cocktailVibe/
+Cocktail Vibe is a small App for graduation project in CodersLab-Warsaw as Java Developer :)  
+You can find it under url: http://server786005.nazwa.pl:8080/cocktailVibe/
 
 ## Description
 How often do you wish to entertain your guests at home, but you don’t know what to serve?
