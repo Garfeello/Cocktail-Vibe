@@ -43,7 +43,7 @@ public class CocktailDTOService {
         cocktailDTO.setPreparationDescription(drinkApiModel.getStrInstructions());
         cocktailDTO.setAlcoholDTOList(prepareAlcoholDto(ingredientApiModels));
         cocktailDTO.setIngredientDTOList(prepareIngredientDto(ingredientApiModels));
-        cocktailDTO.setPictureDTO(pictureService.createPictureFromUrl(drinkApiModel.getStrDrinkThumb(), drinkApiModel.getStrDrink()));
+        cocktailDTO.setPictureDTO(pictureService.createPictureFromUrl(drinkApiModel.getStrDrinkThumb(), drinkApiModel.getStrDrink(), "jpg"));
         cocktailDTO.setLanguage("en");
         return cocktailDTO;
     }
@@ -58,7 +58,7 @@ public class CocktailDTOService {
                 alcoholDTO.setAlcoholType(ingredient.getStrType());
                 alcoholDTO.setAge(0);
                 alcoholDTO.setLanguage("en");
-                alcoholDTO.setPicture(pictureService.createPictureFromUrl("https://www.thecocktaildb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png", ingredient.getStrIngredient()));
+                alcoholDTO.setPicture(pictureService.createPictureFromUrl("https://www.thecocktaildb.com/images/ingredients/" + ingredient.getStrIngredient() + ".png", ingredient.getStrIngredient(), "png"));
                 alcoholDTOList.add(alcoholDTO);
             }
         }

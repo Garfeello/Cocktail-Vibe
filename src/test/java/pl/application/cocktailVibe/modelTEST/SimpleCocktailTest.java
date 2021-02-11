@@ -25,6 +25,7 @@ public class SimpleCocktailTest {
     public void givenCocktailWhenFindThenUserSaveCorrectly() {
         //given
         Cocktail cocktail = new Cocktail();
+        cocktail.setId(0l);
         cocktail.setLanguage("Pl");
         cocktail.setPreparationDescription("TESTTESTTESTTESTTEST");
         cocktail.setName("Rémy Martin");
@@ -45,7 +46,7 @@ public class SimpleCocktailTest {
         cocktail.setLanguage("Pl");
         cocktail.setPreparationDescription("TESTTESTTESTTESTTEST");
         cocktail.setName(null);
-        cocktail.setLanguage("pl");
+        cocktail.setLanguage(null);
         cocktailRepository.save(cocktail);
     }
 

@@ -23,7 +23,7 @@ public class PictureServiceTEST {
         String url = "https://upload.wikimedia.org/wikipedia/commons/8/82/Facebook_icon.jpg";
         String name = "facebook";
         //when
-        PictureDTO pictureFromUrl = pictureService.createPictureFromUrl(url, name);
+        PictureDTO pictureFromUrl = pictureService.createPictureFromUrl(url, name, "jpg");
         //then
         assertNotNull(pictureFromUrl.getImage());
         assertEquals(name + ".jpg", pictureFromUrl.getName());

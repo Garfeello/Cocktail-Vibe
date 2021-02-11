@@ -21,13 +21,13 @@ public class PictureService {
         this.pictureRepository = pictureRepository;
     }
 
-    public PictureDTO createPictureFromUrl(String pictureURL, String cocktailName) {
+    public PictureDTO createPictureFromUrl(String pictureURL, String cocktailName, String formatType) {
         PictureDTO picture = new PictureDTO();
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
         try {
             URL url = new URL(pictureURL);
             BufferedImage image = ImageIO.read(url);
-            ImageIO.write(image, "jpg", byteArrayOutputStream);
+            ImageIO.write(image, formatType, byteArrayOutputStream);
             byteArrayOutputStream.flush();
         } catch (IOException e) {
             e.printStackTrace();

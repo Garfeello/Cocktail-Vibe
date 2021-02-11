@@ -22,7 +22,7 @@ public class Alcohol {
     @Max(value = 100, message = "maximum age is 100")
     private int age;
 
-    @Size(max = 5500, message = "max word 5500")
+    @Size(max = 6000, message = "max word 5500")
     private String description;
 
     @NotNull

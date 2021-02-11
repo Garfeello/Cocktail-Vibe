@@ -51,13 +51,11 @@ public class MainPageController {
     }
 
     @GetMapping("/search")
-    private String search(@RequestParam(required = false) String searchedString, Model model, Locale locale) {
-
+    private String search(@RequestParam(required = false)String searchedString, Model model, Locale locale) {
         Optional<List<Cocktail>> cocktailsOptional = cocktailRepository.findCocktailsByNameAndLanguage(searchedString, locale.getLanguage());
         Optional<Ingredient> ingredientOptional = ingredientRepository.findFirstByNameAndLanguage(searchedString, locale.getLanguage());
         Optional<Alcohol> alcoholOptional = alcoholRepository.findFirstByNameAndLanguage(searchedString, locale.getLanguage());
         Cocktail cocktail = new Cocktail();
-
         if (cocktailsOptional.isPresent()) {
             model.addAttribute("cocktail", cocktailsOptional.get());
         } else if (ingredientOptional.isPresent()) {
@@ -65,6 +63,7 @@ public class MainPageController {
         } else if (alcoholOptional.isPresent()) {
             alcoholOptional.ifPresent(alcohol -> model.addAttribute("cocktail", cocktailRepository.findCocktailsByAlcoholList(alcohol).get()));
         } else {
+            searchedString = searchedString == null ? " " : searchedString;
             cocktail = cocktailService.getCocktail(cocktailDTOService.getCocktailDto(searchedString));
             model.addAttribute("cocktail", List.of(cocktail));
         }

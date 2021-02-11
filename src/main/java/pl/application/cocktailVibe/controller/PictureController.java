@@ -46,7 +46,7 @@ public class PictureController {
         try {
             OutputStream o = response.getOutputStream();
             o.write(alcoholRepository.getOne(id).getPicture().getImage());
-            response.setContentType("image/jpg");
+            response.setContentType("image/png");
         } catch (IOException e) {
             logger.error("IOException", e);
         } catch (NullPointerException e) {

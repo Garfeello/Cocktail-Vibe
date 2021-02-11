@@ -78,7 +78,7 @@ public class CocktailDbAPI {
     }
 
     private DrinkApiModel getDrinkApiModelByCocktailName(String cocktailName) {
-        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailName;
+        String resourceURL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=" + cocktailName.replace(" ", "%20");
         Optional<List<DrinkApiModel>> optionalDrinkApiModel = Optional.empty();
         try {
             DrinkApiCollection drinkApiCollection = objectMapper.readValue(new URL(resourceURL), DrinkApiCollection.class);

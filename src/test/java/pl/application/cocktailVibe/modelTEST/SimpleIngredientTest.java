@@ -27,6 +27,7 @@ public class SimpleIngredientTest {
     public void givenIngredientWhenFindThenIngredientSaveCorrectly() {
         //given
         Ingredient ingredient = new Ingredient();
+        ingredient.setId(0l);
         ingredient.setLanguage("pl");
         ingredient.setName("Sugar");
         ingredientRepository.save(ingredient);

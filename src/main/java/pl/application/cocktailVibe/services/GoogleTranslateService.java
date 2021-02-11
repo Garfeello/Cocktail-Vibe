@@ -85,13 +85,14 @@ public class GoogleTranslateService {
     private List<Ingredient> translateIngredients(List<Ingredient> ingredientList, String translatedFrom, String translatedTo) {
         List<Ingredient> translatedIngredients = new ArrayList<>();
         for (Ingredient ingredient : ingredientList) {
-            Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByNameAndLanguage(ingredient.getName(), translatedTo);
+            String translateName = googleTranslateAPI.prepareAndGetTranslation(ingredient.getName(), translatedFrom, translatedTo);
+            Optional<Ingredient> optionalIngredient = ingredientRepository.findFirstByNameAndLanguage(translateName, translatedTo);
             if (optionalIngredient.isPresent()) {
                 translatedIngredients.add(optionalIngredient.get());
             } else {
                 Ingredient newIngredient = new Ingredient();
                 newIngredient.setLanguage(translatedTo);
-                newIngredient.setName(googleTranslateAPI.prepareAndGetTranslation(ingredient.getName(), translatedFrom, translatedTo));
+                newIngredient.setName(translateName);
                 newIngredient.setType(googleTranslateAPI.prepareAndGetTranslation(ingredient.getType(), translatedFrom, translatedTo));
                 translatedIngredients.add(newIngredient);
             }
